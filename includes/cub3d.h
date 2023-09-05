@@ -3,12 +3,12 @@
 
 # include <unistd.h>
 # include <stdio.h>
-# include <pthread.h>
 # include <stdbool.h>
 # include <stdlib.h>
 # include <string.h>
-# include <sys/time.h>
 # include <limits.h>
+# include <math.h>
+# include "../libs/libft/include/libft.h"
 
 /* ------------------ COLORS ------------------- */
 # define KNRM	"\x1B[m"
@@ -26,9 +26,10 @@
 # define KRT	"\033[1;0m"
 
 /* ---------------- Error Msgs ---------------- */
-# define ERR_ARG1	"❌ Oops ! Not enough arguments ❌"
-# define ERR_ARG2	"❌ Oops ! Too many arguments ❌"
-# define ERR_MEM	"❌ Memory allocation failed ❌"
+# define ERR_USG	"✅ Usage: ./cub3d <filename.cub>"
+# define ERR_ARG	"❌ Arguments number is invalid"
+# define ERR_EXT	"❌ File must have a '.cub' extension"
+# define ERR_MEM	"❌ Memory allocation failed"
 
 /* ---------------- Status Msg ---------------- */
 
