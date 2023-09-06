@@ -54,8 +54,8 @@ LIBFT		=	$(LIBFT_DIR)libft.a
 LIBFT_H		=	$(LIBFT_DIR)include/libft.h
 
 # -- MLX42 Files -- #
-MLX42_DIR	=	./libs/MLX42/
-MLX42		=	$(MLX42_DIR)build/libmlx42.a
+MLX42_DIR	=	./libs/MLX42/build/
+MLX42		=	$(MLX42_DIR)libmlx42.a
 OPEN_GL		=	-framework Cocoa -framework OpenGL -framework IOKit
 
 # Includes
@@ -84,6 +84,7 @@ $(MLX42):
 	@if [ ! -f "./libs/MLX42/build/libmlx42.a" ]; then \
 		cmake libs/MLX42 -B $(MLX42_DIR) &> /dev/null && make -C $(MLX42_DIR) -j4; \
 	fi
+	//TODO update the message below
 	@echo "\n----------------------- mlx42 is done ✅ ----------------------\n"
 
 $(LIBFT):
