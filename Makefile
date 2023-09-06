@@ -84,8 +84,8 @@ $(MLX42):
 	@if [ ! -f "./libs/MLX42/build/libmlx42.a" ]; then \
 		cmake libs/MLX42 -B $(MLX42_DIR) &> /dev/null && make -C $(MLX42_DIR) -j4; \
 	fi
-	//TODO update the message below
 	@echo "\n----------------------- mlx42 is done ✅ ----------------------\n"
+# TODO update the message above
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
