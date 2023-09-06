@@ -9,6 +9,7 @@
 # include <limits.h>
 # include <math.h>
 # include "../libs/libft/include/libft.h"
+#include "../libs/MLX42/include/MLX42/MLX42.h"
 
 /* ------------------ COLORS ------------------- */
 # define KNRM	"\x1B[m"

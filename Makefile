@@ -8,6 +8,27 @@ CFLAGS		=	-Wall -Wextra -Werror
 # CFLAGS	=	-Wall -Wextra -Werror -g -Wunreachable-code -fsanitize=address
 # CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
 
+# -- OS CHECK -- #
+OS 			= $(shell uname)
+OS_AIR 		= $(shell uname -p)
+
+# -- MLX42 Flags depending on the OS -- #
+# -- LINUX and WSL -- # 
+LINUX 		= -ldl -lglfw -pthread -lm
+
+# -- MAC -- #
+MAC 		= -I /include -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib/"
+MAC_AIR 	= -I /include -lglfw -L "/opt/homebrew/Cellar/glfw/3.3.8/lib"
+
+# -- Check OS to get the correct FLAGS -- #
+ifeq ($(OS_AIR), arm)
+	GLFW = $(MAC_AIR)
+else ifeq ($(OS), Linux)
+	GLFW = $(LINUX)
+else ifeq ($(OS), Darwin)
+	GLFW = $(MAC)
+endif
+
 # -- Remove -- #
 RM			=	rm -rf
 
@@ -30,7 +51,15 @@ HEADER	 	=	$(addprefix $(HEADER_DIR), $(HEADER_LST))
 # -- LIBFT Files -- #
 LIBFT_DIR	=	./libs/libft/
 LIBFT		=	$(LIBFT_DIR)libft.a
-LIBFT_H		=	$(LIBFT_DIR)includes/libft.h
+LIBFT_H		=	$(LIBFT_DIR)include/libft.h
+
+# -- MLX42 Files -- #
+MLX42_DIR	=	./libs/MLX42/
+MLX42		=	$(MLX42_DIR)build/libmlx42.a
+OPEN_GL		=	-framework Cocoa -framework OpenGL -framework IOKit
+
+# Includes
+INCLUDE		= -I$(HEADER_DIR) -I$(LIBFT_DIR) -I$(MLX42_DIR)/include/MLX42
 
 # -- Colors -- #
 RESET		= 	\033[0m
@@ -42,27 +71,34 @@ PURPLE		= 	\033[0;35m
 CYAN		= 	\033[0;36m
 ERASE_LINE 	= 	\033[2K\r
 
-EVALUATOR = $(shell whoami)
 
 # -- Executable's creation -- #
 all : dir $(NAME)
 
 # -- Compile library -- #
-$(NAME) : $(OBJS)
-	@make -C $(LIBFT_DIR)
-	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(RLINE) -lncurses -o $(NAME)
+$(NAME): $(MLX42) $(LIBFT) $(OBJS) 
+	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(MLX42) $(OPEN_GL) $(GLFW) -o $(NAME) $(INCLUDE)
 	@echo "✅ $(GREEN)$(NAME)'s exectuable successfully created.		✅$(RESET)"
+
+$(MLX42):
+	@if [ ! -f "./libs/MLX42/build/libmlx42.a" ]; then \
+		cmake libs/MLX42 -B $(MLX42_DIR) &> /dev/null && make -C $(MLX42_DIR) -j4; \
+	fi
+	@echo "\n----------------------- mlx42 is done ✅ ----------------------\n"
+
+$(LIBFT):
+	@make -C $(LIBFT_DIR)
 
 # -- Create all files .o (object) from files .c (source code) -- #
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c $(HEADER)
 	@printf "$(ERASE_LINE)🎛️  $(PURPLE)Compiling $(YELLOW)$(notdir $<)\r$(RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
 run: all
 	@./$(NAME)
 
 # -- Create directory for *.o files -- #
-dir :
+dir:
 	@mkdir -p $(OBJS_DIR)
 
 leak: CFLAGS += -g
@@ -77,20 +113,19 @@ leaks: all
 # -- Removes objects -- #
 clean :
 	@make -C $(LIBFT_DIR) clean
-	@printf "💥 $(RED)Removing $(NAME)'s objects...$(RESET)\t\t\t💥\n"
+	@printf "💥 $(RED)Removing $(NAME)'s objects...$(RESET)\t\t\t\t💥\n"
 	@$(RM) $(OBJS_DIR)
-	@printf "🗑️  $(CYAN)$(NAME)'s object successfully deleted.$(RESET)\t\t🗑️\n"
+	@printf "🗑️  $(CYAN)$(NAME)'s object successfully deleted.$(RESET)\t\t\t🗑️\n"
 
 # -- Removes objects (with clean) and executable -- #
 fclean : clean
-	@printf "💥 $(RED)Removing executable(s)...$(RESET)				💥\n"
+	@printf "💥 $(RED)Removing executable(s)...$(RESET)\t\t\t\t💥\n"
 	@$(RM) $(LIBFT)
-	@$(RM) $(LIBRLINE_DIR)
 	@$(RM) $(NAME)
 	@printf "🗑️  $(CYAN)Executable(s) and archive(s) successfully deleted.$(RESET)	🗑️\n\n"
 				
 # -- Removes objects and executable then remakes all -- #
-re : clean all
+re : fclean all 
 
 #Open the subject
 pdf : 

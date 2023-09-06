@@ -6,7 +6,7 @@
 #    By: csenand <csenand@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 15:11:55 by csenand           #+#    #+#              #
-#    Updated: 2023/09/04 15:49:50 by csenand          ###   ########.fr        #
+#    Updated: 2023/09/06 12:24:18 by csenand          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,7 @@ all : dir $(NAME)
 # -- Compile library -- #
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
-	@echo "✅ $(GREEN)Libft successfully created. ✅     $(RESET)"
+	@echo "✅ $(GREEN)Libft successfully created.\t\t\t\t✅     $(RESET)"
 
 # -- Create all files .o (object) from files .c (source code) -- #
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADER)
@@ -111,15 +111,15 @@ dir:
 
 # -- Removes objects -- #
 clean :
-	@printf "💥 $(RED)Removing $(NAME)'s objects... $(RESET)💥\n"
+	@printf "💥 $(RED)Removing $(NAME)'s objects... $(RESET)\t\t\t💥\n"
 	@$(RM) $(OBJS_DIR)
-	@printf "🗑️  $(CYAN)libft's object successfully deleted.$(RESET) 🗑️\n"
+	@printf "🗑️  $(CYAN)libft's object successfully deleted.$(RESET)\t\t\t🗑️\n"
 
 # -- Removes objects (with clean) and executable -- #
 fclean : clean
-	@printf "💥 $(RED)Removing $(NAME)'s executable... $(RESET)💥\n"
+	@printf "💥 $(RED)Removing $(NAME)'s executable... $(RESET)\t\t\t💥\n"
 	@$(RM) $(NAME)
-	@printf "🗑️  $(CYAN)Executable(s) and archive(s) successfully deleted.$(RESET) 🗑️\n"
+	@printf "🗑️  $(CYAN)Executable(s) and archive(s) successfully deleted.$(RESET)\t\t\t🗑️\n"
 
 # -- Removes objects and executable then remakes all -- #
 re : fclean all
