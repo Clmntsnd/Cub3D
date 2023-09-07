@@ -78,14 +78,13 @@ all : dir $(NAME)
 # -- Compile library -- #
 $(NAME): $(MLX42) $(LIBFT) $(OBJS) 
 	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(MLX42) $(OPEN_GL) $(GLFW) -o $(NAME) $(INCLUDE)
-	@echo "✅ $(GREEN)$(NAME)'s exectuable successfully created.		✅$(RESET)"
+	@echo "✅ $(GREEN)$(NAME)'s exectuable successfully created.\t✅$(RESET)"
 
 $(MLX42):
 	@if [ ! -f "./libs/MLX42/build/libmlx42.a" ]; then \
 		cmake libs/MLX42 -B $(MLX42_DIR) &> /dev/null && make -C $(MLX42_DIR) -j4; \
 	fi
-	@echo "\n----------------------- mlx42 is done ✅ ----------------------\n"
-# TODO update the message above
+	@echo "\n✅ $(GREEN)MLX42 successfully compiled.\t\t\t✅$(RESET)"
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
@@ -123,6 +122,7 @@ fclean : clean
 	@printf "💥 $(RED)Removing executable(s)...$(RESET)\t\t\t\t💥\n"
 	@$(RM) $(LIBFT)
 	@$(RM) $(NAME)
+	@$(RM) ./libs/MLX42/build
 	@printf "🗑️  $(CYAN)Executable(s) and archive(s) successfully deleted.$(RESET)	🗑️\n\n"
 				
 # -- Removes objects and executable then remakes all -- #
