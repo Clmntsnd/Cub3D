@@ -54,8 +54,8 @@ LIBFT		=	$(LIBFT_DIR)libft.a
 LIBFT_H		=	$(LIBFT_DIR)include/libft.h
 
 # -- MLX42 Files -- #
-MLX42_DIR	=	./libs/MLX42/build/
-MLX42		=	$(MLX42_DIR)libmlx42.a
+MLX42_DIR	=	./libs/MLX42
+MLX42		=	$(MLX42_DIR)/build/libmlx42.a
 OPEN_GL		=	-framework Cocoa -framework OpenGL -framework IOKit
 
 # Includes
@@ -82,7 +82,7 @@ $(NAME): $(MLX42) $(LIBFT) $(OBJS)
 
 $(MLX42):
 	@if [ ! -f "./libs/MLX42/build/libmlx42.a" ]; then \
-		cmake libs/MLX42 -B $(MLX42_DIR) &> /dev/null && make -C $(MLX42_DIR) -j4; \
+		cmake libs/MLX42 -B $(MLX42_DIR)/build &> /dev/null && make -C $(MLX42_DIR)/build -j4; \
 	fi
 	@echo "\n✅ $(GREEN)MLX42 successfully compiled.\t\t\t✅$(RESET)"
 
@@ -122,7 +122,7 @@ fclean : clean
 	@printf "💥 $(RED)Removing executable(s)...$(RESET)\t\t\t\t💥\n"
 	@$(RM) $(LIBFT)
 	@$(RM) $(NAME)
-	@$(RM) ./libs/MLX42/build
+	@$(RM) $(MLX42_DIR)/build
 	@printf "🗑️  $(CYAN)Executable(s) and archive(s) successfully deleted.$(RESET)	🗑️\n\n"
 				
 # -- Removes objects and executable then remakes all -- #
