@@ -6,7 +6,6 @@
 static mlx_image_t* image;
 
 // -----------------------------------------------------------------------------
-
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
     return (r << 24 | g << 16 | b << 8 | a);
@@ -45,21 +44,24 @@ void ft_hook(void* param)
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		image->instances[0].x += 5;
 }
+// -----------------------------------------------------------------------------
 
-/*
-**	Function to parse the filemane and ensure that there is
-**	the correct extension (".cub").
-*/
-bool	ft_parse_ext(int ac, char **av)
+bool	ft_parse_arg(int ac, char **av)
 {
-    char *ext; 
+    char	*ext;
+	int		len;
 
 	ext = ft_strrchr(av[1], '.');
-	if (ac != 2) 
+	len = ft_strlen(av[1]);
+	if (ac != 2)
 		return (printf("❌ Error\n%s\n%s\n", ERR_ARG, ERR_USG), false);
+	if (len < 5)
+		return (printf("❌ Error\n%s\n%s\n", ERR_NAME, ERR_USG), false);
     if (ext == NULL || ft_strncmp(ext, ".cub", 5) != 0)
         return (printf("❌ Error\n%s\n%s\n", ERR_EXT, ERR_USG), false);
-    return (printf("✅ File '%s' has a valid ext!\n", av[1]), true);
+	if (open(av[1], O_RDWR, 0644) == -1)
+		return (printf("❌ Error\n%s\n%s\n", ERR_FILE, ERR_USG), false);
+    return (true);
 }
 
 int	main(int ac, char **av)
@@ -67,10 +69,10 @@ int	main(int ac, char **av)
 
 	mlx_t* mlx;
 
-	if (!ft_parse_ext(ac, av))
-		return(1);
-	//TODO Verif if the file axist otherwise, throw an error
-
+	if (!ft_parse_arg(ac, av))
+		return(EXIT_FAILURE);
+	
+	// Test MLX42
 	// Gotta error check this stuff
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
@@ -95,6 +97,7 @@ int	main(int ac, char **av)
 
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
-	printf("\n🚧 "KYEL"Work In Progress 🚧\n"KRT);
+	// Test End
+	
 	return (0);
 }

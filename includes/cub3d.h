@@ -8,8 +8,9 @@
 # include <string.h>
 # include <limits.h>
 # include <math.h>
+# include <fcntl.h>
 # include "../libs/libft/include/libft.h"
-#include "../libs/MLX42/include/MLX42/MLX42.h"
+# include "../libs/MLX42/include/MLX42/MLX42.h"
 
 /* ------------------ COLORS ------------------- */
 # define KNRM	"\x1B[m"
@@ -30,16 +31,13 @@
 # define ERR_USG	"✅ Usage: ./cub3d <filename.cub>"
 # define ERR_ARG	"❌ Arguments number is invalid"
 # define ERR_EXT	"❌ File must have a '.cub' extension"
+# define ERR_FILE	"❌ File doesn't exist"
+# define ERR_NAME	"❌ Invalid File name"
 # define ERR_MEM	"❌ Memory allocation failed"
-
-/* ---------------- Status Msg ---------------- */
-
 
 /* ------------------ STRUCTS ------------------ */
 
-
 /* ------------------ Parsing ------------------ */
-
 
 /* -------------------- Init ------------------- */
 
