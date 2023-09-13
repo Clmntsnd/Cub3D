@@ -9,9 +9,9 @@ t_data *get_data(void)
 	return (data);
 }
 
-void init_content(t_data *data, char *argv)
-{
-	get_map(data, argv);
-	get_map_size(data, argv);
-	check_map(data);
-}
+// void init_content(t_data *data, char *argv)
+// {
+// 	get_map(data, argv);
+// 	get_map_size(data, argv);
+// 	check_map(data);
+// }
