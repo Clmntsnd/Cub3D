@@ -7,7 +7,7 @@ void print_map(t_data *data)
     i = 0;
     while (data->map[i])
     {
-        printf("%s\n", data->map[i]);
+        printf("%s", data->map[i]);
         i++;
     }
 }
