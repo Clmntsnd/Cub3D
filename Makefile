@@ -57,7 +57,7 @@ LIBFT_H		=	$(LIBFT_DIR)include/libft.h
 # -- MLX42 Files -- #
 MLX42_DIR	=	./libs/MLX42
 MLX42		=	$(MLX42_DIR)/build/libmlx42.a
-OPEN_GL		=	-framework Cocoa -framework OpenGL -framework IOKit
+# OPEN_GL		=	-framework Cocoa -framework OpenGL -framework IOKit
 
 # Includes
 INCLUDE		= -I$(HEADER_DIR) -I$(LIBFT_DIR) -I$(MLX42_DIR)/include/MLX42

@@ -68,7 +68,7 @@ int	main(int ac, char **av)
 {
 
 	mlx_t* mlx;
-	mlx_image_t	*mini_m;
+	// mlx_image_t	*mini_m;
 
 	if (!ft_parse_arg(ac, av))
 		return(EXIT_FAILURE);
@@ -80,13 +80,13 @@ int	main(int ac, char **av)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (!(mini_m = mlx_new_image(mlx, WIDTH, HEIGHT)) || !(image = mlx_new_image(mlx, 30, 30))) //"Player"
+	if (!(image = mlx_new_image(mlx, 30, 30))) //"Player"
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (mlx_image_to_window(mlx, draw_map2D(), 0, 0) == -1 || mlx_image_to_window(mlx, image, 0, 0) == -1)
+	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
