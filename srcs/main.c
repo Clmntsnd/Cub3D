@@ -54,7 +54,7 @@ int	main(int ac, char **av)
 
 	if (!ft_parse_arg(ac, av))
 		return(EXIT_FAILURE);
-	// init_content(data, av[1]);
+	init_content(data, av[1]);
 	
 	// Test MLX42
 	// Gotta error check this stuff
