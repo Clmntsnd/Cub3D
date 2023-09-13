@@ -3,6 +3,6 @@
 
 void map_error_exit(t_data *data)
 {
-	
-	exit();
+	(void)data;
+	exit(1);
 }

@@ -2,10 +2,11 @@
 
 
 int check_valid_char(t_data *data){
-	
+	(void)data;
 	return(0);
 }
 
 int check_walls(t_data *data){
+	(void)data;
 	return(0);
 }

@@ -10,6 +10,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include "../libs/libft/include/libft.h"
+# include "../libs/libft/include/gnl.h"
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 
 /* ------------------ COLORS ------------------- */
@@ -48,6 +49,9 @@ typedef struct s_data {
 	char **map;
 	char **tmp_map;
 }	t_data;
+
+/* ------------------ Error ------------------- */
+void map_error_exit(t_data *data);
 
 /* ------------------ Parsing ------------------ */
 

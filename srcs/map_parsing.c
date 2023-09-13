@@ -5,7 +5,7 @@ void get_map(t_data *data, char *argv)
 {
 	int i;
 	int fd;
-	char **temp;
+	char *temp;
 
 	i = 0;
 	fd = open(argv, O_RDONLY);
@@ -28,7 +28,7 @@ void get_map_size(t_data *data, char argv[1]) {
 	i = 0;
 	fd = open(argv, O_RDONLY);
 	rows = get_next_line(fd);
-	data->heigth = 0;
+	data->height = 0;
 	data->width = 0;
 	while(rows[i])
 	{
@@ -39,15 +39,15 @@ void get_map_size(t_data *data, char argv[1]) {
 	{
 		free(rows);
 		rows = get_next_line(fd);
-		data->heigth++;
+		data->height++;
 	}
 
 }
 
 void check_map(t_data *data)
 {
-	int x;
-	int y;
+	// int x;
+	// int y;
 
 
 	//parsing for top of map information(textures and shit)
