@@ -48,37 +48,39 @@ void ft_hook(void* param)
 
 int	main(int ac, char **av)
 {
+	t_data *data;
 
-	mlx_t* mlx;
+	// mlx_t* mlx;
 
 	if (!ft_parse_arg(ac, av))
 		return(EXIT_FAILURE);
+	init_content(data);
 	
 	// Test MLX42
 	// Gotta error check this stuff
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	if (!(data->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (!(image = mlx_new_image(mlx, 128, 128)))
+	if (!(image = mlx_new_image(data->mlx, 128, 128)))
 	{
-		mlx_close_window(mlx);
+		mlx_close_window(data->mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
+	if (mlx_image_to_window(data->mlx, image, 0, 0) == -1)
 	{
-		mlx_close_window(mlx);
+		mlx_close_window(data->mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
 	
-	mlx_loop_hook(mlx, ft_randomize, mlx);
-	mlx_loop_hook(mlx, ft_hook, mlx);
+	mlx_loop_hook(data->mlx, ft_randomize, data->mlx);
+	mlx_loop_hook(data->mlx, ft_hook, data->mlx);
 
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	mlx_loop(data->mlx);
+	mlx_terminate(data->mlx);
 	// Test End
 
 	return (0);
