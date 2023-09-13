@@ -50,11 +50,11 @@ int	main(int ac, char **av)
 {
 	t_data *data;
 
-	// mlx_t* mlx;
+	data = get_data();
 
 	if (!ft_parse_arg(ac, av))
 		return(EXIT_FAILURE);
-	init_content(data);
+	init_content(data, av[1]);
 	
 	// Test MLX42
 	// Gotta error check this stuff

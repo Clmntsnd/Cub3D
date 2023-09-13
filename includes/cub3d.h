@@ -59,6 +59,8 @@ int check_valid_char(t_data *data);
 int check_walls(t_data *data);
 
 /* -------------------- Init ------------------- */
+t_data *get_data(void);
+void init_content(t_data *data, char *argv);
 
 /* -------------------- Utils ------------------ */
 
