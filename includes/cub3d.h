@@ -37,7 +37,26 @@
 
 /* ------------------ STRUCTS ------------------ */
 
+typedef struct s_data {
+	void *mlx;
+	void *win;
+	int height;
+	int width;
+	void *wall;
+	void *floor;
+	void *player_pos;
+	char **map;
+	char **tmp_map;
+}	t_data;
+
 /* ------------------ Parsing ------------------ */
+
+bool	ft_parse_arg(int ac, char **av);
+void get_map(t_data *data, char *argv);
+void get_map_size(t_data *data, char argv[1]);
+void check_map(t_data *data);
+int check_valid_char(t_data *data);
+int check_walls(t_data *data);
 
 /* -------------------- Init ------------------- */
 
