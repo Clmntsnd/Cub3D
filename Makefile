@@ -35,6 +35,7 @@ RM			=	rm -rf
 # -- SRC Files -- #
 SRCS_DIR	=	./srcs/
 SRCS_LST	= 	main.c \
+				map2D.c
 
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LST))
 
