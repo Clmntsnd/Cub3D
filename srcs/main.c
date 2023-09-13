@@ -1,6 +1,6 @@
 #include "../includes/cub3d.h"
 
-#define WIDTH 512
+#define WIDTH 1024
 #define HEIGHT 512
 
 static mlx_image_t* image;
