@@ -45,6 +45,7 @@ typedef struct s_data {
 	int width;
 	void *wall;
 	void *floor;
+	char direction;
 	void *player_pos;
 	char **map;
 	char **tmp_map;
