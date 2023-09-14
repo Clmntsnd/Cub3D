@@ -1,8 +1,5 @@
 #include "../includes/cub3d.h"
 
-#define WIDTH 1024
-#define HEIGHT 512
-
 static mlx_image_t* image;
 
 // -----------------------------------------------------------------------------
@@ -69,13 +66,19 @@ int	main(int ac, char **av)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (mlx_image_to_window(data->mlx, image, 0, 0) == -1)
+	if (!(data->mini_map = mlx_new_image(data->mlx, WIDTH, HEIGHT)))
 	{
 		mlx_close_window(data->mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	
+	draw_map2D(data);
+	if (mlx_image_to_window(data->mlx, data->mini_map, 0, 0) == -1 || mlx_image_to_window(data->mlx, image, 0, 0) == -1)
+	{
+		mlx_close_window(data->mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
 	mlx_loop_hook(data->mlx, ft_randomize, data->mlx);
 	mlx_loop_hook(data->mlx, ft_hook, data->mlx);
 

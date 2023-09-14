@@ -1,35 +1,40 @@
 #include "../includes/cub3d.h"
 
-mlx_image_t	*draw_map2D()
-{
-	static mlx_image_t	*map2D;
-	int	x = -1; 
-	int	y = -1;
-	int mapX = 8;
-	int mapY = 8;
-	// int map_size = 64;
-	uint32_t color;
-	int map[]= {
-		1,1,1,1,1,1,1,1,
-		1,0,1,0,0,0,0,1,
-		1,0,1,0,0,0,0,1,
-		1,0,0,0,0,0,0,1,
-		1,0,0,0,0,0,0,1,
-		1,0,0,0,0,0,0,1,
-		1,0,0,0,1,0,0,1,
-		1,1,1,1,1,1,1,1,
-	};
+#define TILE_SIZE 28
+#define BORDER_SIZE 1
 
-	while(++y < mapY)
+int32_t get_rgba(int32_t r, int32_t g, int32_t b, int32_t a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
+}
+
+void		draw_map2D(t_data *data)
+{
+    int 		i;
+	int			j;
+	int			x;
+	int			y;
+	uint32_t	color;
+    
+	i = -1;
+	while (data->map[++i])
 	{
-		while(++x < mapX)
+		j = -1;
+		while (data->map[i][++j])
 		{
-			if (map[y * mapX + x] == 1)
-				color = ft_pixel(1,1,1,1);
+			if(data->map[i][j] == '1')
+				color = get_rgba(255,255,255,255); //white
+			else if(data->map[i][j] == '0')
+				color = get_rgba(0,0,0,255); //black
 			else
-				color = ft_pixel(0,0,0,1);
+				continue;
+			x = -1;
+			while (++x < TILE_SIZE)
+			{
+				y = -1;
+				while(++y < TILE_SIZE)
+					mlx_put_pixel(data->mini_map, j * (TILE_SIZE + BORDER_SIZE) + x, i * (TILE_SIZE + BORDER_SIZE) + y, color);
+			}
 		}
-		mlx_put_pixel(map2D, x, y, color);
 	}
-	return (map2D);
 }

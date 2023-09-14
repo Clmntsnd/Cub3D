@@ -2,6 +2,7 @@
 cub3D
 .vscode
 ./libs/MLX42/build
+build
 
 # Prerequisites
 *.d

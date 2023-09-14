@@ -36,6 +36,10 @@
 # define ERR_NAME	"❌ Invalid File name"
 # define ERR_MEM	"❌ Memory allocation failed"
 
+//Window specs
+#define WIDTH 1024
+#define HEIGHT 512
+
 /* ------------------ STRUCTS ------------------ */
 
 typedef struct s_data {
@@ -48,6 +52,7 @@ typedef struct s_data {
 	void *player_pos;
 	char **map;
 	char **tmp_map;
+	mlx_image_t *mini_map;
 }	t_data;
 
 /* ------------------ Error ------------------- */
@@ -68,6 +73,6 @@ void init_content(t_data *data, char *argv);
 
 /* -------------------- Utils ------------------ */
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-mlx_image_t	*draw_map2D();
+void		draw_map2D(t_data *data);
 
 #endif
