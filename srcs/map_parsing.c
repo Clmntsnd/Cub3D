@@ -29,7 +29,7 @@ void get_map_size(t_data *data, char argv[1]) {
 	fd = open(argv, O_RDONLY);
 	rows = get_next_line(fd);
 	data->height = 0;
-	data->width = 0;
+	data->width = -1;
 	while(rows[i])
 	{
 		i++;
