@@ -38,8 +38,6 @@ void	put_color_to_tile(t_data *data, t_minimap *minimap)
 	int 		i;
 	int			j;
 
-	minimap->tile_s = 48; //tile_size : Change this size to be in function of a certain ratio
-	minimap->tile_b = 1; //tile_border: 1 pixel
 	i = -1;
 	while (data->map[++i])
 	{
@@ -50,10 +48,14 @@ void	put_color_to_tile(t_data *data, t_minimap *minimap)
 				minimap->color = get_rgba(255,255,255,255); //assign white to char 1
 			else if(data->map[i][j] == '0')
 				minimap->color = get_rgba(0,0,0,255); //assign black to char 0
-			else if(data->map[i][j] == 'N')
-				minimap->color = get_rgba(255,0,0,255); //assign red to char N
+			else if(data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'W' || data->map[i][j] == 'E')
+			{
+				minimap->color = get_rgba(0,0,0,255); //assign red to char N
+				data->pl_x = j;
+				data->pl_y = i;
+			}
 			else
-				continue; //skip char other than 1 and 0
+				continue; //skip char other than 1, 0 and N (e.g. "\n")
 			put_pixel_to_map2D(minimap, i, j, minimap->color);
 		}
 	}
@@ -67,6 +69,8 @@ int	draw_map2D(t_data *data)
 	t_minimap	*minimap;
 
 	minimap = get_minimap();
+	minimap->tile_s = 48; //tile_size : Change this size to be in function of a certain ratio
+	minimap->tile_b = 1; //tile_border: 1 pixel
 	if(!(minimap->map_img = mlx_new_image(data->mlx, WIDTH, HEIGHT)))
 	{
 		mlx_close_window(data->mlx);

@@ -33,13 +33,13 @@ void ft_hook(void* param)
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		image->instances[0].y -= 5;
+		image->instances[0].y -= 2;
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		image->instances[0].y += 5;
+		image->instances[0].y += 2;
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		image->instances[0].x -= 5;
+		image->instances[0].x -= 2;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		image->instances[0].x += 5;
+		image->instances[0].x += 2;
 }
 // -----------------------------------------------------------------------------
 
@@ -59,16 +59,16 @@ int	main(int ac, char **av)
 	{
 		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
 		return(EXIT_FAILURE);
-		return(EXIT_FAILURE);
 	}
 	draw_map2D(data);
-	if (!(image = mlx_new_image(data->mlx, 128, 128)))
+	if (!(image = mlx_new_image(data->mlx, 30, 30)))
 	{
 		mlx_close_window(data->mlx);
 		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
 		return(EXIT_FAILURE);
 	}
-	if (mlx_image_to_window(data->mlx, image, 0, 0) == -1)
+	//TODO modify the '50' by the var minimap->tile
+	if (mlx_image_to_window(data->mlx, image, data->pl_x * 50, data->pl_y * 50) == -1)
 	{
 		mlx_close_window(data->mlx);
 		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"

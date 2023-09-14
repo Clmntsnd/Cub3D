@@ -51,6 +51,8 @@ typedef struct s_data {
 	void *floor;
 	char direction;
 	void *player_pos;
+	int	pl_x;
+	int	pl_y;
 	char **map;
 	char **tmp_map;
 }	t_data;
