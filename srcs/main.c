@@ -67,8 +67,7 @@ int	main(int ac, char **av)
 		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
 		return(EXIT_FAILURE);
 	}
-	//TODO modify the '50' by the var minimap->tile
-	if (mlx_image_to_window(data->mlx, image, data->pl_x * 50, data->pl_y * 50) == -1)
+	if (mlx_image_to_window(data->mlx, image, data->pl_x, data->pl_y) == -1)
 	{
 		mlx_close_window(data->mlx);
 		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
