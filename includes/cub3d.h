@@ -53,8 +53,16 @@ typedef struct s_data {
 	void *player_pos;
 	char **map;
 	char **tmp_map;
-	mlx_image_t *mini_map;
 }	t_data;
+
+typedef struct s_minimap
+{
+	mlx_image_t *map_img;
+	int			tile;
+	int			tile_s;
+	int			tile_b;
+	uint32_t	color;
+}	t_minimap;
 
 /* ------------------ Error ------------------- */
 void map_error_exit(t_data *data);
@@ -74,6 +82,6 @@ void init_content(t_data *data, char *argv);
 
 /* -------------------- Utils ------------------ */
 int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-void		draw_map2D(t_data *data);
+int			draw_map2D(t_data *data);
 
 #endif
