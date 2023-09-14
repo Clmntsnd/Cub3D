@@ -17,8 +17,8 @@ void	put_pixel_to_map2D(t_data *data, int i, int j, uint32_t color)
 	int	tile_s;
 	int tile_b;
 
-	tile_s = 28;
-	tile_b = 1;
+	tile_s = 28; // tile size w/o border
+	tile_b = 1; // tile border size
 	tile = tile_s + tile_b;
 	x = -1;
 	while (++x < tile_s)
