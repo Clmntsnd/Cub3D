@@ -60,13 +60,7 @@ int	main(int ac, char **av)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (!(image = mlx_new_image(data->mlx, 128, 128)))
-	{
-		mlx_close_window(data->mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (!(data->mini_map = mlx_new_image(data->mlx, WIDTH, HEIGHT)))
+	if (!(image = mlx_new_image(data->mlx, 128, 128)) || !(data->mini_map = mlx_new_image(data->mlx, WIDTH, HEIGHT)))
 	{
 		mlx_close_window(data->mlx);
 		puts(mlx_strerror(mlx_errno));
