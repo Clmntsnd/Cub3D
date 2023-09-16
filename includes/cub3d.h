@@ -51,15 +51,29 @@ typedef struct s_data {
 	void *floor;
 	char direction;
 	void *player_pos;
-	int	pl_x;
-	int	pl_y;
 	char **map;
 	char **tmp_map;
 }	t_data;
 
+typedef struct s_ray
+{
+	double	x;
+	double	y;
+	bool	hit_wall;
+}	t_ray;
+
 typedef struct s_minimap
 {
 	mlx_image_t *map_img;
+	mlx_image_t *player_img;
+	t_ray		*ray;
+	double		pl_w;	// 'size' of the player (in pixel)
+	double		pl_h;	// 'size' of the player (in pixel)
+	double		pl_x;	// 'position' of the player in x
+	double		pl_y;	// 'position' of the player in y
+	double		pl_dx;	// delta 'position' of the player in x
+	double		pl_dy;	// delta 'position' of the player in y
+	double		pl_dir;	// view direction of the player
 	int			tile;
 	int			tile_s;
 	int			tile_b;
@@ -70,20 +84,24 @@ typedef struct s_minimap
 void map_error_exit(t_data *data);
 
 /* ------------------ Parsing ------------------ */
-
-bool	ft_parse_arg(int ac, char **av);
-void get_map(t_data *data, char *argv);
-void get_map_size(t_data *data, char argv[1]);
-void check_map(t_data *data);
-int check_valid_char(t_data *data);
-int check_walls(t_data *data);
+bool		ft_parse_arg(int ac, char **av);
+void		get_map(t_data *data, char *argv);
+void		get_map_size(t_data *data, char argv[1]);
+void		check_map(t_data *data);
+int 		check_valid_char(t_data *data);
+int 		check_walls(t_data *data);
 
 /* -------------------- Init ------------------- */
-t_data *get_data(void);
-void init_content(t_data *data, char *argv);
+t_data		*get_data(void);
+t_minimap	*get_minimap(void);
+void		init_content(t_data *data, char *argv);
 
-/* -------------------- Utils ------------------ */
-int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+/* ------------------ Minimap ------------------ */
 int			draw_map2D(t_data *data);
+
+/* ------------------ Utils ------------------ */
+int32_t 	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
+void 		ft_hook(void* param);
+void		ft_randomize(void* param);
 
 #endif
