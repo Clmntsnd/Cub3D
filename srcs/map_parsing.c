@@ -1,6 +1,27 @@
 
 #include "../includes/cub3d.h"
 
+void remove_map_args(t_data *data)
+{
+	int i;
+	int j;
+
+	j = 0;
+	while (j < data->width)
+	{
+		i = 0;
+		while (i < data->height)
+		{
+			if (ft_strncmp(&data->map[i][j], "NO ", 3))
+			{
+				printf("Yup[i = %d][f = %d]\n", i, j);
+			}
+				i++;
+		}
+		j++;
+	}
+}
+
 void get_map(t_data *data, char *argv)
 {
 	int i;
@@ -16,7 +37,6 @@ void get_map(t_data *data, char *argv)
 		data->map[i] = temp;
 		i++;
 	}
-	data->map[i] = "\0";
 	close(fd);
 }
 
