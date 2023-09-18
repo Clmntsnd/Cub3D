@@ -62,6 +62,9 @@ void	put_color_to_tile(t_data *data, t_minimap *minimap)
 
 void	init_minimap(t_minimap *minimap)
 {
+	minimap->ray.x = 0;
+	minimap->ray.y = 0;
+	minimap->ray.hit_wall = false;
 	minimap->pl_h = 15;
 	minimap->pl_w = 15;
 	minimap->pl_x = 0;

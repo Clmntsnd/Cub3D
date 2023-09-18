@@ -66,7 +66,7 @@ typedef struct s_minimap
 {
 	mlx_image_t *map_img;
 	mlx_image_t *player_img;
-	t_ray		*ray;
+	t_ray		ray;
 	double		pl_w;	// 'size' of the player (in pixel)
 	double		pl_h;	// 'size' of the player (in pixel)
 	double		pl_x;	// 'position' of the player in x
@@ -103,5 +103,7 @@ int			draw_map2D(t_data *data);
 int32_t 	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
 void 		ft_hook(void* param);
 void		ft_randomize(void* param);
+void		print_player(void *param);
+
 
 #endif

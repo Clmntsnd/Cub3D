@@ -59,3 +59,17 @@ void ft_hook(void* param)
 		minimap->player_img->instances[0].x += 2.5;
 	}
 }
+
+void	print_player(void *param)
+{
+	(void)param;
+	t_minimap	*minimap;
+
+	minimap = get_minimap();
+	printf("\npl_x:	%.4f\n", minimap->pl_x);
+	printf("pl_y:	%.4f\n", minimap->pl_y);
+	printf("pl_dx:	%.4f\n", minimap->pl_dx);
+	printf("pl_dy:	%.4f\n", minimap->pl_dy);
+	printf("pl_dir:	%.4f\n", minimap->pl_dir);
+
+}
