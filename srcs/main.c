@@ -21,10 +21,12 @@ int	main(int ac, char **av)
 	// if any init doesn't work, returns an error
 	if (draw_map2D(data) != 0)
 		return(EXIT_FAILURE);
-	//Hooks to manage key binding
-	mlx_loop_hook(data->mlx, ft_randomize, data->mlx);
-	mlx_loop_hook(data->mlx, print_player, data->mlx);
-	mlx_loop_hook(data->mlx, ft_hook, data->mlx);
+
+	mlx_loop_hook(data->mlx, ft_randomize, data->mlx); // create the player by filling the image w/ red pixels
+	mlx_loop_hook(data->mlx, cast_ray, data->mlx); // creat the ray, based on the same methid as the player
+	mlx_loop_hook(data->mlx, print_player, data->mlx); // print play position
+	mlx_loop_hook(data->mlx, ft_hook, data->mlx); // key hook
+
 
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);

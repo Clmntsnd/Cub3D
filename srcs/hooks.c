@@ -34,10 +34,14 @@ void ft_hook(void* param)
 	minimap = get_minimap();
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+	if (mlx_is_key_down(mlx, MLX_KEY_UP)){
 		minimap->player_img->instances[0].y -= 2.5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+		minimap->ray_img->instances[0].y -= 2.5;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_DOWN)){
 		minimap->player_img->instances[0].y += 2.5;
+		minimap->ray_img->instances[0].y += 2.5;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
 		//WIP on directions
@@ -47,6 +51,7 @@ void ft_hook(void* param)
 		// minimap->pl_dx = cos(minimap->pl_dir);
 		// minimap->pl_dy = sin(minimap->pl_dir);
 		minimap->player_img->instances[0].x -= 2.5;
+		minimap->ray_img->instances[0].x -= 2.5;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 	{
@@ -57,6 +62,7 @@ void ft_hook(void* param)
 		// minimap->pl_dx = cos(minimap->pl_dir) * 5;
 		// minimap->pl_dy = sin(minimap->pl_dir) * 5;
 		minimap->player_img->instances[0].x += 2.5;
+		minimap->ray_img->instances[0].x += 2.5;
 	}
 }
 

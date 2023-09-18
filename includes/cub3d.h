@@ -39,6 +39,8 @@
 //Window specs
 #define WIDTH 1024
 #define HEIGHT 512
+#define RAY_W 6
+#define RAY_H 20
 
 /* ------------------ STRUCTS ------------------ */
 
@@ -66,6 +68,7 @@ typedef struct s_minimap
 {
 	mlx_image_t *map_img;
 	mlx_image_t *player_img;
+	mlx_image_t *ray_img;
 	t_ray		ray;
 	double		pl_w;	// 'size' of the player (in pixel)
 	double		pl_h;	// 'size' of the player (in pixel)
@@ -104,6 +107,8 @@ int32_t 	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
 void 		ft_hook(void* param);
 void		ft_randomize(void* param);
 void		print_player(void *param);
+void		cast_ray(void *param);
+
 
 
 #endif
