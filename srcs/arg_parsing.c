@@ -16,6 +16,5 @@ bool	ft_parse_arg(int ac, char **av)
         return (printf("❌ Error\n%s\n%s\n", ERR_EXT, ERR_USG), false);
     if (len < 5)
         return (printf("❌ Error\n%s\n%s\n", ERR_NAME, ERR_USG), false);
-	puts("ft_parse_arg done");
     return (true);
 }

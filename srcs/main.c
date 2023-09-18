@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 
 	mlx_loop_hook(data->mlx, ft_randomize, data->mlx); // create the player by filling the image w/ red pixels
 	mlx_loop_hook(data->mlx, cast_ray, data->mlx); // creat the ray, based on the same methid as the player
-	mlx_loop_hook(data->mlx, print_player, data->mlx); // print play position
+	// mlx_loop_hook(data->mlx, print_player, data->mlx); // print play position
 	mlx_loop_hook(data->mlx, ft_hook, data->mlx); // key hook
 
 
