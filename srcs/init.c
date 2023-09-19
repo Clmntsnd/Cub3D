@@ -10,6 +10,12 @@ void print_map(t_data *data)
         printf("%s", data->map[i]);
         i++;
     }
+	int j = 0;
+	while(j < 6)
+	{
+		printf("\nMap arg[%d] = %s", j,  data->map_args[j]);
+		j++;
+	}
 	printf("\n\nwidth = %d", data->width);
 	printf("\n\nheigth = %d", data->height);
 }

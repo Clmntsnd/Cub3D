@@ -1,12 +1,19 @@
 
 #include "../includes/cub3d.h"
 
+// void init_assets(t_data *data)
+// {
+
+// }
+
+
 void remove_map_args(t_data *data)
 {
 	int i;
 	int j;
 	int flag;
 
+	data->map_args = ft_calloc(6, sizeof(char *));
 	j = 0;
 	flag = 0;
 	while (j < data->width)
@@ -18,16 +25,21 @@ void remove_map_args(t_data *data)
 					|| (ft_strncmp(&data->map[i][j], "SO ", 3) == 0) || (ft_strncmp(&data->map[i][j], "WE ", 3) == 0)
 					|| (ft_strncmp(&data->map[i][j], "C ", 2) == 0) || (ft_strncmp(&data->map[i][j], "F ", 2) == 0))
 			{
+				data->map_args[flag] = data->map[i];
+				printf("[i = %d][j = %d]\n", i, j);
+				printf("map_args = %s\n", data->map_args[flag]);
 				flag++;
-				printf("Yup[i = %d][f = %d]\n", i, j);
 			}
 				i++;
 		}
+		data->map_args++;
 		j++;
 	}
 	if(flag == 6)
+	{		
 		printf("\n\n You have the correct amount of args in your map: %d \n\n", flag);
 		// init_assets(data);
+	}
 	else
 		map_error_exit(data);
 }
