@@ -37,8 +37,8 @@
 # define ERR_MEM	"❌ Memory allocation failed"
 
 //Window specs
-#define WIDTH 1024
-#define HEIGHT 512
+#define WIDTH 10240
+#define HEIGHT 5120
 #define RAY_W 6
 #define RAY_H 20
 
@@ -96,6 +96,7 @@ void get_map_size(t_data *data, char argv[1]);
 void check_map(t_data *data);
 int check_valid_char(t_data *data);
 int check_walls(t_data *data);
+void remove_map_args(t_data *data);
 
 /* -------------------- Init ------------------- */
 t_data		*get_data(void);
