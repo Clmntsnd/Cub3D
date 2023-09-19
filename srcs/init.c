@@ -10,6 +10,8 @@ void print_map(t_data *data)
         printf("%s", data->map[i]);
         i++;
     }
+	printf("\n\nwidth = %d", data->width);
+	printf("\n\nheigth = %d", data->height);
 }
 
 t_data *get_data(void)
@@ -25,6 +27,7 @@ void init_content(t_data *data, char *argv)
 {
 	get_map_size(data, argv);
 	get_map(data, argv);
+	remove_map_args(data);
 	check_map(data);
 	print_map(data);
 }
