@@ -27,12 +27,11 @@ void remove_map_args(t_data *data)
 			{
 				data->map_args[flag] = data->map[i];
 				printf("[i = %d][j = %d]\n", i, j);
-				printf("map_args = %s\n", data->map_args[flag]);
+				printf("map_args = %s flag= %d \n", data->map_args[flag], flag);
 				flag++;
 			}
 				i++;
 		}
-		data->map_args++;
 		j++;
 	}
 	if(flag == 6)
