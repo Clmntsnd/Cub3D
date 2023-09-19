@@ -50,14 +50,50 @@ void	put_color_to_tile(t_data *data, t_minimap *minimap)
 			else if(data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'W' || data->map[i][j] == 'E')
 			{
 				minimap->color = get_rgba(0,0,0,255); //assign red to char N
-				data->pl_x = j * minimap->tile;
-				data->pl_y = i * minimap->tile;
+				minimap->pl_x = j * minimap->tile + (minimap->tile - minimap->pl_h) * 0.5;
+				minimap->pl_y = i * minimap->tile +  (minimap->tile - minimap->pl_w) * 0.5;
 			}
 			else
-				continue; //skip char other than 1, 0 and N (e.g. "\n")
+				continue; //skip char other than 1, 0 and N, S, W, E (e.g. "\n")
 			put_pixel_to_map2D(minimap, i, j, minimap->color);
 		}
 	}
+}
+
+void	init_minimap(t_minimap *minimap)
+{
+	minimap->ray.x = 0;
+	minimap->ray.y = 0;
+	minimap->ray.hit_wall = false;
+	minimap->pl_h = 20;
+	minimap->pl_w = 20;
+	minimap->pl_x = 0;
+	minimap->pl_y = 0;
+	minimap->pl_dir = 0; 
+	minimap->pl_dx = cos(minimap->pl_dir) * 5;
+	minimap->pl_dy = sin(minimap->pl_dir) * 5;
+	minimap->tile_s = 48; //tile_size : Change this size to be in function of a certain ratio
+	minimap->tile_b = 1; //tile_border: 1 pixel
+	minimap->tile = minimap->tile_s + minimap->tile_b;
+}
+
+void	cast_ray(void *param)
+{
+	// minimap->ray.x;
+	// minimap->ray.y;
+	(void)param;
+	t_minimap *minimap;
+	int	i;
+	int	len;
+
+	minimap = get_minimap();
+	i = 0;
+	len = 40;
+	while (++i < len)
+	{
+		mlx_put_pixel(minimap->ray_img, 0, i, get_rgba(250,0,0,255));
+	}
+
 }
 
 /* 
@@ -68,17 +104,22 @@ int	draw_map2D(t_data *data)
 	t_minimap	*minimap;
 
 	minimap = get_minimap();
-	minimap->tile_s = 48; //tile_size : Change this size to be in function of a certain ratio
-	minimap->tile_b = 1; //tile_border: 1 pixel
-	minimap->tile = minimap->tile_s + minimap->tile_b;
-	if(!(minimap->map_img = mlx_new_image(data->mlx, WIDTH, HEIGHT)))
+	init_minimap(minimap);
+
+
+	if(!(minimap->map_img = mlx_new_image(data->mlx, WIDTH, HEIGHT)) 
+		|| !(minimap->player_img = mlx_new_image(data->mlx, minimap->pl_h, minimap->pl_w))
+			|| !(minimap->ray_img = mlx_new_image(data->mlx, 10, 100)))
 	{
 		mlx_close_window(data->mlx);
 		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
 		return(EXIT_FAILURE);
 	}
     put_color_to_tile(data, minimap);
-	if(mlx_image_to_window(data->mlx, minimap->map_img, 0, 0) == -1)
+    // cast_ray(data, minimap);
+	if(mlx_image_to_window(data->mlx, minimap->map_img, 0, 0) == -1 
+		|| mlx_image_to_window(data->mlx, minimap->player_img, minimap->pl_x, minimap->pl_y) == -1
+			|| mlx_image_to_window(data->mlx, minimap->ray_img, minimap->pl_x + minimap->pl_h*0.5, minimap->pl_y + minimap->pl_h*0.5) == -1)
 	{
 		mlx_close_window(data->mlx);
 		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
