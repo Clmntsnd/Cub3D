@@ -34,37 +34,44 @@ void ft_player_and_ray(void* param)
 // 	rand() % 0xFF  // A
 // );
 
-void	cast_ray(t_data *data, t_minimap *minimap)
+void	cast_ray(t_minimap *minimap)
 {
-	(void)data;
+	// (void)param;
+	// t_minimap *minimap;
 	int	i;
 	int	len;
-	minimap->ray.x = minimap->pl_x;
-	minimap->ray.y = minimap->pl_y;
 
+	// minimap = get_minimap();
+	
+	minimap->ray.x = minimap->player_img->instances[0].x + minimap->pl_h * 0.5;
+	minimap->ray.y = minimap->player_img->instances[0].y + minimap->pl_h * 0.5;
+	// minimap->ray.x = minimap->pl_x + minimap->pl_h * 0.5;
+	// minimap->ray.y = minimap->pl_y + minimap->pl_h * 0.5;
+	
 	i = 0;
-	len = 50;
+	len = 75;
 	while (++i < len)
 	{
 		mlx_put_pixel(minimap->map_img, minimap->ray.x, minimap->ray.y, get_rgba(0,250,0,255));
-		minimap->ray.x += 0.5; 
-		minimap->ray.y += 0.25;
+		minimap->ray.x += 0.5;
+		minimap->ray.y += 0.5;
 	}
+	
 }
 
 void ft_hook(void* param)
 {
 	t_minimap	*minimap;
-	t_data		*data;
+	// t_data		*data;
 	mlx_t* 		mlx = param;
-	int			mapX;
-	int			mapY;
+	// int			mapX;
+	// int			mapY;
 
 
 	minimap = get_minimap();
-	data = get_data();
-	mapX = minimap->pl_x / minimap->tile;
-	mapY = minimap->pl_y / minimap->tile;
+	// data = get_data();
+	// mapX = minimap->pl_x / minimap->tile;
+	// mapY = minimap->pl_y / minimap->tile;
 
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
@@ -110,6 +117,7 @@ void ft_hook(void* param)
 		minimap->player_img->instances[0].y += 2.5;
 		// minimap->ray_img->instances[0].y += 2.5;
 	}
+	cast_ray(minimap);
 }
 
 void	print_player(void *param)

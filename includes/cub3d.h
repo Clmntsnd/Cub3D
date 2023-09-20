@@ -111,6 +111,8 @@ int32_t 	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
 void 		ft_hook(void* param);
 void		ft_player_and_ray(void* param);
 void		print_player(void *param);
-void	cast_ray(t_data *data, t_minimap *minimap);
+void		cast_ray(t_minimap *minimap);
+// void		cast_ray(void *param);
+// void		cast_ray();
 
 #endif
