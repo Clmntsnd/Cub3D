@@ -18,12 +18,12 @@ void ft_player_and_ray(void* param)
 			mlx_put_pixel(minimap->player_img, i, j, get_rgba(250,0,0,255));
 	}
 
-	i--; // used to start the ray at the edge of the box
+	// i--; // used to start the ray at the edge of the box
 	
 	// while loop to print a line from the middle 
 	// of the image (x axis) to the end of the image (y axis)
-	while (++i < minimap->player_img->height) 
-		mlx_put_pixel(minimap->player_img, minimap->player_img->width*0.5, i, get_rgba(0,250,0,255));
+	// while (++i < minimap->player_img->height) 
+	// 	mlx_put_pixel(minimap->player_img, minimap->player_img->width*0.5, i, get_rgba(0,250,0,255));
 }
 
 // Saved for now, doesn't req 
@@ -34,62 +34,80 @@ void ft_player_and_ray(void* param)
 // 	rand() % 0xFF  // A
 // );
 
-void	cast_ray(void *param)
+void	cast_ray(t_data *data, t_minimap *minimap)
 {
-	(void)param;
-	t_minimap *minimap;
+	(void)data;
 	int	i;
 	int	len;
+	minimap->ray.x = minimap->pl_x;
+	minimap->ray.y = minimap->pl_y;
 
-	minimap = get_minimap();
 	i = 0;
-	len = 40;
+	len = 50;
 	while (++i < len)
-		mlx_put_pixel(minimap->ray_img, 0, i, get_rgba(0,250,0,255));
+	{
+		mlx_put_pixel(minimap->map_img, minimap->ray.x, minimap->ray.y, get_rgba(0,250,0,255));
+		minimap->ray.x += 0.5; 
+		minimap->ray.y += 0.25;
+	}
 }
 
 void ft_hook(void* param)
 {
 	t_minimap	*minimap;
-	mlx_t* mlx = param;
+	t_data		*data;
+	mlx_t* 		mlx = param;
+	int			mapX;
+	int			mapY;
+
 
 	minimap = get_minimap();
+	data = get_data();
+	mapX = minimap->pl_x / minimap->tile;
+	mapY = minimap->pl_y / minimap->tile;
+
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
 		//WIP on directions
-		minimap->pl_dir += 0.1;
-		if(minimap->pl_dir < 0)
-			minimap->pl_dir += 2 * M_PI;
-		minimap->pl_dx = cos(minimap->pl_dir) * 5;
-		minimap->pl_dy = sin(minimap->pl_dir) * 5;
+		// minimap->pl_dir += 0.1;
+		// if(minimap->pl_dir < 0)
+		// 	minimap->pl_dir += 2 * M_PI;
+		// minimap->pl_dx = cos(minimap->pl_dir) * 5;
+		// minimap->pl_dy = sin(minimap->pl_dir) * 5;
 		// minimap->player_img->instances[0].x -= 2.5;
-		minimap->player_img->instances[0].x -= minimap->pl_dx;
-		minimap->player_img->instances[0].y -= minimap->pl_dy;
-		// minimap->ray_img->instances[0].x -= 2.5;
+		// minimap->player_img->instances[0].x -= minimap->pl_dx;
+		// minimap->player_img->instances[0].y -= minimap->pl_dy;
+		// if (data->map[mapY][mapX] == '1')
+		// 	minimap->pl_x -= 0;
+		// else
+		//	minimap->pl_x -= 2.5;
+		minimap->player_img->instances[0].x -= 2.5;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 	{
 		//WIP on directions
-		minimap->pl_dir -= 0.1;
-		if(minimap->pl_dir > 2 * M_PI)
-			minimap->pl_dir -= 2 * M_PI;
-		minimap->pl_dx = cos(minimap->pl_dir) * 5;
-		minimap->pl_dy = sin(minimap->pl_dir) * 5;
-		minimap->player_img->instances[0].x += minimap->pl_dx;
-		minimap->player_img->instances[0].y += minimap->pl_dy;
+		// minimap->pl_dir -= 0.1;
+		// if(minimap->pl_dir > 2 * M_PI)
+		// 	minimap->pl_dir -= 2 * M_PI;
+		// minimap->pl_dx = cos(minimap->pl_dir) * 5;
+		// minimap->pl_dy = sin(minimap->pl_dir) * 5;
+		// minimap->player_img->instances[0].x += minimap->pl_dx;
+		// minimap->player_img->instances[0].y += minimap->pl_dy;
 		// minimap->ray_img->instances[0].x += 2.5;
+		minimap->player_img->instances[0].x += 2.5;
+
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_UP)){
-		minimap->player_img->instances[0].x -= minimap->pl_dx;
-		minimap->player_img->instances[0].y -= minimap->pl_dy;
-		// minimap->ray_img->instances[0].y -= 2.5;
+		// minimap->player_img->instances[0].x -= minimap->pl_dx;
+		// minimap->player_img->instances[0].y -= minimap->pl_dy;
+		minimap->player_img->instances[0].y -= 2.5;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN)){
-		minimap->player_img->instances[0].x += minimap->pl_dx;
-		minimap->player_img->instances[0].y += minimap->pl_dy;
-		// minimap->player_img->instances[0].y += 2.5;
+		// minimap->player_img->instances[0].x += minimap->pl_dx;
+		// minimap->player_img->instances[0].y += minimap->pl_dy;
+		minimap->player_img->instances[0].y += 2.5;
 		// minimap->ray_img->instances[0].y += 2.5;
 	}
 }
