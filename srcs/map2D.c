@@ -65,16 +65,16 @@ void	init_minimap(t_minimap *minimap)
 	minimap->ray.x = 0;
 	minimap->ray.y = 0;
 	minimap->ray.hit_wall = false;
-	minimap->pl_h = 100;
+	minimap->pl_h = 40;
 	minimap->pl_w = 20;
 	minimap->pl_x = 0;
 	minimap->pl_y = 0;
 	minimap->pl_dir = 0; 
 	minimap->pl_dx = cos(minimap->pl_dir) * 5;
 	minimap->pl_dy = sin(minimap->pl_dir) * 5;
-	minimap->tile_s = 48; //tile_size : Change this size to be in function of a certain ratio
+	minimap->tile_s = 62; //tile_size : Change this size to be in function of a certain ratio
 	minimap->tile_b = 1; //tile_border: 1 pixel
-	minimap->tile = minimap->tile_s + minimap->tile_b;
+	minimap->tile = minimap->tile_s + 2 * minimap->tile_b;
 }
 
 /* 
@@ -96,7 +96,7 @@ int	draw_map2D(t_data *data)
 		return(EXIT_FAILURE);
 	}
     put_color_to_tile(data, minimap);
-    // cast_ray(data, minimap);
+    cast_ray(data, minimap);
 	if(mlx_image_to_window(data->mlx, minimap->map_img, 0, 0) == -1 
 		|| mlx_image_to_window(data->mlx, minimap->player_img, minimap->pl_x, minimap->pl_y) == -1)
 			// || mlx_image_to_window(data->mlx, minimap->ray_img, minimap->pl_x + minimap->pl_h*0.5, minimap->pl_y + minimap->pl_h*0.5) == -1)
