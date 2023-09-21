@@ -95,7 +95,7 @@ int	draw_map2D(t_data *data)
 		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
 		return(EXIT_FAILURE);
 	}
-    put_color_to_tile(data, minimap);
+    // put_color_to_tile(data, minimap);
     // cast_ray();
 	if(mlx_image_to_window(data->mlx, minimap->map_img, 0, 0) == -1 
 		|| mlx_image_to_window(data->mlx, minimap->player_img, minimap->pl_x, minimap->pl_y) == -1)

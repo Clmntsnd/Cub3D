@@ -114,5 +114,9 @@ void		print_player(void *param);
 void		cast_ray(t_minimap *minimap);
 // void		cast_ray(void *param);
 // void		cast_ray();
+void	put_color_to_tile(t_data *data, t_minimap *minimap);
+void	put_pixel_to_map2D(t_minimap *minimap, int i, int j, uint32_t color);
+
+
 
 #endif
