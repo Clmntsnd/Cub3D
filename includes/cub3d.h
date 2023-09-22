@@ -62,6 +62,7 @@ typedef struct s_ms {
 	int			height; 	//map height
 	int			width;		//map width
 	t_player	*player;	//player's informations
+	mlx_image_t *m_img;
 	
 	void		*wall;
 	void		*floor;
@@ -121,6 +122,9 @@ void 		ft_hook(void* param);
 void		ft_player_and_ray(void* param);
 void		print_player(void *param);
 void		cast_ray(t_minimap *minimap);
+
+void		loop(void *param);
+
 // void		cast_ray(void *param);
 // void		cast_ray();
 void	put_color_to_tile(t_ms *ms, t_minimap *minimap);

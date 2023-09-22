@@ -35,7 +35,7 @@ RM			=	rm -rf
 # -- SRC Files -- #
 SRCS_DIR	=	./srcs/
 # SRCS_LST	= 	test.c 
-SRCS_LST	= 	main.c arg_parsing.c error_management.c init.c map_check.c map_parsing.c map2D.c hooks.c\
+SRCS_LST	= 	main.c arg_parsing.c error_management.c init.c map_check.c map_parsing.c map2D.c hooks.c hooks2.c\
 
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LST))
 
