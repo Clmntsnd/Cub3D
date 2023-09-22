@@ -75,66 +75,66 @@ void	cast_ray(t_minimap *minimap)
 
 void ft_hook(void* param)
 {
+	(void)param;
 	t_minimap	*minimap;
-	t_data		*data;
-	mlx_t* 		mlx = param;
+	t_ms		*ms;
 	// int			mapX;
 	// int			mapY;
 
 
 	minimap = get_minimap();
-	data = get_data();
+	ms = get_ms();
 	// mapX = minimap->pl_x / minimap->tile;
 	// mapY = minimap->pl_y / minimap->tile;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-	{
-		//WIP on directions
-		// minimap->pl_dir += 0.1;
-		// if(minimap->pl_dir < 0)
-		// 	minimap->pl_dir += 2 * M_PI;
-		// minimap->pl_dx = cos(minimap->pl_dir) * 5;
-		// minimap->pl_dy = sin(minimap->pl_dir) * 5;
-		// minimap->player_img->instances[0].x -= 2.5;
-		// minimap->player_img->instances[0].x -= minimap->pl_dx;
-		// minimap->player_img->instances[0].y -= minimap->pl_dy;
-		// if (data->map[mapY][mapX] == '1')
-		// 	minimap->pl_x -= 0;
-		// else
-		//	minimap->pl_x -= 2.5;
-		minimap->player_img->instances[0].x -= 2.5;
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-	{
-		//WIP on directions
-		// minimap->pl_dir -= 0.1;
-		// if(minimap->pl_dir > 2 * M_PI)
-		// 	minimap->pl_dir -= 2 * M_PI;
-		// minimap->pl_dx = cos(minimap->pl_dir) * 5;
-		// minimap->pl_dy = sin(minimap->pl_dir) * 5;
-		// minimap->player_img->instances[0].x += minimap->pl_dx;
-		// minimap->player_img->instances[0].y += minimap->pl_dy;
-		// minimap->ray_img->instances[0].x += 2.5;
-		minimap->player_img->instances[0].x += 2.5;
+	if (mlx_is_key_down(ms->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(ms->mlx);
+	// if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+	// {
+	// 	//WIP on directions
+	// 	// minimap->pl_dir += 0.1;
+	// 	// if(minimap->pl_dir < 0)
+	// 	// 	minimap->pl_dir += 2 * M_PI;
+	// 	// minimap->pl_dx = cos(minimap->pl_dir) * 5;
+	// 	// minimap->pl_dy = sin(minimap->pl_dir) * 5;
+	// 	// minimap->player_img->instances[0].x -= 2.5;
+	// 	// minimap->player_img->instances[0].x -= minimap->pl_dx;
+	// 	// minimap->player_img->instances[0].y -= minimap->pl_dy;
+	// 	// if (ms->map[mapY][mapX] == '1')
+	// 	// 	minimap->pl_x -= 0;
+	// 	// else
+	// 	//	minimap->pl_x -= 2.5;
+	// 	minimap->player_img->instances[0].x -= 2.5;
+	// }
+	// if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+	// {
+	// 	//WIP on directions
+	// 	// minimap->pl_dir -= 0.1;
+	// 	// if(minimap->pl_dir > 2 * M_PI)
+	// 	// 	minimap->pl_dir -= 2 * M_PI;
+	// 	// minimap->pl_dx = cos(minimap->pl_dir) * 5;
+	// 	// minimap->pl_dy = sin(minimap->pl_dir) * 5;
+	// 	// minimap->player_img->instances[0].x += minimap->pl_dx;
+	// 	// minimap->player_img->instances[0].y += minimap->pl_dy;
+	// 	// minimap->ray_img->instances[0].x += 2.5;
+	// 	minimap->player_img->instances[0].x += 2.5;
 
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_UP)){
-		// minimap->player_img->instances[0].x -= minimap->pl_dx;
-		// minimap->player_img->instances[0].y -= minimap->pl_dy;
-		minimap->player_img->instances[0].y -= 2.5;
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN)){
-		// minimap->player_img->instances[0].x += minimap->pl_dx;
-		// minimap->player_img->instances[0].y += minimap->pl_dy;
-		minimap->player_img->instances[0].y += 2.5;
-		// minimap->ray_img->instances[0].y += 2.5;
-	}
+	// }
+	// if (mlx_is_key_down(mlx, MLX_KEY_UP)){
+	// 	// minimap->player_img->instances[0].x -= minimap->pl_dx;
+	// 	// minimap->player_img->instances[0].y -= minimap->pl_dy;
+	// 	minimap->player_img->instances[0].y -= 2.5;
+	// }
+	// if (mlx_is_key_down(mlx, MLX_KEY_DOWN)){
+	// 	// minimap->player_img->instances[0].x += minimap->pl_dx;
+	// 	// minimap->player_img->instances[0].y += minimap->pl_dy;
+	// 	minimap->player_img->instances[0].y += 2.5;
+	// 	// minimap->ray_img->instances[0].y += 2.5;
+	// }
+	// // cast_ray(minimap);
+	// // draw_map2D(ms);
+    // put_color_to_tile(ms, minimap);
+	// draw_pl(minimap);
 	// cast_ray(minimap);
-	// draw_map2D(data);
-    put_color_to_tile(data, minimap);
-	draw_pl(minimap);
-	cast_ray(minimap);
 
 }
 

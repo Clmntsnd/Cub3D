@@ -44,20 +44,29 @@
 
 /* ------------------ STRUCTS ------------------ */
 
-typedef struct s_data {
-	void *mlx;
-	void *win;
-	int height;
-	int width;
-	void *wall;
-	void *floor;
-	void *ceiling;
-	void *direction_assets;
-	char direction;
-	void *player_pos;
-	char **map;
-	char **tmp_map;
-}	t_data;
+typedef struct s_player {
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+	double	camX;
+	double	camY;
+}	t_player;
+
+typedef struct s_ms {
+	void		*mlx;
+	char		**map;
+	char		**tmp_map;
+	int			height; 	//map height
+	int			width;		//map width
+	t_player	*player;	//player's informations
+	
+	void		*wall;
+	void		*floor;
+	void		*ceiling;	
+}	t_ms;
 
 typedef struct s_ray
 {
@@ -86,25 +95,25 @@ typedef struct s_minimap
 }	t_minimap;
 
 /* ------------------ Error ------------------- */
-void map_error_exit(t_data *data);
+void map_error_exit(t_ms *ms);
 
 /* ------------------ Parsing ------------------ */
 
 bool	ft_parse_arg(int ac, char **av);
-void get_map(t_data *data, char *argv);
-void get_map_size(t_data *data, char argv[1]);
-void check_map(t_data *data);
-int check_valid_char(t_data *data);
-int check_walls(t_data *data);
-void remove_map_args(t_data *data);
+void get_map(t_ms *ms, char *argv);
+void get_map_size(t_ms *ms, char argv[1]);
+void check_map(t_ms *ms);
+int check_valid_char(t_ms *ms);
+int check_walls(t_ms *ms);
+void remove_map_args(t_ms *ms);
 
 /* -------------------- Init ------------------- */
-t_data		*get_data(void);
+t_ms		*get_ms(void);
 t_minimap	*get_minimap(void);
-void		init_content(t_data *data, char *argv);
+void		init_content(t_ms *ms, char *argv);
 
 /* ------------------ Minimap ------------------ */
-int			draw_map2D(t_data *data);
+int			draw_map2D(t_ms *ms);
 
 /* ------------------ Utils ------------------ */
 int32_t 	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
@@ -114,7 +123,7 @@ void		print_player(void *param);
 void		cast_ray(t_minimap *minimap);
 // void		cast_ray(void *param);
 // void		cast_ray();
-void	put_color_to_tile(t_data *data, t_minimap *minimap);
+void	put_color_to_tile(t_ms *ms, t_minimap *minimap);
 void	put_pixel_to_map2D(t_minimap *minimap, int i, int j, uint32_t color);
 
 
