@@ -21,7 +21,7 @@ t_ms *get_ms(void)
 	if (ms == NULL)
 	{
 		ms = ft_calloc(1, sizeof(t_ms));
-		ms->player = ft_calloc(1, sizeof(t_player));
+		ms->game = ft_calloc(1, sizeof(t_game));
 	}
 	return (ms);
 }

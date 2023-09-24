@@ -1,15 +1,5 @@
 #include "../includes/cub3d.h"
 
-void	init_player(t_ms *ms)
-{
-	ms->player->posX = 1;
-	ms->player->posY = 1;
-	ms->player->dirX = -1;
-	ms->player->dirY = 0;
-	ms->player->planeX = 0;
-	ms->player->planeY = 0.66;
-	ms->player->camX = 0;
-}
 
 int	main(int ac, char **av)
 {
@@ -27,7 +17,7 @@ int	main(int ac, char **av)
 		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
 		return(EXIT_FAILURE);
 	}
-	init_player(ms);
+	init_game(ms);
 
 	if(!(ms->m_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT)))
 	{
@@ -43,8 +33,8 @@ int	main(int ac, char **av)
 	}
 
 
-	printf("\nposX= %.2f\n", ms->player->posX);
-	printf("posY= %.2f\n", ms->player->posY);
+	printf("\nposX= %.2f\n", ms->game->pl_pos.x);
+	printf("posY= %.2f\n", ms->game->pl_pos.y);
 
 	mlx_loop_hook(ms->mlx, loop, ms->mlx); // key hook
 	

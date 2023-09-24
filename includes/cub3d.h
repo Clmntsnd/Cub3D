@@ -37,23 +37,41 @@
 # define ERR_MEM	"❌ Memory allocation failed"
 
 //Window specs
-#define WIDTH 1024
-#define HEIGHT 1024
-#define RAY_W 6
-#define RAY_H 20
+#define WIDTH 640
+#define HEIGHT 480
+#define TEXTURE_W 242
+#define TEXTURE_H 242
 
 /* ------------------ STRUCTS ------------------ */
+typedef	struct s_vect
+{
+	double x;
+	double y;
+}	t_vect;
 
-typedef struct s_player {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	double	camX;
-	double	camY;
-}	t_player;
+typedef struct s_game {
+	t_vect	pl_pos;
+	t_vect	pl_dir;
+	t_vect	plane;
+	double	cam_x;
+	t_vect	ray_dir;
+	t_vect	map;
+	t_vect	side_dist;
+	t_vect	delta_dist;
+	t_vect	step;
+	int		side;
+	double	perp_wall_dist;
+	int		hit;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	double	wall_x; // wall x coord.
+	int		wall_texture_x; 
+	int		wall_texture_y; 
+	double	step_texture; // step_texture, how much the y-coordinate of the wall texture is incremented.
+	double	texture_pos; // texture_pos, the y-coordinate of the wall texture
+	u_int32_t		draw_buffer[HEIGHT][WIDTH]; 
+}	t_game;
 
 typedef struct s_ms {
 	void		*mlx;
@@ -61,7 +79,7 @@ typedef struct s_ms {
 	char		**tmp_map;
 	int			height; 	//map height
 	int			width;		//map width
-	t_player	*player;	//player's informations
+	t_game		*game;		//game informations
 	mlx_image_t *m_img;
 	
 	void		*wall;
@@ -112,6 +130,7 @@ void remove_map_args(t_ms *ms);
 t_ms		*get_ms(void);
 t_minimap	*get_minimap(void);
 void		init_content(t_ms *ms, char *argv);
+void		init_game(t_ms *ms);
 
 /* ------------------ Minimap ------------------ */
 int			draw_map2D(t_ms *ms);
@@ -124,6 +143,7 @@ void		print_player(void *param);
 void		cast_ray(t_minimap *minimap);
 
 void		loop(void *param);
+
 
 // void		cast_ray(void *param);
 // void		cast_ray();
