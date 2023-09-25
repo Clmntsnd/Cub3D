@@ -37,10 +37,10 @@
 # define ERR_MEM	"❌ Memory allocation failed"
 
 //Window specs
-#define WIDTH 640
-#define HEIGHT 480
-#define TEXTURE_W 242
-#define TEXTURE_H 242
+#define WIDTH 1024
+#define HEIGHT 512
+#define TEXTURE_W 24
+#define TEXTURE_H 24
 
 /* ------------------ STRUCTS ------------------ */
 typedef	struct s_vect

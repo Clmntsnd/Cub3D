@@ -1,7 +1,7 @@
 #include "../includes/cub3d.h"
 
-# define MOVE_SPEED 0.025
-# define ROTATE_SPEED 0.02
+# define MOVE_SPEED 0.00012
+# define ROTATE_SPEED 0.00002
 
 //dir NORTH
 	// ms->game->pl_dir.x = -1;
@@ -16,8 +16,18 @@
 	// ms->game->pl_dir.x = 1;
 	// ms->game->plane.y = 0.66;
 
-int map[10][10] = {
+int map[20][10] = {
 		{1,1,1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,1,1,0,1},
+		{1,0,0,0,0,0,1,1,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,0,0,1,1,1,1},
+		{1,1,1,1,0,0,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,1},
@@ -48,22 +58,17 @@ void	init_game(t_ms *ms)
 	ms->game->step.y = 1;
 }
 
-void	set_ray_dir(t_ms *ms)
+void	set_data(t_ms *ms)
 {
+	//set_ray_dir
 	ms->game->ray_dir.x = ms->game->pl_dir.x + ms->game->plane.x * ms->game->cam_x;
 	ms->game->ray_dir.y = ms->game->pl_dir.y + ms->game->plane.y * ms->game->cam_x;
-}
-
-void	set_map_pos(t_ms *ms)
-{
+	
+	//set map pos
 	ms->game->coord.x = ms->game->pl_pos.x;
 	ms->game->coord.y = ms->game->pl_pos.y;
-	// ms->game->coord.x = (int)ms->game->pl_pos.x;
-	// ms->game->coord.y = (int)ms->game->pl_pos.y;
-}
 
-void	set_delta_dist(t_ms *ms)
-{
+	//set delta dist
 	ms->game->delta_dist.x = fabs(1 / ms->game->ray_dir.x);
 	ms->game->delta_dist.y = fabs(1 / ms->game->ray_dir.y);
 }
@@ -121,31 +126,11 @@ void	set_draw_range(t_ms *ms)
 {
 	ms->game->line_height = (int)(HEIGHT / ms->game->perp_wall_dist);
 	ms->game->draw_start = -ms->game->line_height * 0.5 + HEIGHT * 0.5;
-	// ms->game->draw_start = -ms->game->line_height / 2 + HEIGHT / 2;
 	if (ms->game->draw_start < 0)
 		ms->game->draw_start = 0;
 	ms->game->draw_end = ms->game->line_height * 0.5 + HEIGHT * 0.5;
-	// ms->game->draw_end = ms->game->line_height / 2 + HEIGHT / 2;
 	if ( ms->game->draw_end >= HEIGHT)
 		ms->game->draw_end = HEIGHT - 1;
-}
-
-void	calculate_texture(t_ms *ms)
-{
-	if (ms->game->side == 0)
-		ms->game->wall_x = ms->game->pl_pos.y + ms->game->perp_wall_dist * ms->game->ray_dir.y;
-	else
-		ms->game->wall_x = ms->game->pl_pos.x + ms->game->perp_wall_dist * ms->game->ray_dir.x;
-	
-	// ms->game->wall_x -= floor(ms->game->wall_x); //TODO implement this
-
-	ms->game->wall_texture_x = (int)(ms->game->wall_x * (double)TEXTURE_W);
-	if (ms->game->side == 0 && ms->game->ray_dir.x > 0)
-		ms->game->wall_texture_x = TEXTURE_W - ms->game->wall_texture_x - 1;
-	if (ms->game->side == 1 && ms->game->ray_dir.y < 0)
-		ms->game->wall_texture_x = TEXTURE_W - ms->game->wall_texture_x - 1;
-	ms->game->step_texture = 1.0 * TEXTURE_H / ms->game->line_height;
-	ms->game->texture_pos = (ms->game->draw_start - HEIGHT / 2 + ms->game->line_height / 2) * ms->game->step_texture;
 }
 
 void	draw_vertline(t_ms *ms, u_int32_t x)
@@ -154,38 +139,67 @@ void	draw_vertline(t_ms *ms, u_int32_t x)
 	
 	y = 0;
 	while((int)y < ms->game->draw_start)
-	{
-		mlx_put_pixel(ms->m_img, x, y, get_rgba(0,0,0,255)); //ceiling color (Black)
-		y++;
-	}
+		mlx_put_pixel(ms->m_img, x, y++, get_rgba(0,0,0,255)); //ceiling color (Black)
 	while((int)y < ms->game->draw_end)
-	{
-		mlx_put_pixel(ms->m_img, x, y, get_rgba(255,0,0,255)); // red
-		y++;
-	}
+		mlx_put_pixel(ms->m_img, x, y++, get_rgba(255,0,0,255)); // red
 	while((int)y < HEIGHT)
-	{
-		mlx_put_pixel(ms->m_img, x, y, get_rgba(255,255,255,255)); //floor color (white)
-		y++;
-	}
-
+		mlx_put_pixel(ms->m_img, x, y++, get_rgba(255,255,255,255)); //floor color (white)
 }
 
-void	put_buffer_to_img(t_ms *ms)
+void	rotate_vector(double *x, double *y, double angle) 
 {
-	int x;
-	int y;
+	double old_x ;
 
-	x = 0;
-	while (x < WIDTH)
+	old_x= *x;
+	*x = old_x * cos(angle) - *y * sin(angle);
+	*y = old_x * sin(angle) + *y * cos(angle);
+}
+
+void	move_player(t_ms *ms, double move_speed) 
+{
+    // Move along X direction
+    if(map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.x * move_speed)][(int)ms->game->pl_pos.y] == 0)
+        ms->game->pl_pos.x += ms->game->pl_dir.x * move_speed;
+    
+    // Move along Y direction
+    if(map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y + ms->game->pl_dir.y * move_speed)] == 0)
+        ms->game->pl_pos.y += ms->game->pl_dir.y * move_speed;
+}
+
+void strafe_player(t_ms *ms, double strafe_speed) {
+    // Strafe along X direction (perpendicular to direction of facing, so we use pl_dir.y)
+    if(map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.y * strafe_speed)][(int)ms->game->pl_pos.y] == 0)
+        ms->game->pl_pos.x += ms->game->pl_dir.y * strafe_speed;
+    
+    // Strafe along Y direction (perpendicular to direction of facing, so we use -pl_dir.x)
+    if(map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y - ms->game->pl_dir.x * strafe_speed)] == 0)
+        ms->game->pl_pos.y -= ms->game->pl_dir.x * strafe_speed;
+}
+
+void	key_binding(t_ms *ms)
+{
+	if (mlx_is_key_down(ms->mlx, MLX_KEY_ESCAPE))
+			mlx_close_window(ms->mlx);
+
+	if (mlx_is_key_down(ms->mlx, MLX_KEY_W)) 
+		move_player(ms, MOVE_SPEED); // Move forward
+	if (mlx_is_key_down(ms->mlx, MLX_KEY_S))
+		move_player(ms, -MOVE_SPEED); // Move backward
+
+	if (mlx_is_key_down(ms->mlx, MLX_KEY_A))
+		strafe_player(ms, -MOVE_SPEED); // Strafe left
+	if (mlx_is_key_down(ms->mlx, MLX_KEY_D))
+		strafe_player(ms, MOVE_SPEED); // Strafe right
+
+	if (mlx_is_key_down(ms->mlx, MLX_KEY_RIGHT)) 
 	{
-		y = 0;
-		while (y < HEIGHT)
-		{
-			mlx_put_pixel(ms->m_img, x, y, get_rgba(255,255,255,255));
-			y++;
-		}
-		x++;
+		rotate_vector(&ms->game->pl_dir.x, &ms->game->pl_dir.y, -ROTATE_SPEED);
+		rotate_vector(&ms->game->plane.x, &ms->game->plane.y, -ROTATE_SPEED);
+	}
+	if (mlx_is_key_down(ms->mlx, MLX_KEY_LEFT)) 
+	{
+		rotate_vector(&ms->game->pl_dir.x, &ms->game->pl_dir.y, ROTATE_SPEED);
+		rotate_vector(&ms->game->plane.x, &ms->game->plane.y, ROTATE_SPEED);
 	}
 }
 
@@ -196,60 +210,15 @@ void	loop(void *param)
 	int	x;
 
 	ms = get_ms();
-	x = 0;
-	// printf("enter while\n");
-	while(x < WIDTH)
+	x = -1;
+	while(++x < WIDTH)
 	{
 		ms->game->cam_x = 2 * x / (double)WIDTH - 1;
-		set_ray_dir(ms);
-		// printf("\nprint in while");
-		// print_init(ms);
-		set_map_pos(ms);
-		set_delta_dist(ms);
+		set_data(ms);
 		set_side_dist(ms);
 		dda(ms);
 		set_draw_range(ms);
 		draw_vertline(ms, x);
-		// calculate_texture(ms); // TODO TBD if necessary
-
-		x++;
-		if (mlx_is_key_down(ms->mlx, MLX_KEY_ESCAPE))
-			mlx_close_window(ms->mlx);
-		// if (mlx_is_key_down(ms->mlx, MLX_KEY_W))
-		// {
-		// 	if(map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.x * MOVE_SPEED)][(int)ms->game->pl_pos.y] == 0)
-		// 		ms->game->pl_pos.x += ms->game->pl_dir.x * MOVE_SPEED;
-		// 	if (map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y + ms->game->pl_dir.y * MOVE_SPEED)] == 0)
-		// 		ms->game->pl_pos.y += ms->game->pl_dir.y * MOVE_SPEED;
-		// }
-		// if (mlx_is_key_down(ms->mlx, MLX_KEY_S))
-		// {
-		// 	if(map[(int)(ms->game->pl_pos.x - ms->game->pl_dir.x * MOVE_SPEED)][(int)ms->game->pl_pos.y] == 0)
-		// 		ms->game->pl_pos.x += ms->game->pl_dir.x * MOVE_SPEED;
-		// 	if (map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y - ms->game->pl_dir.y * MOVE_SPEED)] == 0)
-		// 		ms->game->pl_pos.y += ms->game->pl_dir.y * MOVE_SPEED;
-		// }
-		if (mlx_is_key_down(ms->mlx, MLX_KEY_RIGHT))
-		{
-			double old_dir_x;
-			double old_plane_x;
-			old_dir_x = ms->game->pl_dir.x;
-			ms->game->pl_dir.x = ms->game->pl_dir.x * cos(-ROTATE_SPEED) - ms->game->pl_dir.y * sin(-ROTATE_SPEED);
-			ms->game->pl_dir.y = old_dir_x * sin(-ROTATE_SPEED) + ms->game->pl_dir.y * cos(-ROTATE_SPEED);
-			old_plane_x = ms->game->plane.x;
-			ms->game->plane.x = ms->game->plane.x * cos(-ROTATE_SPEED) - ms->game->plane.y * sin(-ROTATE_SPEED);
-			ms->game->plane.y = old_plane_x * sin(-ROTATE_SPEED) + ms->game->plane.y * cos(-ROTATE_SPEED);
-		}
-		if (mlx_is_key_down(ms->mlx, MLX_KEY_LEFT))
-		{
-			double old_dir_x;
-			double old_plane_x;
-			old_dir_x = ms->game->pl_dir.x;
-			ms->game->pl_dir.x = ms->game->pl_dir.x * cos(ROTATE_SPEED) - ms->game->pl_dir.y * sin(ROTATE_SPEED);
-			ms->game->pl_dir.y = old_dir_x * sin(ROTATE_SPEED) + ms->game->pl_dir.y * cos(ROTATE_SPEED);
-			old_plane_x = ms->game->plane.x;
-			ms->game->plane.x = ms->game->plane.x * cos(ROTATE_SPEED) - ms->game->plane.y * sin(ROTATE_SPEED);
-			ms->game->plane.y = old_plane_x * sin(ROTATE_SPEED) + ms->game->plane.y * cos(ROTATE_SPEED);
-		}
+		key_binding(ms);
 	}
 }
