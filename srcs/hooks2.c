@@ -1,6 +1,6 @@
 #include "../includes/cub3d.h"
 
-# define MOVE_SPEED 0.00012
+# define MOVE_SPEED 0.00008
 # define ROTATE_SPEED 0.00002
 
 //dir NORTH
@@ -40,13 +40,16 @@ int map[20][10] = {
 
 void	init_game(t_ms *ms)
 {
+	//TODO: attributes pos.x and pos.y per the 'real' map
 	ms->game->pl_pos.x = 2;
 	ms->game->pl_pos.y = 7;
 
-	//dir SOUTH
-	ms->game->pl_dir.x = 1;
-	ms->game->pl_dir.y = 0;
-	ms->game->plane.y = -0.66;
+	//TODO: attributes the correct orientation per the map (N, W, S, E)
+	// iniiral direction vector (where the player looks)
+	ms->game->pl_dir.x = 1; 
+	ms->game->pl_dir.y = 0; 
+	// cam plane
+	ms->game->plane.y = -0.66; 
 	ms->game->plane.x = 0;
 
 	ms->game->cam_x = 0;
@@ -54,6 +57,7 @@ void	init_game(t_ms *ms)
 	ms->game->side_dist.y = 0;
 	ms->game->delta_dist.x = 0;
 	ms->game->delta_dist.y = 0;
+
 	ms->game->step.x = 1;
 	ms->game->step.y = 1;
 }
@@ -104,13 +108,13 @@ void	dda(t_ms *ms)
 		if(ms->game->side_dist.x < ms->game->side_dist.y)
 		{
 			ms->game->side_dist.x += ms->game->delta_dist.x;
-			ms->game->coord.x += ms->game->step.x;
+			ms->game->coord.x += (ms->game->step.x / 4); // TODO find a good 'ratio'
 			ms->game->side = 0;
 		}
 		else
 		{
 			ms->game->side_dist.y += ms->game->delta_dist.y;
-			ms->game->coord.y += ms->game->step.y;
+			ms->game->coord.y += (ms->game->step.y / 4); // TODO find a good 'ratio'
 			ms->game->side = 1;
 		}
 		if(map[(int)ms->game->coord.x][(int)ms->game->coord.y])
