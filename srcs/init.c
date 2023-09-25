@@ -29,7 +29,7 @@ t_ms *get_ms(void)
 void init_content(t_ms *ms, char *argv)
 {
 	get_map_size(ms, argv);
-	get_map(ms, argv);
+	// get_map(ms, argv);
 	// remove_map_args(ms);
 	check_map(ms);
 	print_map(ms);

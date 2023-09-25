@@ -55,7 +55,8 @@ typedef struct s_game {
 	t_vect	plane;
 	double	cam_x;
 	t_vect	ray_dir;
-	t_vect	map;
+	t_vect	coord;
+	// int		**c_map;
 	t_vect	side_dist;
 	t_vect	delta_dist;
 	t_vect	step;
@@ -143,7 +144,7 @@ void		print_player(void *param);
 void		cast_ray(t_minimap *minimap);
 
 void		loop(void *param);
-
+void		print_init(t_ms *ms);
 
 // void		cast_ray(void *param);
 // void		cast_ray();

@@ -1,5 +1,26 @@
 #include "../includes/cub3d.h"
 
+void	print_init(t_ms *ms)
+{
+	printf("\nplpos.x: 	%.2f\n", ms->game->pl_pos.x);
+	printf("plpos.y: 	%.2f\n", ms->game->pl_pos.y);
+	printf("pldir.x: 	%.2f\n", ms->game->pl_dir.x);
+	printf("pldir.y: 	%.2f\n", ms->game->pl_dir.y);
+	printf("plane.x: 	%.2f\n", ms->game->plane.x);
+	printf("plane.y: 	%.2f\n", ms->game->plane.y);
+	printf("cam_x: 		%.2f\n", ms->game->cam_x);
+	printf("ray_dir.x: 	%.2f\n", ms->game->ray_dir.x);
+	printf("ray_dir.y: 	%.2f\n", ms->game->ray_dir.y);
+	// printf("map.x: 		%.2f\n", ms->game->map.x);
+	// printf("map.y: 		%.2f\n", ms->game->map.y);
+	printf("side_dist.x: 	%.2f\n", ms->game->side_dist.x);
+	printf("side_dist.y: 	%.2f\n", ms->game->side_dist.y);
+	printf("delta_dist.x: 	%.2f\n", ms->game->delta_dist.x);
+	printf("delta_dist.y: 	%.2f\n", ms->game->delta_dist.y);
+	printf("step.x: 	%.2f\n", ms->game->step.x);
+	printf("step.y: 	%.2f\n", ms->game->step.y);
+	printf("side:		%d\n", ms->game->side);
+}
 
 int	main(int ac, char **av)
 {
@@ -9,7 +30,7 @@ int	main(int ac, char **av)
 	//TODO: put a ft_err in return that free too
 	if (!ft_parse_arg(ac, av))
 		return(EXIT_FAILURE);
-	init_content(ms, av[1]);
+	// init_content(ms, av[1]);
 	
 	//TODO: maybe move this check elsewhere, 'init_mlx' kinda
 	if (!(ms->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", true)))
@@ -18,7 +39,7 @@ int	main(int ac, char **av)
 		return(EXIT_FAILURE);
 	}
 	init_game(ms);
-
+	print_init(ms);
 	if(!(ms->m_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT)))
 	{
 		mlx_close_window(ms->mlx);
@@ -32,11 +53,7 @@ int	main(int ac, char **av)
 		return(EXIT_FAILURE);
 	}
 
-
-	printf("\nposX= %.2f\n", ms->game->pl_pos.x);
-	printf("posY= %.2f\n", ms->game->pl_pos.y);
-
-	mlx_loop_hook(ms->mlx, loop, ms->mlx); // key hook
+	mlx_loop_hook(ms->mlx, loop, ms->mlx);
 	
 	// Function that draws the minimap
 	// if any init doesn't work, returns an error
