@@ -1,7 +1,7 @@
 #include "../includes/cub3d.h"
 
-# define MOVE_SPEED 0.00008
-# define ROTATE_SPEED 0.00002
+# define MOVE_SPEED 0.00003
+# define ROTATE_SPEED 0.000015
 
 //dir NORTH
 	// ms->game->pl_dir.x = -1;
@@ -37,6 +37,29 @@ int map[20][10] = {
 		{1,0,0,0,0,0,1,1,0,1},
 		{1,0,0,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1,1,1}};
+
+
+// int map[20][20] = {
+		// {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1},
+		// {1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		// {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
 void	init_game(t_ms *ms)
 {
@@ -81,22 +104,22 @@ void	set_side_dist(t_ms *ms)
 {
 	if(ms->game->ray_dir.x < 0)
 	{
-		ms->game->step.x = -1;
+		ms->game->step.x = -0.01;
 		ms->game->side_dist.x = (ms->game->pl_pos.x - ms->game->coord.x) * ms->game->delta_dist.x;
 	}
 	else
 	{
-		ms->game->step.x = 1;
+		ms->game->step.x = 0.01;
 		ms->game->side_dist.x = (ms->game->coord.x + 1.0 - ms->game->pl_pos.x) * ms->game->delta_dist.x;
 	}
 	if(ms->game->ray_dir.y < 0)
 	{
-		ms->game->step.y = -1;
+		ms->game->step.y = -0.01;
 		ms->game->side_dist.y = (ms->game->pl_pos.y - ms->game->coord.y) * ms->game->delta_dist.y;
 	}
 	else
 	{
-		ms->game->step.y = 1;
+		ms->game->step.y = 0.01;
 		ms->game->side_dist.y = (ms->game->coord.y + 1.0 - ms->game->pl_pos.y) * ms->game->delta_dist.y;
 	}
 }
@@ -108,13 +131,25 @@ void	dda(t_ms *ms)
 		if(ms->game->side_dist.x < ms->game->side_dist.y)
 		{
 			ms->game->side_dist.x += ms->game->delta_dist.x;
-			ms->game->coord.x += (ms->game->step.x / 4); // TODO find a good 'ratio'
+			ms->game->coord.x += ms->game->step.x;
+			//keep in case of norm too tough on set_side_dist
+			// if(ms->game->ray_dir.x < 0)
+			// 	ms->game->coord.x -= 0.01;
+			// else
+			// 	ms->game->coord.x += 0.01;
+
 			ms->game->side = 0;
 		}
 		else
 		{
 			ms->game->side_dist.y += ms->game->delta_dist.y;
-			ms->game->coord.y += (ms->game->step.y / 4); // TODO find a good 'ratio'
+			ms->game->coord.y += ms->game->step.y;
+			//keep in case of norm too tough on set_side_dist
+			// if(ms->game->ray_dir.y < 0)
+			// 	ms->game->coord.y -= 0.01; 
+			// else
+			// 	ms->game->coord.y += 0.01;
+
 			ms->game->side = 1;
 		}
 		if(map[(int)ms->game->coord.x][(int)ms->game->coord.y])
@@ -128,12 +163,12 @@ void	dda(t_ms *ms)
 
 void	set_draw_range(t_ms *ms)
 {
-	ms->game->line_height = (int)(HEIGHT / ms->game->perp_wall_dist);
+	ms->game->line_height = (int)((HEIGHT * 125) / ms->game->perp_wall_dist); //add to add multiply HEIGHT by 125 to smooth mvt
 	ms->game->draw_start = -ms->game->line_height * 0.5 + HEIGHT * 0.5;
 	if (ms->game->draw_start < 0)
 		ms->game->draw_start = 0;
 	ms->game->draw_end = ms->game->line_height * 0.5 + HEIGHT * 0.5;
-	if ( ms->game->draw_end >= HEIGHT)
+	if (ms->game->draw_end >= HEIGHT)
 		ms->game->draw_end = HEIGHT - 1;
 }
 
@@ -154,7 +189,7 @@ void	rotate_vector(double *x, double *y, double angle)
 {
 	double old_x ;
 
-	old_x= *x;
+	old_x = *x;
 	*x = old_x * cos(angle) - *y * sin(angle);
 	*y = old_x * sin(angle) + *y * cos(angle);
 }
@@ -170,7 +205,8 @@ void	move_player(t_ms *ms, double move_speed)
         ms->game->pl_pos.y += ms->game->pl_dir.y * move_speed;
 }
 
-void strafe_player(t_ms *ms, double strafe_speed) {
+void strafe_player(t_ms *ms, double strafe_speed) 
+{
     // Strafe along X direction (perpendicular to direction of facing, so we use pl_dir.y)
     if(map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.y * strafe_speed)][(int)ms->game->pl_pos.y] == 0)
         ms->game->pl_pos.x += ms->game->pl_dir.y * strafe_speed;
