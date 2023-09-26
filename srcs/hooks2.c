@@ -87,9 +87,11 @@ void	init_game(t_ms *ms)
 
 void	set_data(t_ms *ms)
 {
-	//set_ray_dir
-	ms->game->ray_dir.x = ms->game->pl_dir.x + ms->game->plane.x * ms->game->cam_x;
-	ms->game->ray_dir.y = ms->game->pl_dir.y + ms->game->plane.y * ms->game->cam_x;
+	//set ray dir
+	ms->game->ray_dir.x = ms->game->pl_dir.x + \
+		ms->game->plane.x * ms->game->cam_x;
+	ms->game->ray_dir.y = ms->game->pl_dir.y + \
+		ms->game->plane.y * ms->game->cam_x;
 	
 	//set map pos
 	ms->game->coord.x = ms->game->pl_pos.x;
@@ -105,22 +107,26 @@ void	set_side_dist(t_ms *ms)
 	if(ms->game->ray_dir.x < 0)
 	{
 		ms->game->step.x = -0.01;
-		ms->game->side_dist.x = (ms->game->pl_pos.x - ms->game->coord.x) * ms->game->delta_dist.x;
+		ms->game->side_dist.x = (ms->game->pl_pos.x - \
+			ms->game->coord.x) * ms->game->delta_dist.x;
 	}
 	else
 	{
 		ms->game->step.x = 0.01;
-		ms->game->side_dist.x = (ms->game->coord.x + 1.0 - ms->game->pl_pos.x) * ms->game->delta_dist.x;
+		ms->game->side_dist.x = (ms->game->coord.x + 1.0 - \
+			ms->game->pl_pos.x) * ms->game->delta_dist.x;
 	}
 	if(ms->game->ray_dir.y < 0)
 	{
 		ms->game->step.y = -0.01;
-		ms->game->side_dist.y = (ms->game->pl_pos.y - ms->game->coord.y) * ms->game->delta_dist.y;
+		ms->game->side_dist.y = (ms->game->pl_pos.y - \
+			ms->game->coord.y) * ms->game->delta_dist.y;
 	}
 	else
 	{
 		ms->game->step.y = 0.01;
-		ms->game->side_dist.y = (ms->game->coord.y + 1.0 - ms->game->pl_pos.y) * ms->game->delta_dist.y;
+		ms->game->side_dist.y = (ms->game->coord.y + 1.0 - \
+			ms->game->pl_pos.y) * ms->game->delta_dist.y;
 	}
 }
 

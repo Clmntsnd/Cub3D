@@ -39,8 +39,6 @@
 //Window specs
 #define WIDTH 1024
 #define HEIGHT 512
-#define TEXTURE_W 24
-#define TEXTURE_H 24
 
 /* ------------------ STRUCTS ------------------ */
 typedef	struct s_vect
@@ -56,22 +54,14 @@ typedef struct s_game {
 	double	cam_x;
 	t_vect	ray_dir;
 	t_vect	coord;
-	// int		**c_map;
 	t_vect	side_dist;
 	t_vect	delta_dist;
 	t_vect	step;
 	int		side;
 	double	perp_wall_dist;
-	int		hit;
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	double	wall_x; // wall x coord.
-	int		wall_texture_x; 
-	int		wall_texture_y; 
-	double	step_texture; // step_texture, how much the y-coordinate of the wall texture is incremented.
-	double	texture_pos; // texture_pos, the y-coordinate of the wall texture
-	u_int32_t		draw_buffer[HEIGHT][WIDTH]; 
 }	t_game;
 
 typedef struct s_ms {
