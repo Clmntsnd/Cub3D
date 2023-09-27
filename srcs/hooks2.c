@@ -65,8 +65,8 @@
 void	init_game(t_ms *ms)
 {
 	//TODO: attributes pos.x and pos.y per the 'real' map
-	ms->game->pl_pos.x = 2;
-	ms->game->pl_pos.y = 2;
+	ms->game->pl_pos.x = 20;
+	ms->game->pl_pos.y = 5;
 
 	//TODO: attributes the correct orientation per the map (N, W, S, E)
 	// iniiral direction vector (where the player looks)

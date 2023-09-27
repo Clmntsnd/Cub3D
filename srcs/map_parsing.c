@@ -1,26 +1,26 @@
 
 #include "../includes/cub3d.h"
 
-void remove_map(t_data *data)
+void remove_map(t_ms *ms)
 {
 	int i;
 	int j;
 
 	i = 0;
 	j = 0;
-	data->main_map = ft_calloc(data->height + 1, sizeof(char *));
-	while (i < data->height)
+	ms->main_map = ft_calloc(ms->height + 1, sizeof(char *));
+	while (i < ms->height)
 	{
-			if ((ft_strncmp(&*data->map[i], &*data->map_args[0], ft_strlen(data->map_args[0])) == 0) || (ft_strncmp(&*data->map[i], &*data->map_args[1], ft_strlen(data->map_args[1])) == 0)
-				|| (ft_strncmp(&*data->map[i], &*data->map_args[2], ft_strlen(data->map_args[2])) == 0) || (ft_strncmp(&*data->map[i], &*data->map_args[3], ft_strlen(data->map_args[3])) == 0)
-				|| (ft_strncmp(&*data->map[i], &*data->map_args[4], ft_strlen(data->map_args[4])) == 0) || (ft_strncmp(&*data->map[i], &*data->map_args[5], ft_strlen(data->map_args[5])) == 0))
+			if ((ft_strncmp(&*ms->map[i], &*ms->map_args[0], ft_strlen(ms->map_args[0])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[1], ft_strlen(ms->map_args[1])) == 0)
+				|| (ft_strncmp(&*ms->map[i], &*ms->map_args[2], ft_strlen(ms->map_args[2])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[3], ft_strlen(ms->map_args[3])) == 0)
+				|| (ft_strncmp(&*ms->map[i], &*ms->map_args[4], ft_strlen(ms->map_args[4])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[5], ft_strlen(ms->map_args[5])) == 0))
 					{
 						// printf("Herrooooooooooo\n");
 						i++;
 					}
-			else if ((ft_strncmp(&*data->map[i], "1", 1) == 0) || (ft_strncmp(&*data->map[i], "0", 1) == 0) || (ft_strncmp(&*data->map[i], " ", 1) == 0) || *data->map[i] == '\0')
+			else if ((ft_strncmp(&*ms->map[i], "1", 1) == 0) || (ft_strncmp(&*ms->map[i], "0", 1) == 0) || (ft_strncmp(&*ms->map[i], " ", 1) == 0) || *ms->map[i] == '\0')
 			{
-				data->main_map[j] = data->map[i];
+				ms->main_map[j] = ms->map[i];
 				j++;
 				i++;
 			}
@@ -29,7 +29,7 @@ void remove_map(t_data *data)
 		}	
 }
 
-void remove_map_args(t_data *data)
+void remove_map_args(t_ms *ms)
 {
 	int i;
 	int j;
@@ -47,7 +47,7 @@ void remove_map_args(t_data *data)
 					|| (ft_strncmp(&ms->map[i][j], "SO ", 3) == 0) || (ft_strncmp(&ms->map[i][j], "WE ", 3) == 0)
 					|| (ft_strncmp(&ms->map[i][j], "C ", 2) == 0) || (ft_strncmp(&ms->map[i][j], "F ", 2) == 0))
 			{
-				data->map_args[flag] = data->map[i];
+				ms->map_args[flag] = ms->map[i];
 				flag++;
 			}
 				i++;
@@ -57,7 +57,7 @@ void remove_map_args(t_data *data)
 	i = 0;
 	if(flag == 6)
 	{
-		remove_map(data);
+		remove_map(ms);
 		return;
 	}
 	else
