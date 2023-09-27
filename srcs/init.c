@@ -7,11 +7,18 @@ void print_map(t_ms *ms)
     i = 0;
     while (ms->map[i])
     {
-        printf("%s", ms->map[i]);
+        printf("%s", data->main_map[i]);
         i++;
     }
-	printf("\n\nwidth = %d", ms->width);
-	printf("\n\nheigth = %d", ms->height);
+	int j = 0;
+	printf("\n\nmap_args\n");
+	while(j < 6)
+	{
+		printf("\nMap arg[%d] = %s", j,  data->map_args[j]);
+		j++;
+	}
+	// printf("\n\nwidth = %d", data->width);
+	// printf("\n\nheigth = %d", data->height);
 }
 
 t_ms *get_ms(void)

@@ -1,7 +1,35 @@
 
 #include "../includes/cub3d.h"
 
-void remove_map_args(t_ms *ms)
+void remove_map(t_data *data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	data->main_map = ft_calloc(data->height + 1, sizeof(char *));
+	while (i < data->height)
+	{
+			if ((ft_strncmp(&*data->map[i], &*data->map_args[0], ft_strlen(data->map_args[0])) == 0) || (ft_strncmp(&*data->map[i], &*data->map_args[1], ft_strlen(data->map_args[1])) == 0)
+				|| (ft_strncmp(&*data->map[i], &*data->map_args[2], ft_strlen(data->map_args[2])) == 0) || (ft_strncmp(&*data->map[i], &*data->map_args[3], ft_strlen(data->map_args[3])) == 0)
+				|| (ft_strncmp(&*data->map[i], &*data->map_args[4], ft_strlen(data->map_args[4])) == 0) || (ft_strncmp(&*data->map[i], &*data->map_args[5], ft_strlen(data->map_args[5])) == 0))
+					{
+						// printf("Herrooooooooooo\n");
+						i++;
+					}
+			else if ((ft_strncmp(&*data->map[i], "1", 1) == 0) || (ft_strncmp(&*data->map[i], "0", 1) == 0) || (ft_strncmp(&*data->map[i], " ", 1) == 0) || *data->map[i] == '\0')
+			{
+				data->main_map[j] = data->map[i];
+				j++;
+				i++;
+			}
+			else
+				i++;
+		}	
+}
+
+void remove_map_args(t_data *data)
 {
 	int i;
 	int j;
@@ -19,19 +47,18 @@ void remove_map_args(t_ms *ms)
 					|| (ft_strncmp(&ms->map[i][j], "SO ", 3) == 0) || (ft_strncmp(&ms->map[i][j], "WE ", 3) == 0)
 					|| (ft_strncmp(&ms->map[i][j], "C ", 2) == 0) || (ft_strncmp(&ms->map[i][j], "F ", 2) == 0))
 			{
-				ms->map_args[flag] = ms->map[i];
-				printf("[i = %d][j = %d]\n", i, j);
-				printf("map_args = %s flag= %d \n", ms->map_args[flag], flag);
+				data->map_args[flag] = data->map[i];
 				flag++;
 			}
 				i++;
 		}
 		j++;
 	}
+	i = 0;
 	if(flag == 6)
-	{		
-		printf("\n\n You have the correct amount of args in your map: %d \n\n", flag);
-		// init_assets(ms);
+	{
+		remove_map(data);
+		return;
 	}
 	else
 		map_error_exit(ms);
