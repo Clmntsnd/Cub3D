@@ -6,6 +6,56 @@
 
 // }
 
+// void remove_map(t_data *data)
+// {
+// 	int i;
+// 	int j;
+// 	int flag;
+
+// 	i = 0;
+// 	flag = 0;
+// 	data->tmp_map = ft_calloc(data->height + 1, sizeof(char *));
+// 	while (i < data->height)
+// 	{
+// 		j = 0;
+// 		data->tmp_map[i] = ft_calloc(data->width + 1, sizeof(char));
+// 		while (j < data->width)
+// 		{
+// 			if ((ft_strncmp(&data->map[i][j], "NO ", 3) == 0) || (ft_strncmp(&data->map[i][j], "EA ", 3) == 0) 
+// 					|| (ft_strncmp(&data->map[i][j], "SO ", 3) == 0) || (ft_strncmp(&data->map[i][j], "WE ", 3) == 0)
+// 					|| (ft_strncmp(&data->map[i][j], "C ", 2) == 0) || (ft_strncmp(&data->map[i][j], "F ", 2) == 0))
+// 			{
+// 				flag = 1;
+// 				break;
+// 			}
+// 			data->tmp_map[i][j] = data->map[i][j];
+// 			j++;
+// 		}
+// 		if(flag == 1)
+// 			break;
+// 		i++;
+// 	}
+// 	i++;
+// 	while (i < data->height)
+// 	{
+// 		j = 0;
+// 		data->tmp_map[i] = ft_calloc(data->width + 1, sizeof(char));
+// 		while (j < data->width)
+// 		{
+// 			data->tmp_map[i][j] = data->map[i][j];
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i < data->height)
+// 	{
+// 		free(data->map[i]);
+// 		i++;
+// 	}
+// 	free(data->map);
+// 	data->map = data->tmp_map;
+// }
 
 void remove_map_args(t_data *data)
 {
@@ -26,18 +76,17 @@ void remove_map_args(t_data *data)
 					|| (ft_strncmp(&data->map[i][j], "C ", 2) == 0) || (ft_strncmp(&data->map[i][j], "F ", 2) == 0))
 			{
 				data->map_args[flag] = data->map[i];
-				printf("[i = %d][j = %d]\n", i, j);
-				printf("map_args = %s flag= %d \n", data->map_args[flag], flag);
 				flag++;
 			}
 				i++;
 		}
 		j++;
 	}
+	i = 0;
 	if(flag == 6)
-	{		
-		printf("\n\n You have the correct amount of args in your map: %d \n\n", flag);
-		// init_assets(data);
+	{
+		remove_map(data);
+		return;
 	}
 	else
 		map_error_exit(data);
