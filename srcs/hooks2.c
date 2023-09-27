@@ -182,7 +182,7 @@ void	set_draw_range(t_ms *ms)
 		ms->game->draw_end = HEIGHT - 1;
 }
 
-void	draw_vertline(t_ms *ms, u_int32_t x)
+void	draw_vertline(t_ms *ms, u_int32_t x, u_int32_t color)
 {
 	u_int32_t	y;
 	
@@ -190,7 +190,7 @@ void	draw_vertline(t_ms *ms, u_int32_t x)
 	while((int)y < ms->game->draw_start)
 		mlx_put_pixel(ms->m_img, x, y++, get_rgba(0,0,0,255)); //ceiling color (Black)
 	while((int)y < ms->game->draw_end)
-		mlx_put_pixel(ms->m_img, x, y++, get_rgba(255,0,0,255)); // red
+		mlx_put_pixel(ms->m_img, x, y++, color); // red
 	while((int)y < HEIGHT)
 		mlx_put_pixel(ms->m_img, x, y++, get_rgba(255,255,255,255)); //floor color (white)
 }
@@ -267,11 +267,25 @@ void	key_binding(t_ms *ms)
 	}
 }
 
+u_int32_t	wall_color(t_ms *ms)
+{
+	if (ms->game->side == 1 && ms->game->ray_dir.y > 0)
+		return (get_rgba(127,127,0,255));
+	if (ms->game->side == 1 && ms->game->ray_dir.y < 0)
+		return (get_rgba(0,127,127,255));
+	if (ms->game->side == 0 && ms->game->ray_dir.x < 0)
+		return (get_rgba(0,0,255,255));
+	if (ms->game->side == 0 && ms->game->ray_dir.x > 0)
+		return (get_rgba(128,0,128,255));
+	return(0);
+}
+
 void	loop(void *param)
 {
 	(void)param;
 	t_ms		*ms;
-	int	x;
+	int			x;
+	u_int32_t	color;
 
 	ms = get_ms();
 	x = -1;
@@ -282,7 +296,8 @@ void	loop(void *param)
 		set_side_dist(ms);
 		dda(ms);
 		set_draw_range(ms);
-		draw_vertline(ms, x);
+		color = wall_color(ms);
+		draw_vertline(ms, x, color);
 		key_binding(ms);
 	}
 }
