@@ -56,6 +56,7 @@ typedef struct s_data {
 	char direction;
 	void *player_pos;
 	char **map;
+	char **main_map;
 	char **tmp_map;
 	char **map_args;
 }	t_data;

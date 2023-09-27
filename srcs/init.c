@@ -5,19 +5,21 @@ void print_map(t_data *data)
     int i;
 
     i = 0;
+	printf("main_map\n");
     while (data->map[i])
     {
-        printf("%s", data->map[i]);
+        printf("%s", data->main_map[i]);
         i++;
     }
 	int j = 0;
+	printf("\n\nmap_args\n");
 	while(j < 6)
 	{
 		printf("\nMap arg[%d] = %s", j,  data->map_args[j]);
 		j++;
 	}
-	printf("\n\nwidth = %d", data->width);
-	printf("\n\nheigth = %d", data->height);
+	// printf("\n\nwidth = %d", data->width);
+	// printf("\n\nheigth = %d", data->height);
 }
 
 t_data *get_data(void)
