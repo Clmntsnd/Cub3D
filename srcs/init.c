@@ -50,7 +50,8 @@ void get_player_pos(t_ms *ms)
 			{
 				ms->game->pl_pos.x = i;
 				ms->game->pl_pos.y = j;
-			}
+				ms->main_map[i][j] = '0';
+			}	
 			j++;
 		}
 		i++;

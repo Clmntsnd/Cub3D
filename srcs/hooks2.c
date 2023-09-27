@@ -65,8 +65,8 @@
 void	init_game(t_ms *ms)
 {
 	//TODO: attributes pos.x and pos.y per the 'real' map
-	ms->game->pl_pos.x = 20;
-	ms->game->pl_pos.y = 5;
+	// ms->game->pl_pos.x = 20;
+	// ms->game->pl_pos.y = 5;
 
 	//TODO: attributes the correct orientation per the map (N, W, S, E)
 	// iniiral direction vector (where the player looks)
@@ -162,7 +162,7 @@ void	dda(t_ms *ms)
 
 			ms->game->side = 1;
 		}
-		if(ms->map[(int)ms->game->coord.x][(int)ms->game->coord.y] == '1')
+		if(ms->main_map[(int)ms->game->coord.x][(int)ms->game->coord.y] == '1')
 			hit = true;
 	}
 	if(ms->game->side == 0)
@@ -214,11 +214,11 @@ void	move_player(t_ms *ms, double move_speed)
 		radius = -0.3;
 	hit_box = move_speed + radius;
     // Move along X direction
-    if(ms->map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.x * hit_box)][(int)ms->game->pl_pos.y] == '0')
+    if(ms->main_map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.x * hit_box)][(int)ms->game->pl_pos.y] == '0')
         ms->game->pl_pos.x += ms->game->pl_dir.x * move_speed;
     
     // Move along Y direction
-    if(ms->map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y + ms->game->pl_dir.y * hit_box)] == '0')
+    if(ms->main_map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y + ms->game->pl_dir.y * hit_box)] == '0')
         ms->game->pl_pos.y += ms->game->pl_dir.y * move_speed;
 }
 
@@ -232,11 +232,11 @@ void strafe_player(t_ms *ms, double strafe_speed)
 		radius = -0.3;
 	hit_box = strafe_speed + radius;
     // Strafe along X direction (perpendicular to direction of facing, so we use pl_dir.y)
-    if(ms->map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.y * hit_box)][(int)ms->game->pl_pos.y] == '0')
+    if(ms->main_map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.y * hit_box)][(int)ms->game->pl_pos.y] == '0')
         ms->game->pl_pos.x += ms->game->pl_dir.y * strafe_speed;
     
     // Strafe along Y direction (perpendicular to direction of facing, so we use -pl_dir.x)
-    if(ms->map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y - ms->game->pl_dir.x * hit_box)] == '0')
+    if(ms->main_map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y - ms->game->pl_dir.x * hit_box)] == '0')
         ms->game->pl_pos.y -= ms->game->pl_dir.x * strafe_speed;
 }
 
