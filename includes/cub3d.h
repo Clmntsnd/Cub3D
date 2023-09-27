@@ -37,13 +37,17 @@
 # define ERR_MEM	"❌ Memory allocation failed"
 
 //Window specs
-#define WIDTH 10240
-#define HEIGHT 5120
-#define RAY_W 6
-#define RAY_H 20
+#define WIDTH 1024
+#define HEIGHT 512
 
 /* ------------------ STRUCTS ------------------ */
+typedef	struct s_vect
+{
+	double x;
+	double y;
+}	t_vect;
 
+<<<<<<< HEAD
 typedef struct s_data {
 	void *mlx;
 	void *win;
@@ -59,6 +63,38 @@ typedef struct s_data {
 	char **tmp_map;
 	char **map_args;
 }	t_data;
+=======
+typedef struct s_game {
+	t_vect	pl_pos;
+	t_vect	pl_dir;
+	t_vect	plane;
+	double	cam_x;
+	t_vect	ray_dir;
+	t_vect	coord;
+	t_vect	side_dist;
+	t_vect	delta_dist;
+	t_vect	step;
+	int		side;
+	double	perp_wall_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_game;
+
+typedef struct s_ms {
+	void		*mlx;
+	char		**map;
+	char		**tmp_map;
+	int			height; 	//map height
+	int			width;		//map width
+	t_game		*game;		//game informations
+	mlx_image_t *m_img;
+	
+	void		*wall;
+	void		*floor;
+	void		*ceiling;	
+}	t_ms;
+>>>>>>> map2D
 
 typedef struct s_ray
 {
@@ -87,32 +123,41 @@ typedef struct s_minimap
 }	t_minimap;
 
 /* ------------------ Error ------------------- */
-void map_error_exit(t_data *data);
+void map_error_exit(t_ms *ms);
 
 /* ------------------ Parsing ------------------ */
 
 bool	ft_parse_arg(int ac, char **av);
-void get_map(t_data *data, char *argv);
-void get_map_size(t_data *data, char argv[1]);
-void check_map(t_data *data);
-int check_valid_char(t_data *data);
-int check_walls(t_data *data);
-void remove_map_args(t_data *data);
+void get_map(t_ms *ms, char *argv);
+void get_map_size(t_ms *ms, char argv[1]);
+void check_map(t_ms *ms);
+int check_valid_char(t_ms *ms);
+int check_walls(t_ms *ms);
+void remove_map_args(t_ms *ms);
 
 /* -------------------- Init ------------------- */
-t_data		*get_data(void);
+t_ms		*get_ms(void);
 t_minimap	*get_minimap(void);
-void		init_content(t_data *data, char *argv);
+void		init_content(t_ms *ms, char *argv);
+void		init_game(t_ms *ms);
 
 /* ------------------ Minimap ------------------ */
-int			draw_map2D(t_data *data);
+int			draw_map2D(t_ms *ms);
 
 /* ------------------ Utils ------------------ */
 int32_t 	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
 void 		ft_hook(void* param);
-void		ft_randomize(void* param);
+void		ft_player_and_ray(void* param);
 void		print_player(void *param);
-void		cast_ray(void *param);
+void		cast_ray(t_minimap *minimap);
+
+void		loop(void *param);
+void		print_init(t_ms *ms);
+
+// void		cast_ray(void *param);
+// void		cast_ray();
+void	put_color_to_tile(t_ms *ms, t_minimap *minimap);
+void	put_pixel_to_map2D(t_minimap *minimap, int i, int j, uint32_t color);
 
 
 

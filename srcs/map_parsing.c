@@ -1,6 +1,7 @@
 
 #include "../includes/cub3d.h"
 
+<<<<<<< HEAD
 // void init_assets(t_data *data)
 // {
 
@@ -8,6 +9,9 @@
 
 
 void remove_map_args(t_data *data)
+=======
+void remove_map_args(t_ms *ms)
+>>>>>>> map2D
 {
 	int i;
 	int j;
@@ -16,14 +20,14 @@ void remove_map_args(t_data *data)
 	data->map_args = ft_calloc(6, sizeof(char *));
 	j = 0;
 	flag = 0;
-	while (j < data->width)
+	while (j < ms->width)
 	{
 		i = 0;
-		while (i < data->height)
+		while (i < ms->height)
 		{
-			if ((ft_strncmp(&data->map[i][j], "NO ", 3) == 0) || (ft_strncmp(&data->map[i][j], "EA ", 3) == 0) 
-					|| (ft_strncmp(&data->map[i][j], "SO ", 3) == 0) || (ft_strncmp(&data->map[i][j], "WE ", 3) == 0)
-					|| (ft_strncmp(&data->map[i][j], "C ", 2) == 0) || (ft_strncmp(&data->map[i][j], "F ", 2) == 0))
+			if ((ft_strncmp(&ms->map[i][j], "NO ", 3) == 0) || (ft_strncmp(&ms->map[i][j], "EA ", 3) == 0) 
+					|| (ft_strncmp(&ms->map[i][j], "SO ", 3) == 0) || (ft_strncmp(&ms->map[i][j], "WE ", 3) == 0)
+					|| (ft_strncmp(&ms->map[i][j], "C ", 2) == 0) || (ft_strncmp(&ms->map[i][j], "F ", 2) == 0))
 			{
 				data->map_args[flag] = data->map[i];
 				printf("[i = %d][j = %d]\n", i, j);
@@ -37,13 +41,17 @@ void remove_map_args(t_data *data)
 	if(flag == 6)
 	{		
 		printf("\n\n You have the correct amount of args in your map: %d \n\n", flag);
+<<<<<<< HEAD
 		// init_assets(data);
 	}
+=======
+		// init_assets(ms);
+>>>>>>> map2D
 	else
-		map_error_exit(data);
+		map_error_exit(ms);
 }
 
-void get_map(t_data *data, char *argv)
+void get_map(t_ms *ms, char *argv)
 {
 	int i;
 	int fd;
@@ -51,17 +59,17 @@ void get_map(t_data *data, char *argv)
 
 	i = 0;
 	fd = open(argv, O_RDONLY);
-	data->map = ft_calloc(data->height + 1, sizeof(char *));
-	while(i <= data->height)
+	ms->map = ft_calloc(ms->height + 1, sizeof(char *));
+	while(i <= ms->height)
 	{
 		temp = get_next_line(fd);
-		data->map[i] = temp;
+		ms->map[i] = temp;
 		i++;
 	}
 	close(fd);
 }
 
-void get_map_size(t_data *data, char argv[1]) {
+void get_map_size(t_ms *ms, char argv[1]) {
 	int i;
 	int fd;
 	char *rows;
@@ -69,23 +77,23 @@ void get_map_size(t_data *data, char argv[1]) {
 	i = 0;
 	fd = open(argv, O_RDONLY);
 	rows = get_next_line(fd);
-	data->height = 0;
-	data->width = -1;
+	ms->height = 0;
+	ms->width = -1;
 	while(rows[i])
 	{
 		i++;
-		data->width++;
+		ms->width++;
 	}
 	while (rows != NULL)
 	{
 		free(rows);
 		rows = get_next_line(fd);
-		data->height++;
+		ms->height++;
 	}
 
 }
 
-void check_map(t_data *data)
+void check_map(t_ms *ms)
 {
 	// int x;
 	// int y;
@@ -94,9 +102,9 @@ void check_map(t_data *data)
 	//parsing for top of map information(textures and shit)
 
 	//add floodfill to checks
-	if(check_valid_char(data) && check_walls(data))
+	if(check_valid_char(ms) && check_walls(ms))
 	{
-		map_error_exit(data);
+		map_error_exit(ms);
 	}
 
 }
