@@ -1,6 +1,6 @@
 #include "../includes/cub3d.h"
 
-# define MOVE_SPEED 0.00003
+# define MOVE_SPEED 0.00006 // TODO find a ratio (when big map, mvt are slow)
 # define ROTATE_SPEED 0.000015
 
 //dir NORTH
@@ -39,33 +39,34 @@
 // 		{1,1,1,1,1,1,1,1,1,1}};
 
 
-int map[20][20] = {
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1},
-		{1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
+// int map[20][20] = {
+// 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1},
+// 		{1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
+
 
 void	init_game(t_ms *ms)
 {
 	//TODO: attributes pos.x and pos.y per the 'real' map
 	ms->game->pl_pos.x = 2;
-	ms->game->pl_pos.y = 7;
+	ms->game->pl_pos.y = 2;
 
 	//TODO: attributes the correct orientation per the map (N, W, S, E)
 	// iniiral direction vector (where the player looks)
@@ -132,7 +133,10 @@ void	set_side_dist(t_ms *ms)
 
 void	dda(t_ms *ms)
 {
-	while(1)
+	bool	hit;
+
+	hit = false;
+	while(!hit)
 	{
 		if(ms->game->side_dist.x < ms->game->side_dist.y)
 		{
@@ -158,8 +162,8 @@ void	dda(t_ms *ms)
 
 			ms->game->side = 1;
 		}
-		if(map[(int)ms->game->coord.x][(int)ms->game->coord.y])
-			break;
+		if(ms->map[(int)ms->game->coord.x][(int)ms->game->coord.y] == '1')
+			hit = true;
 	}
 	if(ms->game->side == 0)
 		ms->game->perp_wall_dist = (ms->game->side_dist.x - ms->game->delta_dist.x);
@@ -203,22 +207,22 @@ void	rotate_vector(double *x, double *y, double angle)
 void	move_player(t_ms *ms, double move_speed) 
 {
     // Move along X direction
-    if(map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.x * move_speed)][(int)ms->game->pl_pos.y] == 0)
+    if(ms->map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.x * move_speed)][(int)ms->game->pl_pos.y] == '0')
         ms->game->pl_pos.x += ms->game->pl_dir.x * move_speed;
     
     // Move along Y direction
-    if(map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y + ms->game->pl_dir.y * move_speed)] == 0)
+    if(ms->map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y + ms->game->pl_dir.y * move_speed)] == '0')
         ms->game->pl_pos.y += ms->game->pl_dir.y * move_speed;
 }
 
 void strafe_player(t_ms *ms, double strafe_speed) 
 {
     // Strafe along X direction (perpendicular to direction of facing, so we use pl_dir.y)
-    if(map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.y * strafe_speed)][(int)ms->game->pl_pos.y] == 0)
+    if(ms->map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.y * strafe_speed)][(int)ms->game->pl_pos.y] == '0')
         ms->game->pl_pos.x += ms->game->pl_dir.y * strafe_speed;
     
     // Strafe along Y direction (perpendicular to direction of facing, so we use -pl_dir.x)
-    if(map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y - ms->game->pl_dir.x * strafe_speed)] == 0)
+    if(ms->map[(int)ms->game->pl_pos.x][(int)(ms->game->pl_pos.y - ms->game->pl_dir.x * strafe_speed)] == '0')
         ms->game->pl_pos.y -= ms->game->pl_dir.x * strafe_speed;
 }
 

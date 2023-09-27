@@ -53,7 +53,7 @@ int	main(int ac, char **av)
 	if (!ft_parse_arg(ac, av))
 		return(EXIT_FAILURE);
 
-	// init_content(ms, av[1]);
+	init_content(ms, av[1]);
 	if (init_mlx(ms) == 1)
 		return(EXIT_FAILURE);
 	init_game(ms);
