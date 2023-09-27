@@ -85,7 +85,7 @@ void remove_map_args(t_data *data)
 	i = 0;
 	if(flag == 6)
 	{
-		remove_map(data);
+		// remove_map(data);
 		return;
 	}
 	else
