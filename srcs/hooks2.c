@@ -70,11 +70,11 @@ void	init_game(t_ms *ms)
 
 	//TODO: attributes the correct orientation per the map (N, W, S, E)
 	// iniiral direction vector (where the player looks)
-	ms->game->pl_dir.x = 1; 
-	ms->game->pl_dir.y = 0; 
+	// ms->game->pl_dir.x = 1; 
+	// ms->game->pl_dir.y = 0; 
 	// cam plane
-	ms->game->plane.y = -0.66; 
-	ms->game->plane.x = 0;
+	// ms->game->plane.y = -0.66; 
+	// ms->game->plane.x = 0;
 
 	ms->game->cam_x = 0;
 	ms->game->side_dist.x = 0;

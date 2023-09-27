@@ -26,7 +26,7 @@ int	init_mlx(t_ms *ms)
 {
 	if (!(ms->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", true)))
 	{
-		printf("%s\n", mlx_strerror(mlx_errno)); //TODO To modify, can't use "puts"
+		printf("%s\n", mlx_strerror(mlx_errno)); 
 		return(EXIT_FAILURE);
 	}
 	if(!(ms->m_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT)))
@@ -67,5 +67,9 @@ int	main(int ac, char **av)
 
 	mlx_loop(ms->mlx);
 	mlx_terminate(ms->mlx);
+	//TODO don't forget to free shit
 	return (0);
 }
+
+//TODO parse C et F to grab the correct ceiling anf floor color
+//TODO add player orientation per N,S,W,E on the map

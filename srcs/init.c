@@ -35,6 +35,30 @@ t_ms *get_ms(void)
 	return (ms);
 }
 
+void	set_dir(t_ms *ms, int i, int j)
+{
+	if (ms->main_map[i][j] == 'N')
+	{
+		ms->game->pl_dir.x = -1;
+		ms->game->plane.y = 0.66;
+	}
+	if (ms->main_map[i][j] == 'S')
+	{
+		ms->game->pl_dir.x = 1;
+		ms->game->plane.y = -0.66;
+	}
+	if (ms->main_map[i][j] == 'E')
+	{
+		ms->game->pl_dir.y = 1; 
+		ms->game->plane.x = 0.66;
+	}
+	if (ms->main_map[i][j] == 'W')
+	{
+		ms->game->pl_dir.y = -1; 
+		ms->game->plane.x = -0.66;
+	}
+}
+
 void get_player_pos(t_ms *ms)
 {
 	int i;
@@ -46,10 +70,14 @@ void get_player_pos(t_ms *ms)
 		j = 0;
 		while(ms->main_map[i][j])
 		{
-			if((ft_strncmp(&ms->main_map[i][j], "N", 1) == 0) || (ft_strncmp(&ms->main_map[i][j], "S", 1) == 0) || (ft_strncmp(&ms->main_map[i][j], "W", 1) == 0) || (ft_strncmp(&ms->main_map[i][j], "E", 1) == 0))
+			if((ft_strncmp(&ms->main_map[i][j], "N", 1) == 0) 
+				|| (ft_strncmp(&ms->main_map[i][j], "S", 1) == 0) 
+					|| (ft_strncmp(&ms->main_map[i][j], "W", 1) == 0) 
+						|| (ft_strncmp(&ms->main_map[i][j], "E", 1) == 0))
 			{
-				ms->game->pl_pos.x = i;
-				ms->game->pl_pos.y = j;
+				ms->game->pl_pos.x = i + 0.3;
+				ms->game->pl_pos.y = j + 0.3;
+				set_dir(ms, i, j);
 				ms->main_map[i][j] = '0';
 			}	
 			j++;
