@@ -1,23 +1,13 @@
 
 #include "../includes/cub3d.h"
 
-<<<<<<< HEAD
-// void init_assets(t_data *data)
-// {
-
-// }
-
-
-void remove_map_args(t_data *data)
-=======
 void remove_map_args(t_ms *ms)
->>>>>>> map2D
 {
 	int i;
 	int j;
 	int flag;
 
-	data->map_args = ft_calloc(6, sizeof(char *));
+	ms->map_args = ft_calloc(6, sizeof(char *));
 	j = 0;
 	flag = 0;
 	while (j < ms->width)
@@ -29,9 +19,9 @@ void remove_map_args(t_ms *ms)
 					|| (ft_strncmp(&ms->map[i][j], "SO ", 3) == 0) || (ft_strncmp(&ms->map[i][j], "WE ", 3) == 0)
 					|| (ft_strncmp(&ms->map[i][j], "C ", 2) == 0) || (ft_strncmp(&ms->map[i][j], "F ", 2) == 0))
 			{
-				data->map_args[flag] = data->map[i];
+				ms->map_args[flag] = ms->map[i];
 				printf("[i = %d][j = %d]\n", i, j);
-				printf("map_args = %s flag= %d \n", data->map_args[flag], flag);
+				printf("map_args = %s flag= %d \n", ms->map_args[flag], flag);
 				flag++;
 			}
 				i++;
@@ -41,12 +31,8 @@ void remove_map_args(t_ms *ms)
 	if(flag == 6)
 	{		
 		printf("\n\n You have the correct amount of args in your map: %d \n\n", flag);
-<<<<<<< HEAD
-		// init_assets(data);
-	}
-=======
 		// init_assets(ms);
->>>>>>> map2D
+	}
 	else
 		map_error_exit(ms);
 }

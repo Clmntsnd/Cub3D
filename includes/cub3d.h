@@ -47,23 +47,6 @@ typedef	struct s_vect
 	double y;
 }	t_vect;
 
-<<<<<<< HEAD
-typedef struct s_data {
-	void *mlx;
-	void *win;
-	int height;
-	int width;
-	void *wall;
-	void *floor;
-	void *ceiling;
-	void *direction_assets;
-	char direction;
-	void *player_pos;
-	char **map;
-	char **tmp_map;
-	char **map_args;
-}	t_data;
-=======
 typedef struct s_game {
 	t_vect	pl_pos;
 	t_vect	pl_dir;
@@ -84,6 +67,7 @@ typedef struct s_game {
 typedef struct s_ms {
 	void		*mlx;
 	char		**map;
+	char		**map_args;
 	char		**tmp_map;
 	int			height; 	//map height
 	int			width;		//map width
@@ -94,7 +78,6 @@ typedef struct s_ms {
 	void		*floor;
 	void		*ceiling;	
 }	t_ms;
->>>>>>> map2D
 
 typedef struct s_ray
 {
