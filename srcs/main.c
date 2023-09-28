@@ -57,6 +57,7 @@ int	main(int ac, char **av)
 	if (init_mlx(ms) == 1)
 		return(EXIT_FAILURE);
 	mlx_loop_hook(ms->mlx, loop, ms->mlx);
+	// mlx_cursor_hook(ms->mlx, &move_cursor, ms->mlx);
 	
 	// Function that draws the minimap
 	// if any init doesn't work, returns an error
