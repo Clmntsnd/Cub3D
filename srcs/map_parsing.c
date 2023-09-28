@@ -35,7 +35,8 @@ void remove_map_args(t_ms *ms)
 	int j;
 	int flag;
 
-	ms->map_args = ft_calloc(6, sizeof(char *));
+	// ms->map_args = ft_calloc(6, sizeof(char *));
+	ms->map_args = ft_calloc(7, sizeof(char *));
 	j = 0;
 	flag = 0;
 	while (j < ms->width)
