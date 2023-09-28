@@ -56,8 +56,6 @@ int	main(int ac, char **av)
 	init_content(ms, av[1]);
 	if (init_mlx(ms) == 1)
 		return(EXIT_FAILURE);
-	init_game(ms);
-	// print_init(ms);
 	mlx_loop_hook(ms->mlx, loop, ms->mlx);
 	
 	// Function that draws the minimap
@@ -72,4 +70,4 @@ int	main(int ac, char **av)
 }
 
 //TODO parse C et F to grab the correct ceiling anf floor color
-//TODO add player orientation per N,S,W,E on the map
+//TODO grabs textures from file and put them in raycast
