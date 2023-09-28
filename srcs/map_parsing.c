@@ -55,7 +55,9 @@ void remove_map_args(t_ms *ms)
 		}
 		j++;
 	}
-	i = 0;
+	
+	//added this
+	ms->map_args[flag] = "\0";
 	if(flag == 6)
 	{
 		remove_map(ms);
