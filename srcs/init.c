@@ -5,7 +5,7 @@ void print_map(t_ms *ms)
     int i;
 
     i = 0;
-    while (ms->map[i])
+    while (ms->main_map[i])
     {
         printf("%s", ms->main_map[i]);
         i++;
@@ -16,6 +16,14 @@ void print_map(t_ms *ms)
 	{
 		printf("\nMap arg[%d] = %s", j,  ms->map_args[j]);
 		j++;
+	}
+
+	printf("Floodfill map\n");
+	int k = 0;
+	while(ms->tmp_map[k])
+	{
+		printf("%s", ms->tmp_map[k]);
+		k++;
 	}
 
 	printf("Player position is x= %f, y= %f\n", ms->game->pl_pos.x, ms->game->pl_pos.y);
