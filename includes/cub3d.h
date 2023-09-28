@@ -39,6 +39,8 @@
 //Window specs
 #define WIDTH 1024
 #define HEIGHT 512
+# define MOVE_SPEED 0.00003
+# define ROTATE_SPEED 0.000015
 
 /* ------------------ STRUCTS ------------------ */
 typedef	struct s_vect
@@ -139,9 +141,8 @@ void		cast_ray(t_minimap *minimap);
 
 void		loop(void *param);
 void		print_init(t_ms *ms);
+void		key_binding(t_ms *ms);
 
-// void		cast_ray(void *param);
-// void		cast_ray();
 void	put_color_to_tile(t_ms *ms, t_minimap *minimap);
 void	put_pixel_to_map2D(t_minimap *minimap, int i, int j, uint32_t color);
 
