@@ -69,5 +69,4 @@ int	main(int ac, char **av)
 	return (0);
 }
 
-//TODO parse C et F to grab the correct ceiling anf floor color
 //TODO grabs textures from file and put them in raycast
