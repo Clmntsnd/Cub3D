@@ -40,7 +40,8 @@
 #define WIDTH 1024
 #define HEIGHT 512
 # define MOVE_SPEED 0.00003
-# define ROTATE_SPEED 0.000015
+# define ROTATE_SPEED 0.00002
+# define MOUSE_SPEED 1000
 
 /* ------------------ STRUCTS ------------------ */
 typedef	struct s_vect
@@ -142,6 +143,9 @@ void		cast_ray(t_minimap *minimap);
 void		loop(void *param);
 void		print_init(t_ms *ms);
 void		key_binding(t_ms *ms);
+void		move_cursor(t_ms *ms);
+void		rotate_vector(double *x, double *y, double angle);
+
 
 void	put_color_to_tile(t_ms *ms, t_minimap *minimap);
 void	put_pixel_to_map2D(t_minimap *minimap, int i, int j, uint32_t color);

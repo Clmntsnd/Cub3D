@@ -124,5 +124,6 @@ void	loop(void *param)
 		color = wall_color(ms);
 		draw_vertline(ms, x, color);
 		key_binding(ms);
+		move_cursor(ms);
 	}
 }
