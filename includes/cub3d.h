@@ -48,20 +48,22 @@ typedef	struct s_vect
 }	t_vect;
 
 typedef struct s_game {
-	t_vect	pl_pos;
-	t_vect	pl_dir;
-	t_vect	plane;
-	double	cam_x;
-	t_vect	ray_dir;
-	t_vect	coord;
-	t_vect	side_dist;
-	t_vect	delta_dist;
-	t_vect	step;
-	int		side;
-	double	perp_wall_dist;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
+	uint32_t	floor;
+	uint32_t	ceiling;
+	t_vect		pl_pos;
+	t_vect		pl_dir;
+	t_vect		plane;
+	double		cam_x;
+	t_vect		ray_dir;
+	t_vect		coord;
+	t_vect		side_dist;
+	t_vect		delta_dist;
+	t_vect		step;
+	int			side;
+	double		perp_wall_dist;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 }	t_game;
 
 typedef struct s_ms {

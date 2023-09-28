@@ -1,104 +1,16 @@
 #include "../includes/cub3d.h"
 
-# define MOVE_SPEED 0.00006 // TODO find a ratio (when big map, mvt are slow)
+# define MOVE_SPEED 0.00003 // TODO find a ratio (when big map, mvt are slow)
 # define ROTATE_SPEED 0.000015
-
-//dir NORTH
-	// ms->game->pl_dir.x = -1;
-	// ms->game->plane.y = 0.66;
-//dir SOUTH
-	// ms->game->pl_dir.x = 1;
-	// ms->game->plane.y = -0.66;
-//dir WEST
-	// ms->game->pl_dir.x = -1;
-	// ms->game->plane.y = -0.66;
-//dir EAST
-	// ms->game->pl_dir.x = 1;
-	// ms->game->plane.y = 0.66;
-
-// int map[20][10] = {
-// 		{1,1,1,1,1,1,1,1,1,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,1,1,0,1},
-// 		{1,0,0,0,0,0,1,1,0,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,1,1,1,0,0,1,1,1,1},
-// 		{1,1,1,1,0,0,1,1,1,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,1,1,0,1},
-// 		{1,0,0,0,0,0,1,1,0,1},
-// 		{1,0,0,0,0,0,0,0,0,1},
-// 		{1,1,1,1,1,1,1,1,1,1}};
-
-
-// int map[20][20] = {
-// 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1},
-// 		{1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-
-
-void	init_game(t_ms *ms)
-{
-	//TODO: attributes pos.x and pos.y per the 'real' map
-	// ms->game->pl_pos.x = 20;
-	// ms->game->pl_pos.y = 5;
-
-	//TODO: attributes the correct orientation per the map (N, W, S, E)
-	// iniiral direction vector (where the player looks)
-	// ms->game->pl_dir.x = 1; 
-	// ms->game->pl_dir.y = 0; 
-	// cam plane
-	// ms->game->plane.y = -0.66; 
-	// ms->game->plane.x = 0;
-
-	ms->game->cam_x = 0;
-	ms->game->side_dist.x = 0;
-	ms->game->side_dist.y = 0;
-	ms->game->delta_dist.x = 0;
-	ms->game->delta_dist.y = 0;
-
-	ms->game->step.x = 1;
-	ms->game->step.y = 1;
-}
 
 void	set_data(t_ms *ms)
 {
-	//set ray dir
 	ms->game->ray_dir.x = ms->game->pl_dir.x + \
 		ms->game->plane.x * ms->game->cam_x;
 	ms->game->ray_dir.y = ms->game->pl_dir.y + \
 		ms->game->plane.y * ms->game->cam_x;
-	
-	//set map pos
 	ms->game->coord.x = ms->game->pl_pos.x;
 	ms->game->coord.y = ms->game->pl_pos.y;
-
-	//set delta dist
 	ms->game->delta_dist.x = fabs(1 / ms->game->ray_dir.x);
 	ms->game->delta_dist.y = fabs(1 / ms->game->ray_dir.y);
 }
@@ -142,24 +54,12 @@ void	dda(t_ms *ms)
 		{
 			ms->game->side_dist.x += ms->game->delta_dist.x;
 			ms->game->coord.x += ms->game->step.x;
-			//keep in case of norm too tough on set_side_dist
-			// if(ms->game->ray_dir.x < 0)
-			// 	ms->game->coord.x -= 0.01;
-			// else
-			// 	ms->game->coord.x += 0.01;
-
 			ms->game->side = 0;
 		}
 		else
 		{
 			ms->game->side_dist.y += ms->game->delta_dist.y;
 			ms->game->coord.y += ms->game->step.y;
-			//keep in case of norm too tough on set_side_dist
-			// if(ms->game->ray_dir.y < 0)
-			// 	ms->game->coord.y -= 0.01; 
-			// else
-			// 	ms->game->coord.y += 0.01;
-
 			ms->game->side = 1;
 		}
 		if(ms->main_map[(int)ms->game->coord.x][(int)ms->game->coord.y] == '1')
@@ -173,7 +73,7 @@ void	dda(t_ms *ms)
 
 void	set_draw_range(t_ms *ms)
 {
-	ms->game->line_height = (int)((HEIGHT * 125) / ms->game->perp_wall_dist); //add to add multiply HEIGHT by 125 to smooth mvt
+	ms->game->line_height = (int)((HEIGHT * 125) / ms->game->perp_wall_dist);
 	ms->game->draw_start = -ms->game->line_height * 0.5 + HEIGHT * 0.5;
 	if (ms->game->draw_start < 0)
 		ms->game->draw_start = 0;
@@ -188,11 +88,11 @@ void	draw_vertline(t_ms *ms, u_int32_t x, u_int32_t color)
 	
 	y = 0;
 	while((int)y < ms->game->draw_start)
-		mlx_put_pixel(ms->m_img, x, y++, get_rgba(0,0,0,255)); //ceiling color (Black)
+		mlx_put_pixel(ms->m_img, x, y++, ms->game->ceiling);
 	while((int)y < ms->game->draw_end)
 		mlx_put_pixel(ms->m_img, x, y++, color); // red
 	while((int)y < HEIGHT)
-		mlx_put_pixel(ms->m_img, x, y++, get_rgba(255,255,255,255)); //floor color (white)
+		mlx_put_pixel(ms->m_img, x, y++, ms->game->floor);
 }
 
 void	rotate_vector(double *x, double *y, double angle) 

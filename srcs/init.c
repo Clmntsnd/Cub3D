@@ -86,12 +86,48 @@ void get_player_pos(t_ms *ms)
 	}
 }
 
+void get_color(t_ms *ms)
+{
+	int 		i;
+	char 		*tmp;
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
+
+	i = 0;
+	while (ms->map_args[i])
+	{
+		if (ms->map_args[i][0] == 'C')
+		{
+			tmp = ms->map_args[i] + 2;
+			r = (u_int32_t)ft_atoi(tmp);
+			tmp = strchr(tmp, ',') + 1;
+			g = (u_int32_t)ft_atoi(tmp);
+			tmp = strchr(tmp, ',') + 1;
+			b = (u_int32_t)ft_atoi(tmp);
+			ms->game->ceiling = get_rgba(r,g,b,255);
+		}
+		if (ms->map_args[i][0] == 'F')
+		{
+			tmp = ms->map_args[i] + 2;
+			r = (u_int32_t)ft_atoi(tmp);
+			tmp = strchr(tmp, ',') + 1;
+			g = (u_int32_t)ft_atoi(tmp);
+			tmp = strchr(tmp, ',') + 1;
+			b = (u_int32_t)ft_atoi(tmp);
+			ms->game->floor = get_rgba(r,g,b,255);
+		}
+		i++;
+	}
+}
+
 void init_content(t_ms *ms, char *argv)
 {
 	get_map_size(ms, argv);
 	get_map(ms, argv);
 	remove_map_args(ms);
 	get_player_pos(ms);
+	get_color(ms);
 	check_map(ms);
 	print_map(ms);
 }
