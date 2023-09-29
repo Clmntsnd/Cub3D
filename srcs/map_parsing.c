@@ -162,7 +162,7 @@ void check_map(t_ms *ms)
 	x = ms->game->pl_pos.x;
 	y = ms->game->pl_pos.y;
 	//add floodfill to checks
-	if(check_valid_char(ms) && check_walls(ms))
+	if(check_valid_char(ms) || check_walls(ms))
 	{
 		map_error_exit(ms);
 	}
