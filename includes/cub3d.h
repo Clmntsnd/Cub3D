@@ -74,7 +74,7 @@ typedef struct s_ms {
 	void		*mlx;
 	char		**map;
 	char		**map_args;
-	char **main_map;
+	char 		**main_map;
 	char		**tmp_map;
 	int			height; 	//map height
 	int			width;		//map width
