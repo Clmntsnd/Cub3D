@@ -122,11 +122,9 @@ void get_map_size(t_ms *ms, char argv[1]) {
 char **copy_map(t_ms *ms)
 {
 	int i;
-	int j;
 	char **map;
 
 	i = 0;
-	j = 0;
 	map = ft_calloc(ms->height + 1, sizeof(char *));
 	while (i < ms->height)
 	{
