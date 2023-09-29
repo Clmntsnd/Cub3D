@@ -38,10 +38,10 @@
 
 //Window specs
 #define WIDTH 1024
-#define HEIGHT 512
-# define MOVE_SPEED 0.00003
-# define ROTATE_SPEED 0.00002
-# define MOUSE_SPEED 1000
+#define HEIGHT 768
+# define MOVE_SPEED 0.00002
+# define ROTATE_SPEED 0.000015
+# define MOUSE_SPEED 1500
 
 /* ------------------ STRUCTS ------------------ */
 typedef	struct s_vect
@@ -67,6 +67,7 @@ typedef struct s_game {
 	int			line_height;
 	int			draw_start;
 	int			draw_end;
+	bool		m_activ;
 }	t_game;
 
 typedef struct s_ms {

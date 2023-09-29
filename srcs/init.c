@@ -83,8 +83,8 @@ void get_player_pos(t_ms *ms)
 					|| (ft_strncmp(&ms->main_map[i][j], "W", 1) == 0) 
 						|| (ft_strncmp(&ms->main_map[i][j], "E", 1) == 0))
 			{
-				ms->game->pl_pos.x = i + 0.3;
-				ms->game->pl_pos.y = j + 0.3;
+				ms->game->pl_pos.x = i + 0.1;
+				ms->game->pl_pos.y = j + 0.1;
 				set_dir(ms, i, j);
 				ms->main_map[i][j] = '0';
 			}	
@@ -136,6 +136,6 @@ void init_content(t_ms *ms, char *argv)
 	remove_map_args(ms);
 	get_player_pos(ms);
 	get_color(ms);
-	check_map(ms);
+	// check_map(ms);
 	print_map(ms);
 }

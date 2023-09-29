@@ -70,7 +70,7 @@ void	dda(t_ms *ms)
 
 void	set_draw_range(t_ms *ms)
 {
-	ms->game->line_height = (int)((HEIGHT * 125) / ms->game->perp_wall_dist);
+	ms->game->line_height = (int)((HEIGHT * 100) / ms->game->perp_wall_dist);
 	ms->game->draw_start = -ms->game->line_height * 0.5 + HEIGHT * 0.5;
 	if (ms->game->draw_start < 0)
 		ms->game->draw_start = 0;
