@@ -119,66 +119,92 @@ void get_map_size(t_ms *ms, char argv[1]) {
 
 //floodfill//
 
-int is_valid(int x, int y) {
-    // Check if the coordinates (x, y) are within the map boundaries
-    return x >= 0 && x < ROWS && y >= 0 && y < COLS;
-}
+// int is_valid(int x, int y) {
+//     // Check if the coordinates (x, y) are within the map boundaries
+//     return x >= 0 && x < ROWS && y >= 0 && y < COLS;
+// }
 
-int flood_fill(int x, int y, char **map) {
-	int dx[] = {-1, 1, 0, 0};
-	int dy[] = {0, 0, -1, 1};
-    int surrounded;
-	int i;
+// int flood_fill(int x, int y, char **map) {
+// 	int dx[] = {-1, 1, 0, 0};
+// 	int dy[] = {0, 0, -1, 1};
+//     int surrounded;
+// 	int i;
 
-	i = 0;
-	surrounded = 1;
-    if (!is_valid(x, y)) {
-        return 0;
-    }
+// 	i = 0;
+// 	surrounded = 1;
+//     if (!is_valid(x, y)) {
+//         return 0;
+//     }
 
-    if (map[x][y] == '1') {
-        return 1;  // We've reached a wall, so it's surrounded
-    }
+//     if (map[x][y] == '1') {
+//         return 1;  // We've reached a wall, so it's surrounded
+//     }
 
-    if (map[x][y] == 'F') {
-        return 0;  // We've already visited this cell
-    }
+//     if (map[x][y] == 'F') {
+//         return 0;  // We've already visited this cell
+//     }
 
-    // Mark the current cell as visited
-    map[x][y] = 'F';
+//     // Mark the current cell as visited
+//     map[x][y] = 'F';
 
-    // Check the neighboring cells in all four directions
-    while (i <= 4) {
-        surrounded = surrounded && flood_fill(x + dx[i], y + dy[i], map);
-		i++;
-    }
+//     // Check the neighboring cells in all four directions
+//     while (i < 4) {
+//         surrounded = surrounded && flood_fill(x + dx[i], y + dy[i], map);
+// 		i++;
+//     }
 
-    return surrounded;
-}
+//     return surrounded;
+// }
 
-int is_surrounded_by_walls(char **map, t_ms *ms)
+// int is_surrounded_by_walls(char **map, t_ms *ms)
+// {
+//     return flood_fill(ms->game->pl_pos.x, ms->game->pl_pos.y, map);
+// }
+
+
+
+
+void	floodfill(t_ms *ms, char u, char v, int x, int y)
 {
-    return flood_fill(ms->game->pl_pos.x, ms->game->pl_pos.y, map);
+	if (ms->tmp_map[x][y] == '0')
+	{
+		ms->tmp_map[x][y] = 'D';
+		floodfill(ms, u, v, x + 1, y);
+		floodfill(ms, u, v, x - 1, y);
+		floodfill(ms, u, v, x, y - 1);
+		floodfill(ms, u, v, x, y + 1);
+	}
+	if (ms->tmp_map[x][y] == ' ' || ms->tmp_map[x][y] == '\t')
+	{
+		map_error_exit(ms);
+	}
 }
-
 
 void check_map(t_ms *ms)
 {
+	int x;
+	int y;
 
+
+	x = ms->game->pl_pos.x;
+	y = ms->game->pl_pos.y;
 	//add floodfill to checks
 	if(check_valid_char(ms) && check_walls(ms))
 	{
 		map_error_exit(ms);
 	}
 
-	int surrounded;
-	surrounded = is_surrounded_by_walls(ms->tmp_map, ms);
+	floodfill(ms, '0', 'D', x, y);
 
-	if (!surrounded) {
-        printf("The map and empty spaces are surrounded by walls.\n");
-    } else {
-		printf("The map and empty spaces are not surrounded by walls.\n");
-		map_error_exit(ms);
-    }
+
+	// int surrounded;
+	// surrounded = is_surrounded_by_walls(ms->tmp_map, ms);
+
+	// if (!surrounded) {
+    //     printf("The map and empty spaces are surrounded by walls.\n");
+    // } else {
+	// 	printf("The map and empty spaces are not surrounded by walls.\n");
+	// 	map_error_exit(ms);
+    // }
 }
 

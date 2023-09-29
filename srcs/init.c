@@ -136,6 +136,6 @@ void init_content(t_ms *ms, char *argv)
 	remove_map_args(ms);
 	get_player_pos(ms);
 	get_color(ms);
-	// check_map(ms);
+	check_map(ms);
 	print_map(ms);
 }
