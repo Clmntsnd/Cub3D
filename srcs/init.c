@@ -71,8 +71,10 @@ void get_player_pos(t_ms *ms)
 {
 	int i;
 	int j;
+	int flag;
 
 	i = 0;
+	flag = 0;
 	while(ms->main_map[i])
 	{
 		j = 0;
@@ -83,11 +85,17 @@ void get_player_pos(t_ms *ms)
 					|| (ft_strncmp(&ms->main_map[i][j], "W", 1) == 0) 
 						|| (ft_strncmp(&ms->main_map[i][j], "E", 1) == 0))
 			{
+				flag++;
 				ms->game->pl_pos.x = i + 0.5;
 				ms->game->pl_pos.y = j + 0.5;
 				set_dir(ms, i, j);
 				ms->main_map[i][j] = '0';
-			}	
+			}
+			if (flag > 1)
+			{
+				printf("Error\nMore than one player position\n");
+				map_error_exit(ms);	
+			}
 			j++;
 		}
 		i++;

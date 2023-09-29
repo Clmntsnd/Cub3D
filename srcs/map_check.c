@@ -6,21 +6,16 @@ int check_valid_char(t_ms *ms)
 {
 	int		i;
 	int		j;
+	int 	flag;
 
 	j = 0;
-	while (j < ms->width)
+	flag = 0;
+	while (*ms->main_map[j] != '\0')
 	{
 		i = 0;
-		while (i < ms->height)
+		while (ms->main_map[j][i] != '\0')
 		{
-			i++;
-
-			// Add map restrictions here //
-
-			// if (ms->map[i][j] == ' ' || ms->map[i][j] == '\t' || ms->map[i][j] == 'E' || ms->map[i][j] == 'O' || ms->map[i][j] == 'N' || ms->map[i][j] == 'S'|| ms->map[i][j] == '1' || ms->map[i][j] == '0' || ms->map[i][j] == '\n')
-			// 			i++;
-			// else
-			// 	map_error_exit(ms);
+				i++;
 		}
 		j++;
 	}
