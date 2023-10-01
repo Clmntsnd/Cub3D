@@ -102,13 +102,13 @@ void get_player_pos(t_ms *ms)
 	}
 }
 
-bool	is_valid_number(char *str) 
+bool	is_valid_arg(char *str) 
 {
 	int		i;
 	int		j;
 	char	**color;
 
-    color = ft_split(str, ',');
+	color = ft_split(str, ',');
 	if (!color)
 		return (false);
 	i = 0;
@@ -117,7 +117,7 @@ bool	is_valid_number(char *str)
 	if (i != 3)
 		return (ft_free_tab_char(color), false);
 	i = -1;
-	while(color[++i])
+	while (color[++i])
 	{
 		if (color[i][0] == '\0' || color[i][0] == '\n')
 			return (ft_free_tab_char(color), false);
@@ -126,11 +126,11 @@ bool	is_valid_number(char *str)
 			if (ft_isdigit(color[i][j++]) == 0)
 				return (ft_free_tab_char(color), false);
 	}
-	ft_free_tab_char(color); 
-    return (true);
+	ft_free_tab_char(color);
+	return (true);
 }
 
-void	convert_color(t_ms *ms, int i, char *str)
+bool	convert_color(t_ms *ms, int i, char *str)
 {
 	u_int32_t	r;
 	u_int32_t	g;
@@ -141,10 +141,13 @@ void	convert_color(t_ms *ms, int i, char *str)
 	g = (u_int32_t)ft_atoi(str);
 	str = ft_strchr(str, ',') + 1;
 	b = (u_int32_t)ft_atoi(str);
-	if(ms->map_args[i][0] == 'C')
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (printf("not a valid value\n"), false);
+	if (ms->map_args[i][0] == 'C')
 		ms->game->ceiling = get_rgba(r,g,b,255);
 	else
 		ms->game->floor = get_rgba(r,g,b,255);
+	return (true);
 }
 
 bool get_color(t_ms *ms)
@@ -158,10 +161,12 @@ bool get_color(t_ms *ms)
         if (ms->map_args[i][0] == 'C' || ms->map_args[i][0] == 'F') 
 		{
             tmp = ms->map_args[i] + 2;
-            if (!is_valid_number(tmp)) 
+            if (!is_valid_arg(tmp)) 
             	return (printf("❌ Error\n%s\n", ERR_COL), false);
 			else
-				convert_color(ms, i, tmp);
+				if (!convert_color(ms, i, tmp))
+            		return (printf("❌ Error\n%s\n", ERR_COL), false);
+
         }
     }
 	return (true);
