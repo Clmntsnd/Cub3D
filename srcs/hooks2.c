@@ -51,18 +51,24 @@ void	dda(t_ms *ms)
 		{
 			ms->game->side_dist.x += ms->game->delta_dist.x;
 			ms->game->coord.x += ms->game->step.x;
-			ms->game->side = 0;
+			if (ms->game->ray_dir.x > 0)
+				ms->game->side = 0; 
+			else
+				ms->game->side = 1;
 		}
 		else
 		{
 			ms->game->side_dist.y += ms->game->delta_dist.y;
 			ms->game->coord.y += ms->game->step.y;
-			ms->game->side = 1;
+			if (ms->game->ray_dir.y > 0)
+				ms->game->side = 2;
+			else
+				ms->game->side = 3;
 		}
 		if(ms->main_map[(int)ms->game->coord.x][(int)ms->game->coord.y] == '1')
 			hit = true;
 	}
-	if(ms->game->side == 0)
+	if(ms->game->side < 2)
 		ms->game->perp_wall_dist = (ms->game->side_dist.x - ms->game->delta_dist.x);
 	else
 		ms->game->perp_wall_dist = (ms->game->side_dist.y - ms->game->delta_dist.y);
@@ -79,7 +85,7 @@ void	set_draw_range(t_ms *ms)
 		ms->game->draw_end = HEIGHT - 1;
 }
 
-void	draw_vertline(t_ms *ms, u_int32_t x, u_int32_t color)
+void	draw_vert_line(t_ms *ms, u_int32_t x, u_int32_t color)
 {
 	u_int32_t	y;
 	
@@ -87,21 +93,21 @@ void	draw_vertline(t_ms *ms, u_int32_t x, u_int32_t color)
 	while((int)y < ms->game->draw_start)
 		mlx_put_pixel(ms->m_img, x, y++, ms->game->ceiling);
 	while((int)y < ms->game->draw_end)
-		mlx_put_pixel(ms->m_img, x, y++, color); // red
+		mlx_put_pixel(ms->m_img, x, y++, color);
 	while((int)y < HEIGHT)
 		mlx_put_pixel(ms->m_img, x, y++, ms->game->floor);
 }
 
 u_int32_t	wall_color(t_ms *ms)
 {
-	if (ms->game->side == 1 && ms->game->ray_dir.y > 0)
-		return (get_rgba(127,127,0,255));
-	if (ms->game->side == 1 && ms->game->ray_dir.y < 0)
-		return (get_rgba(0,127,127,255));
-	if (ms->game->side == 0 && ms->game->ray_dir.x < 0)
-		return (get_rgba(0,0,255,255));
-	if (ms->game->side == 0 && ms->game->ray_dir.x > 0)
-		return (get_rgba(128,0,128,255));
+	if (ms->game->side == 0) 
+		return (get_rgba(255,0,0,255)); //south wall
+	if (ms->game->side == 1)
+		return (get_rgba(0,255,0,255)); //north wall
+	if (ms->game->side == 2)
+		return (get_rgba(0,0,255,255)); //east wall
+	if (ms->game->side == 3)
+		return (get_rgba(128,0,128,255)); //west wall
 	return(0);
 }
 
@@ -122,7 +128,7 @@ void	loop(void *param)
 		dda(ms);
 		set_draw_range(ms);
 		color = wall_color(ms);
-		draw_vertline(ms, x, color);
+		draw_vert_line(ms, x, color);
 		key_binding(ms);
 		move_cursor(ms);
 	}
