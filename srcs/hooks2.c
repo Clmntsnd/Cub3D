@@ -101,11 +101,11 @@ void	draw_vert_line(t_ms *ms, u_int32_t x, u_int32_t color)
 u_int32_t	wall_color(t_ms *ms)
 {
 	if (ms->game->side == 0) 
-		return (get_rgba(255,0,0,255)); //south wall
+		return (get_rgba(128,128,255,255)); //south wall
 	if (ms->game->side == 1)
-		return (get_rgba(0,255,0,255)); //north wall
+		return (get_rgba(128,255,128,255)); //north wall
 	if (ms->game->side == 2)
-		return (get_rgba(0,0,255,255)); //east wall
+		return (get_rgba(255,128,128,255)); //east wall
 	if (ms->game->side == 3)
 		return (get_rgba(128,0,128,255)); //west wall
 	return(0);

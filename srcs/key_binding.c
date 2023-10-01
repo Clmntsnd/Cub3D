@@ -14,9 +14,9 @@ void	move_player(t_ms *ms, double move_speed)
 	double radius;
 	double hit_box;
 
-	radius = 0.1;
+	radius = 0.3;
 	if (move_speed < 0)
-		radius = -0.1;
+		radius = -0.3;
 	hit_box = move_speed + radius;
     // Move along X direction
     if(ms->main_map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.x * hit_box)][(int)ms->game->pl_pos.y] == '0')
@@ -32,9 +32,9 @@ void strafe_player(t_ms *ms, double strafe_speed)
 	double radius;
 	double hit_box;
 
-	radius = 0.1;
+	radius = 0.3;
 	if (strafe_speed < 0)
-		radius = -0.1;
+		radius = -0.3;
 	hit_box = strafe_speed + radius;
     // Strafe along X direction (perpendicular to direction of facing, so we use pl_dir.y)
     if(ms->main_map[(int)(ms->game->pl_pos.x + ms->game->pl_dir.y * hit_box)][(int)ms->game->pl_pos.y] == '0')

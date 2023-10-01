@@ -40,9 +40,9 @@
 //Window specs
 #define WIDTH 1024
 #define HEIGHT 768
-# define MOVE_SPEED 0.00002
-# define ROTATE_SPEED 0.000015
-# define MOUSE_SPEED 1500
+# define MOVE_SPEED 0.00004
+# define ROTATE_SPEED 0.00002
+# define MOUSE_SPEED 1000
 
 /* ------------------ STRUCTS ------------------ */
 typedef	struct s_vect
