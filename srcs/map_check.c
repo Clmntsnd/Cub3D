@@ -6,10 +6,8 @@ int check_valid_char(t_ms *ms)
 {
 	int		i;
 	int		j;
-	int 	flag;
 
 	j = 0;
-	flag = 0;
 	while (*ms->main_map[j] != '\0')
 	{
 		i = 0;

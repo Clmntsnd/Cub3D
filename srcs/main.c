@@ -54,6 +54,8 @@ int	main(int ac, char **av)
 		return(EXIT_FAILURE);
 
 	init_content(ms, av[1]);
+	if(!get_color(ms))
+        return (EXIT_FAILURE);
 	if (init_mlx(ms) == 1)
 		return(EXIT_FAILURE);
 	mlx_loop_hook(ms->mlx, loop, ms->mlx);

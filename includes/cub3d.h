@@ -35,6 +35,7 @@
 # define ERR_FILE	"❌ File doesn't exist"
 # define ERR_NAME	"❌ Invalid File name"
 # define ERR_MEM	"❌ Memory allocation failed"
+# define ERR_COL	"❌ Invalid Color"
 
 //Window specs
 #define WIDTH 1024
@@ -129,7 +130,7 @@ void remove_map_args(t_ms *ms);
 t_ms		*get_ms(void);
 t_minimap	*get_minimap(void);
 void		init_content(t_ms *ms, char *argv);
-void		init_game(t_ms *ms);
+bool 		get_color(t_ms *ms);
 
 /* ------------------ Minimap ------------------ */
 int			draw_map2D(t_ms *ms);
@@ -150,6 +151,7 @@ void		rotate_vector(double *x, double *y, double angle);
 
 void	put_color_to_tile(t_ms *ms, t_minimap *minimap);
 void	put_pixel_to_map2D(t_minimap *minimap, int i, int j, uint32_t color);
+
 
 
 
