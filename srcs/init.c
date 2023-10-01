@@ -142,7 +142,7 @@ bool	convert_color(t_ms *ms, int i, char *str)
 	str = ft_strchr(str, ',') + 1;
 	b = (u_int32_t)ft_atoi(str);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (printf("not a valid value\n"), false);
+		return (false);
 	if (ms->map_args[i][0] == 'C')
 		ms->game->ceiling = get_rgba(r,g,b,255);
 	else
@@ -160,13 +160,9 @@ bool get_color(t_ms *ms)
 	{
         if (ms->map_args[i][0] == 'C' || ms->map_args[i][0] == 'F') 
 		{
-            tmp = ms->map_args[i] + 2;
-            if (!is_valid_arg(tmp)) 
+            tmp = ms->map_args[i] + 2; 
+            if (!is_valid_arg(tmp) || !convert_color(ms, i, tmp)) 
             	return (printf("❌ Error\n%s\n", ERR_COL), false);
-			else
-				if (!convert_color(ms, i, tmp))
-            		return (printf("❌ Error\n%s\n", ERR_COL), false);
-
         }
     }
 	return (true);
