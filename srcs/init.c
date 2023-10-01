@@ -114,12 +114,12 @@ bool	is_valid_number(char *str)
 	i = -1;
 	while(color[++i])
 	{
-		printf("color[%d]= %s\n", i, color[i]);  // Print character for debugging purposes
+		printf("color[%d]= %s\n", i, color[i]);
 		j = 0;
 		while (color[i][j] && color[i][j] != '\n')
 		{
-			printf("color[%d][%d]= %c\n", i, j, color[i][j]);  // Print character for debugging purposes
-			if (ft_isdigit(color[i][j]) == 0)  // Add check for '\0'
+			printf("color[%d][%d]= %c\n", i, j, color[i][j]);
+			if (ft_isdigit(color[i][j]) == 0)
 			{
 				ft_free_tab_char(color);
 				return (false);
@@ -130,7 +130,6 @@ bool	is_valid_number(char *str)
 	ft_free_tab_char(color); 
     return (true);
 }
-
 
 bool get_color(t_ms *ms)
 {
@@ -164,7 +163,6 @@ bool get_color(t_ms *ms)
     }
 	return (true);
 }
-
 
 void init_content(t_ms *ms, char *argv)
 {
