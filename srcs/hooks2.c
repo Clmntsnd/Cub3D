@@ -123,15 +123,15 @@ void	find_texture_hit(t_ms *ms, xpm_t *texture)
 
 	hit = 0;
 	if (ms->game->side == 0 || ms->game->side == 1) 
-		hit = ms->game->pl_pos.x + ms->game->perp_wall_dist * ms->game->ray_dir.x;
-	else
 		hit = ms->game->pl_pos.y + ms->game->perp_wall_dist * ms->game->ray_dir.y;
+	else
+		hit = ms->game->pl_pos.x + ms->game->perp_wall_dist * ms->game->ray_dir.x;
 	hit -= (int)hit;
 	ms->game->tex_x = (int)(hit * (double)texture->texture.width);
-	if ((ms->game->side == 0 || ms->game->side == 1) && ms->game->ray_dir.y > 0)
-		ms->game->tex_x = texture->texture.width - ms->game->ray_dir.x - 1;
-	if ((ms->game->side == 2 || ms->game->side == 3) && ms->game->ray_dir.x < 0)
-		ms->game->tex_x = texture->texture.width - ms->game->ray_dir.x - 1;
+	if (ms->game->side == 0 && ms->game->ray_dir.x > 0)
+		ms->game->tex_x = texture->texture.width - ms->game->ray_dir.x;
+	// if ((ms->game->side == 2 || ms->game->side == 3) && ms->game->ray_dir.y < 0)
+	// 	ms->game->tex_x = texture->texture.width - ms->game->ray_dir.x - 1;
 }
 
 int **fill_texture(xpm_t *texture)
