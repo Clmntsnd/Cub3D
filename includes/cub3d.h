@@ -69,7 +69,19 @@ typedef struct s_game {
 	int			draw_start;
 	int			draw_end;
 	bool		m_activ;
+	int			tex_x;
 }	t_game;
+
+typedef struct s_tex{
+	int			**no;
+	int			**so;
+	int			**ea;
+	int			**we;
+	xpm_t		*no_tex;
+	xpm_t		*so_tex;
+	xpm_t		*ea_tex;
+	xpm_t		*we_tex;
+}	t_tex;
 
 typedef struct s_ms {
 	void		*mlx;
@@ -81,7 +93,7 @@ typedef struct s_ms {
 	int			width;		//map width
 	t_game		*game;		//game informations
 	mlx_image_t *m_img;
-	
+	t_tex		*tex;
 	void		*wall;
 	void		*floor;
 	void		*ceiling;	
