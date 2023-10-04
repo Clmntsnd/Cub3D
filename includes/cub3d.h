@@ -137,7 +137,6 @@ void check_map(t_ms *ms);
 int check_valid_char(t_ms *ms);
 int check_walls(t_ms *ms);
 void remove_map_args(t_ms *ms);
-
 char **sanatize_args(char **args);
 
 /* -------------------- Init ------------------- */
@@ -145,6 +144,7 @@ t_ms		*get_ms(void);
 t_minimap	*get_minimap(void);
 void		init_content(t_ms *ms, char *argv);
 bool 		get_color(t_ms *ms);
+bool		get_texture(t_ms *ms);
 
 /* ------------------ Minimap ------------------ */
 int			draw_map2D(t_ms *ms);

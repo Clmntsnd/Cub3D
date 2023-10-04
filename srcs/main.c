@@ -54,6 +54,8 @@ int	main(int ac, char **av)
 		return(EXIT_FAILURE);
 
 	init_content(ms, av[1]);
+	// if(!get_texture(ms))
+	// 	return (EXIT_FAILURE);
 	if(!get_color(ms))
         return (EXIT_FAILURE);
 	if (init_mlx(ms) == 1)
