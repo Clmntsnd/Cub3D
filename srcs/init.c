@@ -22,7 +22,7 @@ void print_map(t_ms *ms)
 	int k = 0;
 	while(k < ms->height)
 	{
-		printf("\n%s", ms->main_map[k]);
+		printf("%s", ms->main_map[k]);
 		k++;
 	}
 
@@ -37,7 +37,7 @@ t_ms *get_ms(void)
 
 	if (ms == NULL)
 	{
-		ms = ft_calloc(1, sizeof(t_ms));
+		ms = (t_ms *)ft_calloc(1, sizeof(t_ms));
 		ms->game = ft_calloc(1, sizeof(t_game));
 	}
 	return (ms);
