@@ -138,6 +138,8 @@ int check_valid_char(t_ms *ms);
 int check_walls(t_ms *ms);
 void remove_map_args(t_ms *ms);
 
+char **sanatize_args(char **args);
+
 /* -------------------- Init ------------------- */
 t_ms		*get_ms(void);
 t_minimap	*get_minimap(void);

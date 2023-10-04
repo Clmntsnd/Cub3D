@@ -168,6 +168,25 @@ bool get_color(t_ms *ms)
 	return (true);
 }
 
+char **sanatize_args(char **args)
+{
+	if (args == NULL || *args == NULL) {
+        return(NULL); // Nothing to sanitize
+    }
+    char *src = *args;
+    char *dst = *args;
+
+    while (*src) {
+        if (*src != ' ' && *src != '\t') {
+            *dst = *src;
+            dst++;
+        }
+        src++;
+    }
+    *dst = '\0';
+	return(args);
+}
+
 void init_content(t_ms *ms, char *argv)
 {
 	get_map_size(ms, argv);

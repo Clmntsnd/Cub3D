@@ -67,3 +67,37 @@ int main() {
 
 
 
+
+
+
+void sanitize_args(char **arg) {
+    // Check if the argument is NULL or empty
+    if (arg == NULL || *arg == NULL) {
+        return; // Nothing to sanitize
+    }
+
+    char *src = *arg;
+    char *dst = *arg;
+
+    while (*src) {
+        if (*src != ' ' && *src != '\t') {
+            *dst = *src; // Copy the character to the destination
+            dst++; // Move the destination pointer
+        }
+        src++; // Move the source pointer
+    }
+
+    *dst = '\0'; // Null-terminate the sanitized string
+}
+
+int main() {
+    char *arg = "Hello,   World!";
+
+    printf("Original arg: '%s'\n", arg);
+
+    sanitize_args(&arg);
+
+    printf("Sanitized arg: '%s'\n", arg);
+
+    return 0;
+}

@@ -70,7 +70,8 @@ void remove_map_args(t_ms *ms)
 					|| (ft_strncmp(&ms->map[i][j], "SO ", 3) == 0) || (ft_strncmp(&ms->map[i][j], "WE ", 3) == 0)
 					|| (ft_strncmp(&ms->map[i][j], "C ", 2) == 0) || (ft_strncmp(&ms->map[i][j], "F ", 2) == 0))
 			{
-				ms->map_args[flag] = ft_strdup(ms->map[i]);
+				ms->map_args[flag] = ft_strdup(*sanatize_args(&ms->map[i]));
+				// ft_strdup(ms->map[i]);
 				flag++;
 			}
 				i++;
