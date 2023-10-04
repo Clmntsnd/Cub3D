@@ -20,9 +20,9 @@ void print_map(t_ms *ms)
 
 	printf("Floodfill map\n");
 	int k = 0;
-	while(ms->tmp_map[k])
+	while(k < ms->height)
 	{
-		printf("%s", ms->tmp_map[k]);
+		printf("\n%s", ms->main_map[k]);
 		k++;
 	}
 

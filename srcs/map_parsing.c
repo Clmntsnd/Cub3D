@@ -2,15 +2,12 @@
 #include "../includes/cub3d.h"
 
 char **calloc_double_p(char **data, int numRows, int numCols) {
-    // Allocate memory for an array of pointers to char arrays (rows)
     data = (char **)ft_calloc(numRows + 1, sizeof(char *));
 
     if (data == NULL) {
         perror("Memory allocation failed");
         exit(1);
     }
-
-    // Allocate memory for each row
     int i = 0;
     while (i < numRows + 1) {
         data[i] = (char *)ft_calloc(numCols, sizeof(char));
@@ -20,7 +17,6 @@ char **calloc_double_p(char **data, int numRows, int numCols) {
         }
 		i++;
     }
-
     return data;
 }
 
@@ -33,10 +29,6 @@ void remove_map(t_ms *ms)
 	j = 0;
 	if(ms->main_map == NULL)
 		ms->main_map = calloc_double_p(ms->main_map, ms->height, ms->width);
-		// ms->main_map = (char **)ft_calloc(ms->height + 1, sizeof(char *));
-	if(ms->tmp_map == NULL)
-		ms->tmp_map = calloc_double_p(ms->tmp_map, ms->height, ms->width);
-		// ms->tmp_map = (char **)ft_calloc(ms->height + 1, sizeof(char *));
 	while (i < ms->height)
 	{
 			while((ft_strncmp(&*ms->map[i], &*ms->map_args[0], ft_strlen(ms->map_args[0])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[1], ft_strlen(ms->map_args[1])) == 0)
@@ -48,7 +40,6 @@ void remove_map(t_ms *ms)
 			if ((ft_strncmp(&*ms->map[i], "1", 1) == 0) || (ft_strncmp(&*ms->map[i], "0", 1) == 0) || (ft_strncmp(&*ms->map[i], " ", 1) == 0) || *ms->map[i] == '\0')
 			{
 				ms->main_map[j] = ms->map[i];
-				ms->tmp_map[j] = ms->map[i];
 				j++;
 				i++;
 			}
@@ -56,7 +47,6 @@ void remove_map(t_ms *ms)
 				i++;
 		}
 		ms->main_map[j] = "\0";	
-		ms->tmp_map[j] = "\0";
 }
 
 
@@ -67,7 +57,7 @@ void remove_map_args(t_ms *ms)
 	int flag;
 
 	if(ms->map_args == NULL) 
-		ms->map_args = (char **)ft_calloc(7, sizeof(char *));
+		ms->map_args = calloc_double_p(ms->map_args, 6, ms->width);
 	j = 0;
 	flag = 0;
 	while (j < ms->width)
@@ -108,7 +98,6 @@ void get_map(t_ms *ms, char *argv)
 	fd = open(argv, O_RDONLY);
 	if(ms->map == NULL)
 		ms->map = calloc_double_p(ms->map, ms->height, ms->width);
-		// ms->map = ft_calloc(ms->height + 1, sizeof(char *));
 	int j = 0;
 	while(j <= ms->height)
 	{
@@ -188,8 +177,8 @@ void check_map(t_ms *ms)
 		map_error_exit(ms);
 	}
 
-	floodfill(ms->tmp_map, '0', '2', x, y);
-	floodfill(ms->tmp_map, '2', '0', x, y);
+	floodfill(ms->main_map, '0', '2', x, y);
+	floodfill(ms->main_map, '2', '0', x, y);
 
 }
 

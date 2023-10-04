@@ -88,7 +88,6 @@ typedef struct s_ms {
 	char		**map;
 	char		**map_args;
 	char 		**main_map;
-	char		**tmp_map;
 	int			height; 	//map height
 	int			width;		//map width
 	t_game		*game;		//game informations
@@ -127,6 +126,7 @@ typedef struct s_minimap
 
 /* ------------------ Error ------------------- */
 void map_error_exit(t_ms *ms);
+void free_exit(t_ms *ms);
 
 /* ------------------ Parsing ------------------ */
 
