@@ -11,8 +11,10 @@ void remove_map(t_ms *ms)
 
 	i = 0;
 	j = 0;
-	ms->main_map = ft_calloc(ms->height + 1, sizeof(char *));
-	ms->tmp_map = ft_calloc(ms->height + 1, sizeof(char *));
+	if(ms->main_map == NULL)
+		ms->main_map = ft_calloc(ms->height + 1, sizeof(char *));
+	if(ms->tmp_map == NULL)
+		ms->tmp_map = ft_calloc(ms->height + 1, sizeof(char *));
 	while (i < ms->height)
 	{
 			while((ft_strncmp(&*ms->map[i], &*ms->map_args[0], ft_strlen(ms->map_args[0])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[1], ft_strlen(ms->map_args[1])) == 0)
@@ -41,8 +43,8 @@ void remove_map_args(t_ms *ms)
 	int j;
 	int flag;
 
-	// ms->map_args = ft_calloc(6, sizeof(char *));
-	ms->map_args = ft_calloc(7, sizeof(char *));
+	if(ms->map_args == NULL) 
+		ms->map_args = ft_calloc(7, sizeof(char *));
 	j = 0;
 	flag = 0;
 	while (j < ms->width)
@@ -64,7 +66,7 @@ void remove_map_args(t_ms *ms)
 	
 	//added this
 	ms->map_args[flag] = "\0";
-	if(flag == 6)
+	if(flag >= 6)
 	{
 		remove_map(ms);
 		return;
@@ -81,7 +83,8 @@ void get_map(t_ms *ms, char *argv)
 
 	i = 0;
 	fd = open(argv, O_RDONLY);
-	ms->map = ft_calloc(ms->height + 1, sizeof(char *));
+	if(ms->map == NULL)
+		ms->map = ft_calloc(ms->height + 1, sizeof(char *));
 	while(i <= ms->height)
 	{
 		temp = get_next_line(fd);
