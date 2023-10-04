@@ -163,6 +163,8 @@ void		rotate_vector(double *x, double *y, double angle);
 
 void	put_color_to_tile(t_ms *ms, t_minimap *minimap);
 void	put_pixel_to_map2D(t_minimap *minimap, int i, int j, uint32_t color);
+int		**fill_texture(xpm_t *texture);
+
 
 
 

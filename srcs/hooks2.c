@@ -128,10 +128,10 @@ void	find_texture_hit(t_ms *ms, xpm_t *texture)
 		hit = ms->game->pl_pos.x + ms->game->perp_wall_dist * ms->game->ray_dir.x;
 	hit -= (int)hit;
 	ms->game->tex_x = (int)(hit * (double)texture->texture.width);
-	if (ms->game->side == 0 && ms->game->ray_dir.x > 0)
-		ms->game->tex_x = texture->texture.width - ms->game->ray_dir.x;
-	// if ((ms->game->side == 2 || ms->game->side == 3) && ms->game->ray_dir.y < 0)
-	// 	ms->game->tex_x = texture->texture.width - ms->game->ray_dir.x - 1;
+	if ((ms->game->side == 0 || ms->game->side == 1) && ms->game->ray_dir.x > 0)
+		ms->game->tex_x = texture->texture.width - ms->game->tex_x - 1;
+	if ((ms->game->side == 2 || ms->game->side == 3) && ms->game->ray_dir.y < 0)
+		ms->game->tex_x = texture->texture.width - ms->game->tex_x - 1;
 }
 
 int **fill_texture(xpm_t *texture)
@@ -165,32 +165,27 @@ void	draw_vert_pix(t_ms *ms, int x, xpm_t *wall_text, int **array)
 	int		tex_y;
 	int		j;
 
-	dist = 10 * wall_text->texture.height / ms->game->line_height;
+	dist = 1.0 * wall_text->texture.height / ms->game->line_height;
 	pos = ((double)ms->game->draw_start - (double)HEIGHT * 0.5 + (double)ms->game->line_height * 0.5) * dist;
 	if (pos < 0)
 		pos = 0;
-	j = ms->game->draw_start;
-	while(++j < ms->game->draw_end)
+	j = 0;
+	while (j < ms->game->draw_start)
+		mlx_put_pixel(ms->m_img, x, j++, ms->game->ceiling);
+	while(j < ms->game->draw_end)
 	{
 		tex_y = (int)pos;
 		if (pos > wall_text->texture.height - 1)
 			pos = wall_text->texture.height - 1;
 		pos += dist;
-		mlx_put_pixel(ms->m_img, x, j, array[ms->game->tex_x][tex_y]);
+		mlx_put_pixel(ms->m_img, x, j++, array[tex_y][ms->game->tex_x]);
 	}
+	while ((int)j < HEIGHT)
+		mlx_put_pixel(ms->m_img, x, j++, ms->game->floor);
 }
 
 void	pick_texture(t_ms *ms, int x)
 {
-	ms->tex = ft_calloc(1, sizeof(t_tex));
-	
-	//grab the texture from the path
-	ms->tex->so_tex = mlx_load_xpm42("./assets/textures/test.xpm42");
-	if (!ms->tex->so_tex)
-		printf("pb texture\n");
-
-	//populate the 2D array from the texture 
-	ms->tex->so = fill_texture(ms->tex->so_tex);
 	if (ms->game->side == 0)
 	{
 		find_texture_hit(ms, ms->tex->so_tex);
