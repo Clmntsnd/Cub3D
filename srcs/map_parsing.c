@@ -91,6 +91,7 @@ void get_map(t_ms *ms, char *argv)
 		ms->map[i] = temp;
 		i++;
 	}
+	free(temp);
 	close(fd);
 }
 
@@ -118,25 +119,12 @@ void get_map_size(t_ms *ms, char argv[1]) {
 		rows = get_next_line(fd);
 		ms->height++;
 	}
+	free(rows);
+	close(fd);
 }
 
 //floodfill//
 
-char **copy_map(t_ms *ms)
-{
-	int i;
-	char **map;
-
-	i = 0;
-	map = ft_calloc(ms->height + 1, sizeof(char *));
-	while (i < ms->height)
-	{
-		map[i] = ms->tmp_map[i];
-		i++;
-	}
-	map[i] = "\0";
-	return(map);
-}
 
 
 void	floodfill(char **map, char u, char v, int x, int y)
@@ -170,8 +158,8 @@ void check_map(t_ms *ms)
 		map_error_exit(ms);
 	}
 
-	floodfill(copy_map(ms), '0', '2', x, y);
-	floodfill(copy_map(ms), '2', '0', x, y);
+	floodfill(ms->tmp_map, '0', '2', x, y);
+	floodfill(ms->tmp_map, '2', '0', x, y);
 
 }
 

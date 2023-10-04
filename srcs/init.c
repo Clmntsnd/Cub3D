@@ -27,8 +27,8 @@ void print_map(t_ms *ms)
 	}
 
 	printf("Player position is x= %f, y= %f\n", ms->game->pl_pos.x, ms->game->pl_pos.y);
-	// printf("\n\nwidth = %d", data->width);
-	// printf("\n\nheigth = %d", data->height);
+	printf("\n\nwidth = %d", ms->width);
+	printf("\n\nheigth = %d", ms->height);
 }
 
 t_ms *get_ms(void)
