@@ -14,7 +14,7 @@ void print_map(t_ms *ms)
 	printf("\n\nmap_args\n");
 	while(j < 6)
 	{
-		printf("\nMap arg[%d] = %s", j,  ms->map_args[j]);
+		printf("\nMap arg[%d] = %s", j,  ms->map_args[j] + 2);
 		j++;
 	}
 
@@ -178,28 +178,28 @@ bool get_texture(t_ms *ms)
 	{
 		if (ft_strncmp(ms->map_args[i], "NO", 2) == 0)
 		{
-			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) < 0)
+			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) != 0)
 				return (printf("❌ Error\n"), false);
 			ms->tex->no_tex = mlx_load_xpm42(ms->map_args[i]);
 			close(fd);
 		}
 		else if (ft_strncmp(ms->map_args[i], "SO", 2) == 0)
 		{
-			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) < 0)
+			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) != 0)
 				return (printf("❌ Error\n"), false);
-			ms->tex->so_tex = mlx_load_xpm42(ms->map_args[i]);
+			ms->tex->so_tex = mlx_load_xpm42(ms->map_args[i] + 2);
 			close(fd);
 		}
 		else if (ft_strncmp(ms->map_args[i], "WE", 2) == 0)
 		{
-			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) < 0)
+			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) != 0)
 				return (printf("❌ Error\n"), false);
 			ms->tex->we_tex = mlx_load_xpm42(ms->map_args[i]);
 			close(fd);
 		}
 		else if (ft_strncmp(ms->map_args[i], "EA", 2) == 0)
 		{
-			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) < 0)
+			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) != 0)
 				return (printf("❌ Error\n"), false);
 			ms->tex->ea_tex = mlx_load_xpm42(ms->map_args[i]);
 			close(fd);

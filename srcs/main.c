@@ -54,21 +54,24 @@ int	main(int ac, char **av)
 		return(EXIT_FAILURE);
 
 	init_content(ms, av[1]);
-	// if(!get_texture(ms))
-	// 	return (EXIT_FAILURE);
+	if(!get_texture(ms))
+		return (EXIT_FAILURE);
 	if(!get_color(ms))
         return (EXIT_FAILURE);
 	if (init_mlx(ms) == 1)
 		return(EXIT_FAILURE);
 
 	//grab the texture from the path
-	ms->tex = ft_calloc(1, sizeof(t_tex));
-	ms->tex->so_tex = mlx_load_xpm42("./assets/textures/s_wall.xpm42");
+	// ms->tex = ft_calloc(1, sizeof(t_tex));
+	// ms->tex->so_tex = mlx_load_xpm42("./assets/textures/s_wall.xpm42");
 	// ms->tex->so_tex = mlx_load_xpm42("./assets/textures/test.xpm42");
 	if (!ms->tex->so_tex)
 		printf("pb texture\n");
 	//populate the 2D array from the texture 
 	ms->tex->so = fill_texture(ms->tex->so_tex);
+	ms->tex->no = fill_texture(ms->tex->no_tex);
+	ms->tex->we = fill_texture(ms->tex->we_tex);
+	ms->tex->ea = fill_texture(ms->tex->ea_tex);
 
 	mlx_loop_hook(ms->mlx, loop, ms->mlx);
 	// mlx_cursor_hook(ms->mlx, &move_cursor, ms->mlx);
