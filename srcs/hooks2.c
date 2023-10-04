@@ -186,7 +186,7 @@ void	draw_vert_pix(t_ms *ms, int x, xpm_t *wall_text, int **array)
 
 void	pick_texture(t_ms *ms, int x)
 {
-	if (ms->game->side == 0)
+	if (ms->game->side == 0 || ms->game->side == 1 || ms->game->side == 2 || ms->game->side == 3)
 	{
 		find_texture_hit(ms, ms->tex->so_tex);
 		draw_vert_pix(ms, x, ms->tex->so_tex, ms->tex->so);
@@ -199,7 +199,6 @@ void	loop(void *param)
 	(void)param;
 	t_ms		*ms;
 	int			x;
-	// u_int32_t	color;
 
 	ms = get_ms();
 	x = -1;
@@ -210,6 +209,8 @@ void	loop(void *param)
 		set_side_dist(ms);
 		dda(ms);
 		set_draw_range(ms);
+		
+		// u_int32_t	color;
 		// color = wall_color(ms);
 		// draw_vert_line(ms, x, color);
 

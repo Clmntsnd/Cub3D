@@ -64,9 +64,9 @@ int	main(int ac, char **av)
 	ms->tex->so_tex = mlx_load_xpm42("./assets/textures/test.xpm42");
 	if (!ms->tex->so_tex)
 		printf("pb texture\n");
-
 	//populate the 2D array from the texture 
 	ms->tex->so = fill_texture(ms->tex->so_tex);
+
 	mlx_loop_hook(ms->mlx, loop, ms->mlx);
 	// mlx_cursor_hook(ms->mlx, &move_cursor, ms->mlx);
 	
