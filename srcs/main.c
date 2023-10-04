@@ -61,7 +61,8 @@ int	main(int ac, char **av)
 
 	//grab the texture from the path
 	ms->tex = ft_calloc(1, sizeof(t_tex));
-	ms->tex->so_tex = mlx_load_xpm42("./assets/textures/test.xpm42");
+	ms->tex->so_tex = mlx_load_xpm42("./assets/textures/s_wall.xpm42");
+	// ms->tex->so_tex = mlx_load_xpm42("./assets/textures/test.xpm42");
 	if (!ms->tex->so_tex)
 		printf("pb texture\n");
 	//populate the 2D array from the texture 
@@ -75,6 +76,7 @@ int	main(int ac, char **av)
 	// if (draw_map2D(ms) != 0)
 	// 	return(EXIT_FAILURE);
 
+	// mlx_delete_image(ms->mlx, ms->m_img);
 	mlx_loop(ms->mlx);
 	mlx_terminate(ms->mlx);
 	//TODO don't forget to free shit
