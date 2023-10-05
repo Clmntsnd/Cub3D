@@ -131,7 +131,7 @@ re : fclean all
 
 #Open the subject
 pdf : 
-	@open https://cdn.intra.42.fr/pdf/pdf/93097/en.subject.pdf
+	@open https://cdn.intra.42.fr/pdf/pdf/105108/en.subject.pdf
 
 # Run norminette
 norm :

@@ -146,7 +146,8 @@ void		init_content(t_ms *ms, char *argv);
 bool 		get_color(t_ms *ms);
 
 /* ------------------ Minimap ------------------ */
-int			draw_map2D(t_ms *ms);
+void			draw_map2D(void *param);
+// int			draw_map2D(t_ms *ms);
 
 /* ------------------ Utils ------------------ */
 int32_t 	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);

@@ -59,25 +59,40 @@ void	put_color_to_tile(t_ms *ms, t_minimap *minimap)
 /* 
 **	Draw a minimap of the map passed as an arg
 */
-int	draw_map2D(t_ms *ms)
+// int	draw_map2D(t_ms *ms)
+// {
+// 	t_minimap	*minimap;
+
+// 	minimap = get_minimap();
+// 	minimap->tile_s = 24; //tile_size : Change this size to be in function of a certain ratio
+// 	minimap->tile_b = 0; //tile_border: 1 pixel
+// 	if(!(minimap->map_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT))) //TODO update WIDTH adn Height
+// 	{
+// 		mlx_close_window(ms->mlx);
+// 		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
+// 		return(EXIT_FAILURE);
+// 	}
+//     put_color_to_tile(ms, minimap);
+// 	mlx_delete_image(ms->mlx, minimap->map_img);
+// 	return (0);
+// }
+
+void	draw_map2D(void *param)
 {
+	(void)param;
+	t_ms		*ms;
 	t_minimap	*minimap;
 
+	ms = get_ms();
 	minimap = get_minimap();
 	minimap->tile_s = 24; //tile_size : Change this size to be in function of a certain ratio
 	minimap->tile_b = 0; //tile_border: 1 pixel
-	if(!(minimap->map_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT))) //TODO update WIDTH adn Height
+	if(!(minimap->map_img = mlx_new_image(ms->mlx, 512, 384))) //TODO update WIDTH adn Height
 	{
 		mlx_close_window(ms->mlx);
 		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
-		return(EXIT_FAILURE);
+		return ;
 	}
     put_color_to_tile(ms, minimap);
-	// if(mlx_image_to_window(ms->mlx, minimap->map_img, 0, 0) == -1)
-	// {
-	// 	mlx_close_window(ms->mlx);
-	// 	puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
-	// 	return(EXIT_FAILURE);
-	// }
-	return (0);
+	// mlx_delete_image(ms->mlx, minimap->map_img);
 }

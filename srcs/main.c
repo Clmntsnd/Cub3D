@@ -91,8 +91,10 @@ int	main(int ac, char **av)
 	ms->tex->we = fill_texture(ms->tex->we_tex);
 	ms->tex->ea = fill_texture(ms->tex->ea_tex);
 	//TODO put the above in a function
-	draw_map2D(ms);
+	
+	// draw_map2D(ms);
 	mlx_loop_hook(ms->mlx, loop, ms->mlx);
+	// mlx_loop_hook(ms->mlx, draw_map2D, ms->mlx);
 	// mlx_loop_hook(ms->mlx, ft_hook, ms->mlx);
 	
 	// Function that draws the minimap

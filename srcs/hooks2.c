@@ -202,12 +202,12 @@ void	loop(void *param)
 		key_binding(ms);
 		move_cursor(ms);
 	}
-	if (!ms->game->minimap_activ)
-		return ;
-	if(mlx_image_to_window(ms->mlx, minimap->map_img, 0, 0) == -1)
-	{
-		mlx_close_window(ms->mlx);
-		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
-		return ;
-	}
+	// if (!ms->game->minimap_activ)
+	// 	return ;
+	// if(mlx_image_to_window(ms->mlx, minimap->map_img, 0, 0) == -1)
+	// {
+	// 	mlx_close_window(ms->mlx);
+	// 	puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
+	// 	return ;
+	// }
 }
