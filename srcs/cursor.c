@@ -2,10 +2,9 @@
 
 void	move_cursor(t_ms *ms)
 {
-	int32_t	x = 0;
-	int32_t	y = 0;
+	int32_t	x = WIDTH * 0.5;
+	int32_t	y = HEIGHT * 0.5;
 
-	//TODO need to implement old_x and old_y to have the correct spawn orientation
 	mlx_get_mouse_pos(ms->mlx, &x, &y);
 	mlx_set_cursor_mode(ms->mlx, MLX_MOUSE_HIDDEN);
 	
