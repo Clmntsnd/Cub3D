@@ -185,9 +185,11 @@ void	loop(void *param)
 {
 	(void)param;
 	t_ms		*ms;
+	t_minimap	*minimap;
 	int			x;
 
 	ms = get_ms();
+	minimap = get_minimap();
 	x = -1;
 	while(++x < WIDTH)
 	{
@@ -199,5 +201,13 @@ void	loop(void *param)
 		pick_texture(ms, x);
 		key_binding(ms);
 		move_cursor(ms);
+	}
+	if (!ms->game->minimap_activ)
+		return ;
+	if(mlx_image_to_window(ms->mlx, minimap->map_img, 0, 0) == -1)
+	{
+		mlx_close_window(ms->mlx);
+		puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
+		return ;
 	}
 }

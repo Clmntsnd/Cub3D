@@ -40,7 +40,7 @@
 //Window specs
 #define WIDTH 1024
 #define HEIGHT 768
-# define MOVE_SPEED 0.00006
+# define MOVE_SPEED 0.00004
 # define ROTATE_SPEED 0.00003
 # define MOUSE_SPEED 1000
 
@@ -69,6 +69,7 @@ typedef struct s_game {
 	int			draw_start;
 	int			draw_end;
 	bool		m_activ;
+	bool		minimap_activ;
 	int			tex_x;
 }	t_game;
 
