@@ -63,12 +63,22 @@ int	main(int ac, char **av)
 
 	//grab the texture from the path
 	ms->tex = ft_calloc(1, sizeof(t_tex));
+	if (!ms->tex)
+		printf("❌ Error\n%s\n%s\n", ERR_MEM, ERR_USG);
+
 	ms->tex->so_tex = mlx_load_xpm42("./assets/textures/s_wall.xpm42");
-	ms->tex->no_tex = mlx_load_xpm42("./assets/textures/test.xpm42");
-	ms->tex->ea_tex = mlx_load_xpm42("./assets/textures/test2.xpm42");
-	ms->tex->we_tex = mlx_load_xpm42("./assets/textures/w_wall.xpm42");
 	if (!ms->tex->so_tex)
-		printf("pb texture\n");
+		printf("❌ Error\n%s\n%s\n", ERR_S_TEX, ERR_USG);
+	ms->tex->no_tex = mlx_load_xpm42("./assets/textures/n_wall.xpm42");
+	if (!ms->tex->no_tex)
+		printf("❌ Error\n%s\n%s\n", ERR_N_TEX, ERR_USG);
+	ms->tex->ea_tex = mlx_load_xpm42("./assets/textures/e_wall.xpm42");
+	if (!ms->tex->no_tex)
+		printf("❌ Error\n%s\n%s\n", ERR_E_TEX, ERR_USG);
+	ms->tex->we_tex = mlx_load_xpm42("./assets/textures/w_wall.xpm42");
+	if (!ms->tex->no_tex)
+		printf("❌ Error\n%s\n%s\n", ERR_W_TEX, ERR_USG);
+	
 	//populate the 2D array from the texture 
 	ms->tex->so = fill_texture(ms->tex->so_tex);
 	ms->tex->no = fill_texture(ms->tex->no_tex);

@@ -36,6 +36,10 @@
 # define ERR_NAME	"❌ Invalid File name"
 # define ERR_MEM	"❌ Memory allocation failed"
 # define ERR_COL	"❌ Invalid Color"
+# define ERR_S_TEX	"❌ Invalid South Texture"
+# define ERR_N_TEX	"❌ Invalid North Texture"
+# define ERR_W_TEX	"❌ Invalid West Texture"
+# define ERR_E_TEX	"❌ Invalid East Texture"
 
 //Window specs
 #define WIDTH 1024
