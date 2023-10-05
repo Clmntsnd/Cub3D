@@ -92,6 +92,7 @@ typedef struct s_ms {
 	char		**map;
 	char		**map_args;
 	char 		**main_map;
+	char    	**paths;
 	int			height; 	//map height
 	int			width;		//map width
 	t_game		*game;		//game informations
@@ -159,7 +160,7 @@ void 		ft_hook(void* param);
 void		ft_player_and_ray(void* param);
 void		print_player(void *param);
 void		cast_ray(t_minimap *minimap);
-
+char **calloc_double_p(char **data, int numRows, int numCols);
 void		loop(void *param);
 void		print_init(t_ms *ms);
 void		key_binding(t_ms *ms);

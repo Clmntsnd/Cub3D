@@ -14,7 +14,8 @@ void print_map(t_ms *ms)
 	printf("\n\nmap_args\n");
 	while(j < 6)
 	{
-		printf("\nMap arg[%d] = %s", j,  ms->map_args[j] + 2);
+		printf("\nMap arg[%d] = %s", j,  ms->map_args[j]);
+		// printf("\npath arg[%d] = %s", j,  ms->paths[j]);
 		j++;
 	}
 
@@ -168,43 +169,63 @@ bool get_color(t_ms *ms)
 	return (true);
 }
 
+char **remove_direction(char **str)
+{
+	char *src = *str;
+    char *dst = *str;
+
+	src = src + 2;
+    while (*src) {
+        if (*src != ' ' && *src != '\t') {
+            *dst = *src;
+            dst++;
+        }
+        src++;
+    }
+    *dst = '\0';
+	
+	return(str);
+}
+
 bool get_texture(t_ms *ms)
 {
 	int i;
-	int fd;
 
 	i = -1;
+	if(ms->tex == NULL)
+		ms->tex = ft_calloc(1, sizeof(t_tex));
+	if(ms->paths == NULL) 
+		ms->paths = calloc_double_p(ms->paths, 4, ft_strlen(ms->map_args[0]));
 	while (ms->map_args[++i])
 	{
 		if (ft_strncmp(ms->map_args[i], "NO", 2) == 0)
 		{
-			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) != 0)
+			ms->paths[0] = ft_strdup(ms->map_args[i] + 2);
+			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return (printf("❌ Error\n"), false);
-			ms->tex->no_tex = mlx_load_xpm42(ms->map_args[i]);
-			close(fd);
+			ms->tex->no_tex = mlx_load_xpm42(ms->paths[0]);
 		}
 		else if (ft_strncmp(ms->map_args[i], "SO", 2) == 0)
 		{
-			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) != 0)
+			ms->paths[1] = ft_strdup(ms->map_args[i] + 2);
+			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return (printf("❌ Error\n"), false);
-			ms->tex->so_tex = mlx_load_xpm42(ms->map_args[i] + 2);
-			close(fd);
+			ms->tex->so_tex = mlx_load_xpm42(ms->paths[1]);
 		}
 		else if (ft_strncmp(ms->map_args[i], "WE", 2) == 0)
 		{
-			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) != 0)
+			ms->paths[2] = ft_strdup(ms->map_args[i] + 2);
+			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return (printf("❌ Error\n"), false);
-			ms->tex->we_tex = mlx_load_xpm42(ms->map_args[i]);
-			close(fd);
+			ms->tex->we_tex = mlx_load_xpm42(ms->paths[2]);
 		}
 		else if (ft_strncmp(ms->map_args[i], "EA", 2) == 0)
 		{
-			if ((fd = open(ms->map_args[i] + 2, O_RDONLY)) != 0)
+			ms->paths[3] = ft_strdup(ms->map_args[i] + 2);
+			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return (printf("❌ Error\n"), false);
-			ms->tex->ea_tex = mlx_load_xpm42(ms->map_args[i]);
-			close(fd);
+			ms->tex->ea_tex = mlx_load_xpm42(ms->paths[3]);
 		}
-		i++;
 	}
 	return (true);
 }
@@ -218,7 +239,7 @@ char **sanatize_args(char **args)
     char *dst = *args;
 
     while (*src) {
-        if (*src != ' ' && *src != '\t') {
+        if (*src != ' ' && *src != '\t' && *src != '\n') {
             *dst = *src;
             dst++;
         }

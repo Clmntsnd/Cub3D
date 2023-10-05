@@ -35,6 +35,14 @@ void free_exit(t_ms *ms){
 	{
 		mlx_close_window(ms->mlx);
 	}
+	if(ms->tex != NULL)
+	{
+		free(ms->tex);
+	}
+	if(ms->paths != NULL)
+	{
+		ft_free_tab_char(ms->paths);
+	}
 }
 
 
