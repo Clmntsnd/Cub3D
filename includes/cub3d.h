@@ -40,8 +40,8 @@
 //Window specs
 #define WIDTH 1024
 #define HEIGHT 768
-# define MOVE_SPEED 0.00004
-# define ROTATE_SPEED 0.00002
+# define MOVE_SPEED 0.00006
+# define ROTATE_SPEED 0.00003
 # define MOUSE_SPEED 1000
 
 /* ------------------ STRUCTS ------------------ */

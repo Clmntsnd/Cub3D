@@ -11,8 +11,8 @@ void	set_data(t_ms *ms)
 		ms->game->plane.x * ms->game->cam_x;
 	ms->game->ray_dir.y = ms->game->pl_dir.y + \
 		ms->game->plane.y * ms->game->cam_x;
-	ms->game->coord.x = ms->game->pl_pos.x;
-	ms->game->coord.y = ms->game->pl_pos.y;
+	ms->game->coord.x = (int)ms->game->pl_pos.x;
+	ms->game->coord.y = (int)ms->game->pl_pos.y;
 	ms->game->delta_dist.x = fabs(1 / ms->game->ray_dir.x);
 	ms->game->delta_dist.y = fabs(1 / ms->game->ray_dir.y);
 }
@@ -21,25 +21,25 @@ void	set_side_dist(t_ms *ms)
 {
 	if(ms->game->ray_dir.x < 0)
 	{
-		ms->game->step.x = -0.01;
+		ms->game->step.x = -1;
 		ms->game->side_dist.x = (ms->game->pl_pos.x - \
 			ms->game->coord.x) * ms->game->delta_dist.x;
 	}
 	else
 	{
-		ms->game->step.x = 0.01;
+		ms->game->step.x = 1;
 		ms->game->side_dist.x = (ms->game->coord.x + 1.0 - \
 			ms->game->pl_pos.x) * ms->game->delta_dist.x;
 	}
 	if(ms->game->ray_dir.y < 0)
 	{
-		ms->game->step.y = -0.01;
+		ms->game->step.y = -1;
 		ms->game->side_dist.y = (ms->game->pl_pos.y - \
 			ms->game->coord.y) * ms->game->delta_dist.y;
 	}
 	else
 	{
-		ms->game->step.y = 0.01;
+		ms->game->step.y = 1;
 		ms->game->side_dist.y = (ms->game->coord.y + 1.0 - \
 			ms->game->pl_pos.y) * ms->game->delta_dist.y;
 	}
@@ -81,7 +81,7 @@ void	dda(t_ms *ms)
 
 void	set_draw_range(t_ms *ms)
 {
-	ms->game->line_height = (int)((HEIGHT * 100) / ms->game->perp_wall_dist);
+	ms->game->line_height = (int)(HEIGHT / ms->game->perp_wall_dist);
 	ms->game->draw_start = -ms->game->line_height * 0.5 + HEIGHT * 0.5;
 	if (ms->game->draw_start < 0)
 		ms->game->draw_start = 0;
@@ -90,33 +90,6 @@ void	set_draw_range(t_ms *ms)
 		ms->game->draw_end = HEIGHT - 1;
 }
 
-void	draw_vert_line(t_ms *ms, u_int32_t x, u_int32_t color)
-{
-	u_int32_t	y;
-	
-	y = 0;
-	while ((int)y < ms->game->draw_start)
-		mlx_put_pixel(ms->m_img, x, y++, ms->game->ceiling);
-	while ((int)y < ms->game->draw_end)
-		mlx_put_pixel(ms->m_img, x, y++, color);
-	while ((int)y < HEIGHT)
-		mlx_put_pixel(ms->m_img, x, y++, ms->game->floor);
-}
-
-u_int32_t	wall_color(t_ms *ms)
-{
-	if (ms->game->side == 0) 
-		return (get_rgba(128,128,255,255)); //south wall
-	if (ms->game->side == 1)
-		return (get_rgba(128,255,128,255)); //north wall
-	if (ms->game->side == 2)
-		return (get_rgba(255,128,128,255)); //east wall
-	if (ms->game->side == 3)
-		return (get_rgba(128,0,128,255)); //west wall
-	return(0);
-}
-
-// WIP
 void	find_texture_hit(t_ms *ms, xpm_t *texture)
 {
 	double	hit;
@@ -186,13 +159,27 @@ void	draw_vert_pix(t_ms *ms, int x, xpm_t *wall_text, int **array)
 
 void	pick_texture(t_ms *ms, int x)
 {
-	if (ms->game->side == 0 || ms->game->side == 1 || ms->game->side == 2 || ms->game->side == 3)
+	if (ms->game->side == 0)
 	{
 		find_texture_hit(ms, ms->tex->so_tex);
 		draw_vert_pix(ms, x, ms->tex->so_tex, ms->tex->so);
 	}
+	if (ms->game->side == 1)
+	{
+		find_texture_hit(ms, ms->tex->no_tex);
+		draw_vert_pix(ms, x, ms->tex->no_tex, ms->tex->no);
+	}
+	if (ms->game->side == 2)
+	{
+		find_texture_hit(ms, ms->tex->ea_tex);
+		draw_vert_pix(ms, x, ms->tex->ea_tex, ms->tex->ea);
+	}
+	if (ms->game->side == 3)
+	{
+		find_texture_hit(ms, ms->tex->we_tex);
+		draw_vert_pix(ms, x, ms->tex->we_tex, ms->tex->we);
+	}
 }
-// WIP
 
 void	loop(void *param)
 {
@@ -209,13 +196,8 @@ void	loop(void *param)
 		set_side_dist(ms);
 		dda(ms);
 		set_draw_range(ms);
-		
-		// u_int32_t	color;
-		// color = wall_color(ms);
-		// draw_vert_line(ms, x, color);
-
 		pick_texture(ms, x);
 		key_binding(ms);
-		// move_cursor(ms);
+		move_cursor(ms);
 	}
 }
