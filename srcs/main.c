@@ -22,6 +22,22 @@ int	init_mlx(t_ms *ms)
 	return (EXIT_SUCCESS);
 }
 
+// void ft_hook(void* param)
+// {
+// 	mlx_t* mlx = param;
+
+// 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+// 		mlx_close_window(mlx);
+// 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+// 		image->instances[0].y -= 2;
+// 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+// 		image->instances[0].y += 2;
+// 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+// 		image->instances[0].x -= 2;
+// 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+// 		image->instances[0].x += 2;
+// }
+
 int	main(int ac, char **av)
 {
 	t_ms *ms;
@@ -67,7 +83,10 @@ int	main(int ac, char **av)
 	ms->tex->ea = fill_texture(ms->tex->ea_tex);
 	//TODO put the above in a function
 	
+	// draw_map2D(ms);
 	mlx_loop_hook(ms->mlx, loop, ms->mlx);
+	// mlx_loop_hook(ms->mlx, draw_map2D, ms->mlx);
+	// mlx_loop_hook(ms->mlx, ft_hook, ms->mlx);
 	
 	// Function that draws the minimap
 	// if any init doesn't work, returns an error

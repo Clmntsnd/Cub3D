@@ -44,7 +44,7 @@
 //Window specs
 #define WIDTH 1024
 #define HEIGHT 768
-# define MOVE_SPEED 0.00006
+# define MOVE_SPEED 0.00004
 # define ROTATE_SPEED 0.00003
 # define MOUSE_SPEED 1000
 
@@ -73,6 +73,7 @@ typedef struct s_game {
 	int			draw_start;
 	int			draw_end;
 	bool		m_activ;
+	bool		minimap_activ;
 	int			tex_x;
 }	t_game;
 
@@ -152,7 +153,8 @@ bool 		get_color(t_ms *ms);
 bool		get_texture(t_ms *ms);
 
 /* ------------------ Minimap ------------------ */
-int			draw_map2D(t_ms *ms);
+void			draw_map2D(void *param);
+// int			draw_map2D(t_ms *ms);
 
 /* ------------------ Utils ------------------ */
 int32_t 	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
