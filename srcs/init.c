@@ -118,6 +118,8 @@ bool get_texture(t_ms *ms)
 			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return(printf("❌ Error\n%s\n", ERR_N_TEX), false);
 			ms->tex->no_tex = mlx_load_xpm42(ms->paths[0]);
+			free(ms->paths[0]);
+			free(ms->map_args[i]);
 		}
 		else if (ft_strncmp(ms->map_args[i], "SO", 2) == 0)
 		{
@@ -125,6 +127,8 @@ bool get_texture(t_ms *ms)
 			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return(printf("❌ Error\n%s\n", ERR_S_TEX), false);
 			ms->tex->so_tex = mlx_load_xpm42(ms->paths[1]);
+			free(ms->paths[1]);
+			free(ms->map_args[i]);
 		}
 		else if (ft_strncmp(ms->map_args[i], "WE", 2) == 0)
 		{
@@ -132,6 +136,8 @@ bool get_texture(t_ms *ms)
 			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return(printf("❌ Error\n%s\n", ERR_W_TEX), false);
 			ms->tex->we_tex = mlx_load_xpm42(ms->paths[2]);
+			free(ms->paths[2]);
+			free(ms->map_args[i]);
 		}
 		else if (ft_strncmp(ms->map_args[i], "EA", 2) == 0)
 		{
@@ -139,7 +145,10 @@ bool get_texture(t_ms *ms)
 			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return(printf("❌ Error\n%s\n", ERR_E_TEX), false);
 			ms->tex->ea_tex = mlx_load_xpm42(ms->paths[3]);
+			free(ms->paths[3]);
+			free(ms->map_args[i]);
 		}
+		
 	}
 	ms->tex->so = fill_texture(ms->tex->so_tex);
 	ms->tex->no = fill_texture(ms->tex->no_tex);
@@ -151,13 +160,15 @@ bool get_texture(t_ms *ms)
 char **sanatize_args(char **args)
 {
 	if (args == NULL || *args == NULL) {
-        return(NULL); // Nothing to sanitize
+        return(NULL);
     }
     char *src = *args;
     char *dst = *args;
 
-    while (*src) {
-        if (*src != ' ' && *src != '\t' && *src != '\n') {
+    while (*src)
+	{
+        if (*src != ' ' && *src != '\t' && *src != '\n') 
+		{
             *dst = *src;
             dst++;
         }
@@ -174,5 +185,7 @@ void init_content(t_ms *ms, char *argv)
 	remove_map_args(ms);
 	get_player_pos(ms);
 	check_map(ms);
-	print_map(ms);
+
+	//remove before grading
+	// print_map(ms);
 }

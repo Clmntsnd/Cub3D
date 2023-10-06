@@ -131,8 +131,10 @@ typedef struct s_minimap
 }	t_minimap;
 
 /* ------------------ Error ------------------- */
+int			clean_exit(t_ms *ms);
 void 		map_error_exit(t_ms *ms);
 void 		free_exit(t_ms *ms);
+void		free_double_p(char **map, int numRows);
 
 /* ------------------ Parsing ------------------ */
 bool		ft_parse_arg(int ac, char **av);

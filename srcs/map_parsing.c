@@ -1,14 +1,16 @@
 
 #include "../includes/cub3d.h"
 
-char **calloc_double_p(char **data, int numRows, int numCols) {
-    data = (char **)ft_calloc(numRows + 1, sizeof(char *));
+char **calloc_double_p(char **data, int numRows, int numCols)
+{
+    int i;
 
+	i = 0;
+    data = (char **)ft_calloc(numRows + 1, sizeof(char *));
     if (data == NULL) {
         perror("Memory allocation failed");
         exit(1);
     }
-    int i = 0;
     while (i < numRows + 1) {
         data[i] = (char *)ft_calloc(numCols, sizeof(char));
         if (data[i] == NULL) {
@@ -71,15 +73,12 @@ void remove_map_args(t_ms *ms)
 					|| (ft_strncmp(&ms->map[i][j], "C ", 2) == 0) || (ft_strncmp(&ms->map[i][j], "F ", 2) == 0))
 			{
 				ms->map_args[flag] = ft_strdup(*sanatize_args(&ms->map[i]));
-				// ft_strdup(ms->map[i]);
 				flag++;
 			}
 				i++;
 		}
 		j++;
 	}
-	
-	//added this
 	ms->map_args[flag] = "\0";
 	if(flag >= 6)
 	{
@@ -119,8 +118,6 @@ void get_map_size(t_ms *ms, char argv[1]) {
 	fd = open(argv, O_RDONLY);
 	rows = get_next_line(fd);
 	ms->height = 0;
-
-	// changed this to 0
 	ms->width = 0;
 
 	while(rows[i])
@@ -139,9 +136,6 @@ void get_map_size(t_ms *ms, char argv[1]) {
 }
 
 //floodfill//
-
-
-
 void	floodfill(char **map, char u, char v, int x, int y)
 {
 	while (map[x][y] == u)
@@ -164,15 +158,11 @@ void check_map(t_ms *ms)
 	int x;
 	int y;
 
-
 	x = ms->game->pl_pos.x;
 	y = ms->game->pl_pos.y;
 	//add floodfill to checks
-	if(check_valid_char(ms) || check_walls(ms))
-	{
+	if(check_valid_char(ms))
 		map_error_exit(ms);
-	}
-
 	floodfill(ms->main_map, '0', '2', x, y);
 	floodfill(ms->main_map, '2', '0', x, y);
 

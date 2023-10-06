@@ -27,8 +27,3 @@ int check_valid_char(t_ms *ms)
 	}
 	return (0);
 }
-
-int check_walls(t_ms *ms){
-	(void)ms;
-	return(0);
-}
