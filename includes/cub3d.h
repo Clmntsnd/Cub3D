@@ -131,51 +131,55 @@ typedef struct s_minimap
 }	t_minimap;
 
 /* ------------------ Error ------------------- */
-void map_error_exit(t_ms *ms);
-void free_exit(t_ms *ms);
+void 		map_error_exit(t_ms *ms);
+void 		free_exit(t_ms *ms);
 
 /* ------------------ Parsing ------------------ */
-
-bool	ft_parse_arg(int ac, char **av);
-void get_map(t_ms *ms, char *argv);
-void get_map_size(t_ms *ms, char argv[1]);
-void check_map(t_ms *ms);
-int check_valid_char(t_ms *ms);
-int check_walls(t_ms *ms);
-void remove_map_args(t_ms *ms);
-char **sanatize_args(char **args);
+bool		ft_parse_arg(int ac, char **av);
+void		get_map(t_ms *ms, char *argv);
+void		get_map_size(t_ms *ms, char argv[1]);
+void		check_map(t_ms *ms);
+int			check_valid_char(t_ms *ms);
+int			check_walls(t_ms *ms);
+void		remove_map_args(t_ms *ms);
+char		**sanatize_args(char **args);
 
 /* -------------------- Init ------------------- */
 t_ms		*get_ms(void);
 t_minimap	*get_minimap(void);
 void		init_content(t_ms *ms, char *argv);
-bool 		get_color(t_ms *ms);
 bool		get_texture(t_ms *ms);
 
 /* ------------------ Minimap ------------------ */
 void			draw_map2D(void *param);
 // int			draw_map2D(t_ms *ms);
+void		put_color_to_tile(t_ms *ms, t_minimap *minimap);
+void		put_pixel_to_map2D(t_minimap *minimap, int i, int j, uint32_t color);
+
+/* ------------------ Raycast ------------------ */
+void		loop(void *param);
+void		pick_texture(t_ms *ms, int x);
+void		draw_vert_pix(t_ms *ms, int x, xpm_t *wall_text, int **array);
+int			**fill_texture(xpm_t *texture);
+void		find_texture_hit(t_ms *ms, xpm_t *texture);
+
+/* ------------------ Colors ------------------ */
+int32_t 	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
+bool 		get_color(t_ms *ms);
+bool		convert_color(t_ms *ms, int i, char *str);
+bool		is_valid_arg(char *str);
+
 
 /* ------------------ Utils ------------------ */
-int32_t 	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
-void 		ft_hook(void* param);
-void		ft_player_and_ray(void* param);
-void		print_player(void *param);
-void		cast_ray(t_minimap *minimap);
-char **calloc_double_p(char **data, int numRows, int numCols);
-void		loop(void *param);
-void		print_init(t_ms *ms);
+char		**calloc_double_p(char **data, int numRows, int numCols);
 void		key_binding(t_ms *ms);
 void		move_cursor(t_ms *ms);
 void		rotate_vector(double *x, double *y, double angle);
 
 
-void	put_color_to_tile(t_ms *ms, t_minimap *minimap);
-void	put_pixel_to_map2D(t_minimap *minimap, int i, int j, uint32_t color);
-int		**fill_texture(xpm_t *texture);
 
-
-
-
-
+void		ft_player_and_ray(void* param);
+void 		ft_hook(void* param);
+void		cast_ray(t_minimap *minimap);
+void		print_player(void *param);
 #endif
