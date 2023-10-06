@@ -45,7 +45,6 @@ void free_exit(t_ms *ms){
 	}
 }
 
-
 void map_error_exit(t_ms *ms)
 {
 	free_exit(ms);

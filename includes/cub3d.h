@@ -46,7 +46,7 @@
 #define HEIGHT 768
 # define MOVE_SPEED 0.00004
 # define ROTATE_SPEED 0.00003
-# define MOUSE_SPEED 1000
+# define MOUSE_SPEED 750
 
 /* ------------------ STRUCTS ------------------ */
 typedef	struct s_vect
