@@ -12,37 +12,21 @@ void free_double_p(char **map, int numRows) {
 
 void free_exit(t_ms *ms){
 	if(ms->map != NULL)
-	{
 		ft_free_tab_char(ms->map);
-	}
 	if(ms->main_map != NULL)
-	{
 		ft_free_tab_char(ms->main_map);
-	}
 	if(ms->map_args != NULL)
-	{
 		ft_free_tab_char(ms->map_args);
-	}
 	if(ms->game != NULL)
-	{
 		free(ms->game);
-	}
 	if(ms != NULL)
-	{
 		free(ms);
-	}
 	if(ms->mlx != NULL)
-	{
 		mlx_close_window(ms->mlx);
-	}
 	if(ms->tex != NULL)
-	{
 		free(ms->tex);
-	}
 	if(ms->paths != NULL)
-	{
 		ft_free_tab_char(ms->paths);
-	}
 }
 
 void map_error_exit(t_ms *ms)
@@ -52,3 +36,11 @@ void map_error_exit(t_ms *ms)
 	exit(1);
 }
 
+int clean_exit(t_ms *ms)
+{
+	free(ms->game);
+	free(ms->tex);
+	free(ms);
+	printf("Exit\n");
+	return(0);
+}
