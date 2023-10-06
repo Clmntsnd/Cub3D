@@ -146,7 +146,7 @@ void	floodfill(char **map, char u, char v, int x, int y)
 		floodfill(map, u, v, x, y - 1);
 		floodfill(map, u, v, x, y + 1);
 	}
-	if (map[x][y] == ' ' || map[x][y] == '\t')
+	if (map[x][y] == ' ' || map[x][y] == '\t' || map[x][0] == '0' || (map[x][y + 1] == '\n' && map[x][y] == '0'))
 	{
 		printf("Error\nMap is not surrounded by walls\n");
 		exit(0);
