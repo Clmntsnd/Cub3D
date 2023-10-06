@@ -29,17 +29,18 @@
 # define KRT	"\033[1;0m"
 
 /* ---------------- Error Msgs ---------------- */
-# define ERR_USG	"✅ Usage: ./cub3d <filename.cub>"
-# define ERR_ARG	"❌ Arguments number is invalid"
-# define ERR_EXT	"❌ File must have a '.cub' extension"
-# define ERR_FILE	"❌ File doesn't exist"
-# define ERR_NAME	"❌ Invalid File name"
-# define ERR_MEM	"❌ Memory allocation failed"
-# define ERR_COL	"❌ Invalid Color"
-# define ERR_S_TEX	"❌ Invalid South Texture"
-# define ERR_N_TEX	"❌ Invalid North Texture"
-# define ERR_W_TEX	"❌ Invalid West Texture"
-# define ERR_E_TEX	"❌ Invalid East Texture"
+# define ERR_USG		"✅ Usage: ./cub3d <filename.cub>"
+# define ERR_ARG		"❌ Arguments number is invalid"
+# define ERR_EXT		"❌ File must have a '.cub' extension"
+# define ERR_FILE		"❌ File doesn't exist"
+# define ERR_NAME		"❌ Invalid File name"
+# define ERR_MEM		"❌ Memory allocation failed"
+# define ERR_COL		"❌ Invalid Color"
+# define ERR_S_TEX		"❌ Invalid South Texture"
+# define ERR_N_TEX		"❌ Invalid North Texture"
+# define ERR_W_TEX		"❌ Invalid West Texture"
+# define ERR_E_TEX		"❌ Invalid East Texture"
+# define ERR_XPM_TEX	"❌ Invalid XPM Texture"
 
 //Window specs
 #define WIDTH 1024

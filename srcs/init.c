@@ -118,6 +118,8 @@ bool get_texture(t_ms *ms)
 			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return(printf("❌ Error\n%s\n", ERR_N_TEX), false);
 			ms->tex->no_tex = mlx_load_xpm42(ms->paths[0]);
+			if(!ms->tex->no_tex)
+				return(printf("❌ Error\n%s\n", ERR_XPM_TEX), false);
 			free(ms->paths[0]);
 			free(ms->map_args[i]);
 		}
@@ -127,6 +129,8 @@ bool get_texture(t_ms *ms)
 			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return(printf("❌ Error\n%s\n", ERR_S_TEX), false);
 			ms->tex->so_tex = mlx_load_xpm42(ms->paths[1]);
+			if(!ms->tex->so_tex)
+				return(printf("❌ Error\n%s\n", ERR_XPM_TEX), false);
 			free(ms->paths[1]);
 			free(ms->map_args[i]);
 		}
@@ -136,6 +140,8 @@ bool get_texture(t_ms *ms)
 			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return(printf("❌ Error\n%s\n", ERR_W_TEX), false);
 			ms->tex->we_tex = mlx_load_xpm42(ms->paths[2]);
+			if(!ms->tex->we_tex)
+				return(printf("❌ Error\n%s\n", ERR_XPM_TEX), false);
 			free(ms->paths[2]);
 			free(ms->map_args[i]);
 		}
@@ -145,6 +151,8 @@ bool get_texture(t_ms *ms)
 			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
 				return(printf("❌ Error\n%s\n", ERR_E_TEX), false);
 			ms->tex->ea_tex = mlx_load_xpm42(ms->paths[3]);
+			if(!ms->tex->ea_tex)
+				return(printf("❌ Error\n%s\n", ERR_XPM_TEX), false);
 			free(ms->paths[3]);
 			free(ms->map_args[i]);
 		}
