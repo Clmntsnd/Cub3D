@@ -36,11 +36,21 @@ void map_error_exit(t_ms *ms)
 	exit(1);
 }
 
+void free_texture(t_ms *ms)
+{
+	free(ms->tex->no_tex);
+	free(ms->tex->so_tex);
+	free(ms->tex->we_tex);
+	free(ms->tex->ea_tex);
+	free(ms->tex);
+}
+
 int clean_exit(t_ms *ms)
 {
 	free(ms->game);
-	free(ms->tex);
-	free(ms);
+	free_texture(ms);
+	if(ms->map_args != NULL)
+		ft_free_tab_char(ms->map_args);
 	printf("Exit\n");
 	return(0);
 }

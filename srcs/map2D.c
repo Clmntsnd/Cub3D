@@ -1,3 +1,4 @@
+
 #include "../includes/cub3d.h"
 
 t_minimap *get_minimap(void)

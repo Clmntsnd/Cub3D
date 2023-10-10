@@ -1,0 +1,104 @@
+{
+    mlx_loop_hook_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_loop_hook
+    ...
+}
+{
+    mlx_loop_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_loop
+    ...
+}
+{
+    mlx_terminate_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_terminate
+    ...
+}
+{
+    mlx_init_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_init
+    ...
+}
+{
+    mlx_strerror_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_strerror
+    ...
+}
+{
+    mlx_new_image_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_new_image
+    ...
+}
+{
+    mlx_close_window_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_close_window
+    ...
+}
+{
+    mlx_put_pixel_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_put_pixel
+    ...
+}
+{
+    mlx_load_xpm42_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_load_xpm42
+    ...
+}
+{
+    mlx_is_key_down_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_is_key_down
+    ...
+}
+{
+    mlx_get_mouse_pos_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_get_mouse_pos
+    ...
+}
+{
+    mlx_set_cursor_mode_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_set_cursor_mode
+    ...
+}
+{
+    mlx_set_mouse_pos_leak
+    Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    fun:mlx_set_mouse_pos
+    ...
+}

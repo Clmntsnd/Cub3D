@@ -109,7 +109,7 @@ bool get_texture(t_ms *ms)
 	if(ms->tex == NULL)
 		ms->tex = ft_calloc(1, sizeof(t_tex));
 	if(ms->paths == NULL) 
-		ms->paths = calloc_double_p(ms->paths, 4, ft_strlen(ms->map_args[0]));
+		ms->paths = ft_calloc(4, sizeof(char *));
 	while (ms->map_args[++i])
 	{
 		if (ft_strncmp(ms->map_args[i], "NO", 2) == 0)
@@ -193,7 +193,6 @@ void init_content(t_ms *ms, char *argv)
 	remove_map_args(ms);
 	get_player_pos(ms);
 	check_map(ms);
-
 	//remove before grading
 	// print_map(ms);
 }

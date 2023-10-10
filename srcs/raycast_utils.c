@@ -1,3 +1,5 @@
+
+
 #include "../includes/cub3d.h"
 
 void	find_texture_hit(t_ms *ms, xpm_t *texture)

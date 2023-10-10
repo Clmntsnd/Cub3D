@@ -69,8 +69,8 @@ int	main(int ac, char **av)
 
 	mlx_loop(ms->mlx);
 	mlx_terminate(ms->mlx);
-	//TODO don't forget to free shit
 	clean_exit(ms);
+	//TODO don't forget to free shit
 	return (0);
 }
 
