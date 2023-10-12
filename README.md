@@ -19,19 +19,17 @@ valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins
 
 
 
-
-
-
-mlx_loop_hook();
-mlx_loop();
-mlx_terminate();
-mlx_init();
-mlx_strerror();
-mlx_new_image();
-mlx_close_window();
-mlx_put_pixel();
-mlx_load_xpm42();
-mlx_is_key_down();
-mlx_get_mouse_pos();
-mlx_set_cursor_mode();
-mlx_set_mouse_pos();
+bad_arg_asset_missing.cub   managed
+bad_arg_color_missing.cub   managed  
+bad_arg_dup.cub             managed  
+bad_arg_order_asset.cub     managed
+bad_arg_order_colors.cub    managed  
+bad_arg_rgb_missing.cub     managed         
+bad_arg_wrong_asset_orientation.cub  managed
+bad_assest_ext.cub      managed             
+bad_color_rgb.cub       managed  
+bad_ext.test            managed    
+bad_map_char.cub        **Issue**      
+bad_map_dup_starting_point.cub   managed                       
+bad_map_not_starting_point.cub     **Issues**
+bad_map_open.cub          Managed         

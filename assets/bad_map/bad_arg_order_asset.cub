@@ -2,10 +2,10 @@ F 254,100,0
 C 225,30,0
 
 111111111111
-10000000N111
-111111111111
+10000000N1111
+1111111111111
 
-NO asset/wall.xpm42
-SO asset/wall.xpm42
-EA asset/wall.xpm42
-WE asset/wall.xpm42
+NO ./assets/textures/n_wall.xpm42
+WE ./assets/textures/w_wall.xpm42
+EA ./assets/textures/e_wall.xpm42
+SO ./assets/textures/s_wall.xpm42

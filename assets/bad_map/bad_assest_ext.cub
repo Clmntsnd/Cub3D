@@ -1,7 +1,7 @@
-NO not_asset/wall.xpm42
-SO asset/wall.xpm42
-EA asset/wall.xpm42
-WE asset/wall.xpm42
+NO ./assets/textures/noupsiee.xpm42
+WE ./assets/textures/w_wall.xpm42
+EA ./assets/textures/e_wall.xpm42
+SO ./assets/textures/s_wall.xpm42
 
 F 254,100,0
 C 225,30,0

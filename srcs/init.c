@@ -191,6 +191,7 @@ void init_content(t_ms *ms, char *argv)
 	get_map_size(ms, argv);
 	get_map(ms, argv);
 	remove_map_args(ms);
+	printf("test\n");
 	get_player_pos(ms);
 	check_map(ms);
 	//remove before grading
