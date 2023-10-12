@@ -92,12 +92,12 @@ void get_player_pos(t_ms *ms)
 				flag++;
 				set_dir(ms, i, j);
 			}
-			if (flag > 1 || flag < 1)
-			{
-				printf("Error\nMore than one player position or no starting position..\n");
-				map_error_exit(ms);	
-			}
 		}
+	}
+	if (flag > 1 || flag == 0)
+	{
+		printf("Error\nMore than one player position or no starting position..\n");
+		map_error_exit(ms);	
 	}
 }
 
