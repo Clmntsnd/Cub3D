@@ -84,10 +84,7 @@ void get_player_pos(t_ms *ms)
 		j = -1;
 		while(ms->main_map[i][++j])
 		{
-			if((ft_strncmp(&ms->main_map[i][j], "N", 1) == 0) 
-				|| (ft_strncmp(&ms->main_map[i][j], "S", 1) == 0) 
-					|| (ft_strncmp(&ms->main_map[i][j], "W", 1) == 0) 
-						|| (ft_strncmp(&ms->main_map[i][j], "E", 1) == 0))
+			if((ms->main_map[i][j] == 'N') || (ms->main_map[i][j] == 'S') || (ms->main_map[i][j] == 'W' || (ms->main_map[i][j] == 'E')))
 			{
 				flag++;
 				set_dir(ms, i, j);
