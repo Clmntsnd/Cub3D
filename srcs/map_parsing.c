@@ -23,7 +23,7 @@ void remove_map(t_ms *ms)
 					}
 			if (((ms->map[i][j] == '1' || ms->map[i][j] == '0'  || ms->map[i][j] == 'N' || ms->map[i][j] == 'S' || ms->map[i][j] == 'E' || ms->map[i][j] == 'W' || ms->map[i][j] == ' ' || ms->map[i][j] == '\t') && (ms->map[i][j])) && (flag != 6))
 			{
-				printf("error\n");
+				printf("error\nToo few or too many textures..");
 				map_error_exit(ms);
 			}
 			else if (((ms->map[i][j] == '1' || ms->map[i][j] == '0'  || ms->map[i][j] == 'N' || ms->map[i][j] == 'S' || ms->map[i][j] == 'E' || ms->map[i][j] == 'W' || ms->map[i][j] == ' ' || ms->map[i][j] == '\t')) && (flag == 6))
@@ -46,7 +46,6 @@ void check_arg_dup(t_ms *ms)
 	flag = ft_calloc(6, sizeof(int));
 	while(i < 6)
 	{
-		printf("test2\n");
 		if(ms->map_args[i][0] == 'N')
 			flag[0] = 1;
 		else if(ms->map_args[i][0] == 'S')
@@ -65,7 +64,10 @@ void check_arg_dup(t_ms *ms)
 	while(i < 6)
 	{
 		if(flag[i] != 1)
+		{
+			printf("Error:\nDuplicate arguments..");
 			map_error_exit(ms);
+		}
 		i++;
 	}
 }

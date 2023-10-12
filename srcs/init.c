@@ -1,37 +1,5 @@
 #include "../includes/cub3d.h"
 
-void print_map(t_ms *ms)
-{
-    int i;
-
-    i = 0;
-    while (ms->main_map[i])
-    {
-        printf("%s", ms->main_map[i]);
-        i++;
-    }
-	int j = 0;
-	printf("\n\nmap_args\n");
-	while(j < 6)
-	{
-		printf("\nMap arg[%d] = %s", j,  ms->map_args[j]);
-		// printf("\npath arg[%d] = %s", j,  ms->paths[j]);
-		j++;
-	}
-
-	printf("Floodfill map\n");
-	int k = 0;
-	while(k < ms->height)
-	{
-		printf("%s", ms->main_map[k]);
-		k++;
-	}
-
-	printf("Player position is x= %f, y= %f\n", ms->game->pl_pos.x, ms->game->pl_pos.y);
-	printf("\n\nwidth = %d", ms->width);
-	printf("\n\nheigth = %d", ms->height);
-}
-
 t_ms *get_ms(void)
 {
 	static t_ms *ms = NULL;
@@ -188,9 +156,6 @@ void init_content(t_ms *ms, char *argv)
 	get_map_size(ms, argv);
 	get_map(ms, argv);
 	remove_map_args(ms);
-	printf("test\n");
 	get_player_pos(ms);
 	check_map(ms);
-	//remove before grading
-	// print_map(ms);
 }
