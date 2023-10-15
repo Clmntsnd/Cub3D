@@ -37,7 +37,7 @@ SRCS_DIR	=	./srcs/
 # SRCS_LST	= 	test.c 
 SRCS_LST	= 	main.c arg_parsing.c error_management.c init.c \
 				map_check.c map_parsing.c map2D.c hooks.c raycast.c \
-				key_binding.c raycast_utils.c colors.c
+				key_binding.c raycast_utils.c colors.c utils.c \
 
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LST))
 

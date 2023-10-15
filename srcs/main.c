@@ -1,27 +1,5 @@
 #include "../includes/cub3d.h"
 
-int	init_mlx(t_ms *ms)
-{
-	if (!(ms->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", true)))
-	{
-		printf("%s\n", mlx_strerror(mlx_errno)); 
-		return(EXIT_FAILURE);
-	}
-	if(!(ms->m_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT)))
-	{
-		mlx_close_window(ms->mlx);
-		printf("%s\n", mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if(mlx_image_to_window(ms->mlx, ms->m_img, 0, 0) == -1)
-	{
-		mlx_close_window(ms->mlx);
-		printf("%s\n", mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
-
 // void ft_hook(void* param)
 // {
 // 	mlx_t* mlx = param;

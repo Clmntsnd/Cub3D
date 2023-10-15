@@ -141,7 +141,6 @@ void		free_double_p(char **map, int numRows);
 bool		ft_parse_arg(int ac, char **av);
 void		get_map(t_ms *ms, char *argv);
 void		get_map_size(t_ms *ms, char argv[1]);
-void		check_map(t_ms *ms);
 int			check_valid_char(t_ms *ms);
 int			check_walls(t_ms *ms);
 void		remove_map_args(t_ms *ms);
@@ -149,13 +148,19 @@ char		**sanatize_args(char **args);
 
 /* -------------------- Init ------------------- */
 t_ms		*get_ms(void);
+int			init_mlx(t_ms *ms);
 t_minimap	*get_minimap(void);
 void		init_content(t_ms *ms, char *argv);
 bool		get_texture(t_ms *ms);
 
+/* ------------------- Checks ------------------ */
+void		check_map(t_ms *ms);
+void		check_arg_dup(t_ms *ms);
+void		floodfill(char **map, char u, char v, int x, int y);
+
 /* ------------------ Minimap ------------------ */
-void			draw_map2D(void *param);
-// int			draw_map2D(t_ms *ms);
+void		draw_map2D(void *param);
+// int		draw_map2D(t_ms *ms);
 void		put_color_to_tile(t_ms *ms, t_minimap *minimap);
 void		put_pixel_to_map2D(t_minimap *minimap, int i, int j, uint32_t color);
 
@@ -174,11 +179,11 @@ bool		is_valid_arg(char *str);
 
 
 /* ------------------ Utils ------------------ */
-char		**calloc_double_p(char **data, int numRows, int numCols);
 void		key_binding(t_ms *ms);
 void		move_cursor(t_ms *ms);
 void		rotate_vector(double *x, double *y, double angle);
-
+void		get_player_pos(t_ms *ms);
+void		set_dir(t_ms *ms, int i, int j);
 
 
 void		ft_player_and_ray(void* param);

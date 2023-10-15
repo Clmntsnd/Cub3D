@@ -12,58 +12,26 @@ t_ms *get_ms(void)
 	return (ms);
 }
 
-void	set_dir(t_ms *ms, int i, int j)
+int	init_mlx(t_ms *ms)
 {
-	if (ms->main_map[i][j] == 'N')
+	if (!(ms->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", true)))
 	{
-		ms->game->pl_dir.x = -1;
-		ms->game->plane.y = 0.66;
+		printf("%s\n", mlx_strerror(mlx_errno)); 
+		return(EXIT_FAILURE);
 	}
-	if (ms->main_map[i][j] == 'S')
+	if(!(ms->m_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT)))
 	{
-		ms->game->pl_dir.x = 1;
-		ms->game->plane.y = -0.66;
+		mlx_close_window(ms->mlx);
+		printf("%s\n", mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
 	}
-	if (ms->main_map[i][j] == 'E')
+	if(mlx_image_to_window(ms->mlx, ms->m_img, 0, 0) == -1)
 	{
-		ms->game->pl_dir.y = 1; 
-		ms->game->plane.x = 0.66;
+		mlx_close_window(ms->mlx);
+		printf("%s\n", mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
 	}
-	if (ms->main_map[i][j] == 'W')
-	{
-		ms->game->pl_dir.y = -1; 
-		ms->game->plane.x = -0.66;
-	}
-	ms->game->pl_pos.x = i + 0.5;
-	ms->game->pl_pos.y = j + 0.5;
-	ms->main_map[i][j] = '0';
-}
-
-void get_player_pos(t_ms *ms)
-{
-	int i;
-	int j;
-	int flag;
-
-	i = -1;
-	flag = 0;
-	while(ms->main_map[++i])
-	{
-		j = -1;
-		while(ms->main_map[i][++j])
-		{
-			if((ms->main_map[i][j] == 'N') || (ms->main_map[i][j] == 'S') || (ms->main_map[i][j] == 'W' || (ms->main_map[i][j] == 'E')))
-			{
-				flag++;
-				set_dir(ms, i, j);
-			}
-		}
-	}
-	if (flag > 1 || flag == 0)
-	{
-		printf("Error\nMore than one player position or no starting position..\n");
-		map_error_exit(ms);	
-	}
+	return (EXIT_SUCCESS);
 }
 
 bool get_texture(t_ms *ms)
@@ -121,34 +89,12 @@ bool get_texture(t_ms *ms)
 			free(ms->paths[3]);
 			free(ms->map_args[i]);
 		}
-		
 	}
 	ms->tex->so = fill_texture(ms->tex->so_tex);
 	ms->tex->no = fill_texture(ms->tex->no_tex);
 	ms->tex->we = fill_texture(ms->tex->we_tex);
 	ms->tex->ea = fill_texture(ms->tex->ea_tex);
 	return (true);
-}
-
-char **sanatize_args(char **args)
-{
-	if (args == NULL || *args == NULL) {
-        return(NULL);
-    }
-    char *src = *args;
-    char *dst = *args;
-
-    while (*src)
-	{
-        if (*src != ' ' && *src != '\t' && *src != '\n') 
-		{
-            *dst = *src;
-            dst++;
-        }
-        src++;
-    }
-    *dst = '\0';
-	return(args);
 }
 
 void init_content(t_ms *ms, char *argv)
