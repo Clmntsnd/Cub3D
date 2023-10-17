@@ -34,4 +34,4 @@ bad_map_open.cub                       managed        1 leak + double free
 
 GOOD MAPS
 ./cub3D assets/maps/good_map2.cub                     5 leaks
-./cub3D assets/maps/good_map2.cub      **ISSUES**
+./cub3D assets/maps/good_map.cub      **ISSUES with tabs in texture path**
