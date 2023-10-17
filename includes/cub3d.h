@@ -36,6 +36,7 @@
 # define ERR_NAME		"❌ Invalid File name"
 # define ERR_MEM		"❌ Memory allocation failed"
 # define ERR_COL		"❌ Invalid Color"
+# define ERR_TEX		"❌ Invalid Texture"
 # define ERR_S_TEX		"❌ Invalid South Texture"
 # define ERR_N_TEX		"❌ Invalid North Texture"
 # define ERR_W_TEX		"❌ Invalid West Texture"
@@ -94,7 +95,7 @@ typedef struct s_ms {
 	char		**map;
 	char		**map_args;
 	char 		**main_map;
-	char    	**paths;
+	char    	*paths;
 	int			height; 	//map height
 	int			width;		//map width
 	t_game		*game;		//game informations
@@ -136,7 +137,7 @@ void		rev_floodfill(char **map, char v, int x, int y);
 void		loop(void *param);
 void		pick_texture(t_ms *ms, int x);
 void		draw_vert_pix(t_ms *ms, int x, xpm_t *wall_text, int **array);
-int			**fill_texture(xpm_t *texture);
+int			**convert_texture(xpm_t *texture);
 void		find_texture_hit(t_ms *ms, xpm_t *texture);
 
 /* ------------------ Colors ------------------ */

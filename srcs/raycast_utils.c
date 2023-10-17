@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpilotte <jpilotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:50:02 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/17 13:50:05 by jpilotte         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:12:40 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	find_texture_hit(t_ms *ms, xpm_t *texture)
 		ms->game->tex_x = texture->texture.width - ms->game->tex_x - 1;
 }
 
-int	**fill_texture(xpm_t *texture)
+int	**convert_texture(xpm_t *texture)
 {
 	int	**array;
 	int	i;
