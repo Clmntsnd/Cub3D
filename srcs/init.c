@@ -26,12 +26,14 @@ t_ms	*get_ms(void)
 
 int	init_mlx(t_ms *ms)
 {
-	if (!(ms->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", true)))
+	ms->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
+	if (!(ms->mlx))
 	{
 		printf("%s\n", mlx_strerror(mlx_errno)); 
 		return (EXIT_FAILURE);
 	}
-	if (!(ms->m_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT)))
+	ms->m_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
+	if (!(ms->m_img))
 	{
 		mlx_close_window(ms->mlx);
 		printf("%s\n", mlx_strerror(mlx_errno));
@@ -109,7 +111,7 @@ bool	get_texture(t_ms *ms)
 	return (true);
 }
 
-void init_content(t_ms *ms, char *argv)
+void	init_content(t_ms *ms, char *argv)
 {
 	get_map_size(ms, argv);
 	get_map(ms, argv);
