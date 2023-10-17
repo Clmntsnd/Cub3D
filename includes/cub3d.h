@@ -101,57 +101,55 @@ typedef struct s_ms {
 	t_game		*game;		//game informations
 	mlx_image_t *m_img;
 	t_tex		*tex;
-	void		*wall;
-	void		*floor;
-	void		*ceiling;	
+
 }	t_ms;
 
 /* ------------------ Error ------------------- */
-int			clean_exit(t_ms *ms);
-void 		map_error_exit(t_ms *ms);
-void 		free_exit(t_ms *ms);
-void		free_double_p(char **map, int numRows);
+int		clean_exit(t_ms *ms);
+void 	map_error_exit(t_ms *ms);
+void 	free_exit(t_ms *ms);
+void	free_double_p(char **map, int numRows);
 
 /* ------------------ Parsing ------------------ */
-bool		ft_parse_arg(int ac, char **av);
-void		get_map(t_ms *ms, char *argv);
-void		get_map_size(t_ms *ms, char argv[1]);
-int			check_valid_char(t_ms *ms);
-int			check_walls(t_ms *ms);
-void		remove_map_args(t_ms *ms);
-char		**sanatize_args(char **args);
+bool	ft_parse_arg(int ac, char **av);
+void	get_map(t_ms *ms, char *argv);
+void	get_map_size(t_ms *ms, char argv[1]);
+int		check_valid_char(t_ms *ms);
+int		check_walls(t_ms *ms);
+void	remove_map_args(t_ms *ms);
+char	**sanatize_args(char **args);
 
 /* -------------------- Init ------------------- */
-t_ms		*get_ms(void);
-int			init_mlx(t_ms *ms);
-void		init_content(t_ms *ms, char *argv);
-bool		get_texture(t_ms *ms);
+t_ms	*get_ms(void);
+int		init_mlx(t_ms *ms);
+void	init_content(t_ms *ms, char *argv);
+bool	get_texture(t_ms *ms);
 
 /* ------------------- Checks ------------------ */
-void		check_map(t_ms *ms);
-void		check_arg_dup(t_ms *ms);
-void		floodfill(char **map, char v, int x, int y);
-void		rev_floodfill(char **map, char v, int x, int y);
+void	check_map(t_ms *ms);
+void	check_arg_dup(t_ms *ms);
+void	floodfill(char **map, char v, int x, int y);
+void	rev_floodfill(char **map, char v, int x, int y);
 
 /* ------------------ Raycast ------------------ */
-void		loop(void *param);
-void		pick_texture(t_ms *ms, int x);
-void		draw_vert_pix(t_ms *ms, int x, xpm_t *wall_text, int **array);
-int			**convert_texture(xpm_t *texture);
-void		find_texture_hit(t_ms *ms, xpm_t *texture);
+void	loop(void *param);
+void	pick_texture(t_ms *ms, int x);
+void	draw_vert_pix(t_ms *ms, int x, xpm_t *wall_text, int **array);
+int		**convert_texture(xpm_t *texture);
+void	find_texture_hit(t_ms *ms, xpm_t *texture);
 
 /* ------------------ Colors ------------------ */
-int32_t 	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
-bool 		get_color(t_ms *ms);
-bool		convert_color(t_ms *ms, int i, char *str);
-bool		is_valid_arg(char *str);
-
+int32_t get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
+bool 	get_color(t_ms *ms);
+bool	convert_color(t_ms *ms, int i, char *str);
+bool	is_valid_arg(char *str);
 
 /* ------------------ Utils ------------------ */
-void		key_binding(t_ms *ms);
-void		move_cursor(t_ms *ms);
-void		rotate_vector(double *x, double *y, double angle);
-void		get_player_pos(t_ms *ms);
-void		set_dir(t_ms *ms, int i, int j);
+void	key_binding(t_ms *ms);
+void	move_cursor(t_ms *ms);
+void	rotate_vector(double *x, double *y, double angle);
+void	get_player_pos(t_ms *ms);
+void	set_dir(t_ms *ms, int i, int j);
+int		is_valid_char(char c);
 
 #endif

@@ -25,41 +25,6 @@ void	check_map(t_ms *ms)
 	rev_floodfill(ms->main_map, '0', x, y);
 }
 
-int	is_valid_char(char c)
-{
-	return (c == '0' || c == '1' || c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W' || c == '\t' || c == '\n' || c == ' ');
-}
-
-int	check_valid_char_in_row(char *row)
-{
-	int	i;
-
-	i = -1;
-	while (row[++i] != '\0')
-	{
-		if (!is_valid_char(row[i]))
-		{
-			printf("Error\nInvalid character in map\n");
-			return (1);
-		}
-	}
-	return (0);
-}
-
-int	check_valid_char(t_ms *ms)
-{
-	int	j;
-
-	j = -1;
-	while (ms->main_map[++j] != NULL)
-	{
-		if (check_valid_char_in_row(ms->main_map[j]) == 1)
-			return (1);
-	}
-	return (0);
-}
-
 void	check_arg_dup(t_ms *ms)
 {
 	int	i;
