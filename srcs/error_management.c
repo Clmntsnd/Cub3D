@@ -23,9 +23,7 @@ void	free_exit(t_ms *ms)
 void	map_error_exit(t_ms *ms)
 {
 	free_exit(ms);
-	// (void) ms;
-	// printf("\nFree from here\n");
-	// exit(1);
+	exit(1);
 }
 
 int		len_of_double_p_int(int **pp)

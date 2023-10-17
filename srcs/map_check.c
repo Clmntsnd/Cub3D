@@ -19,10 +19,14 @@ void	check_map(t_ms *ms)
 
 	x = ms->game->pl_pos.x;
 	y = ms->game->pl_pos.y;
-	if (check_valid_char(ms))
+	if (check_valid_char(ms) )
 		map_error_exit(ms);
-	floodfill(ms->main_map, 'X', x, y);
-	rev_floodfill(ms->main_map, '0', x, y);
+	if (floodfill(ms->main_map, 'X', x, y) 
+		|| rev_floodfill(ms->main_map, '0', x, y))
+	{
+		printf("❌ Error\n%s\n", ERR_WALL),
+		map_error_exit(ms);
+	}
 }
 
 void	check_arg_dup(t_ms *ms)
@@ -54,7 +58,7 @@ void	check_arg_dup(t_ms *ms)
 	}
 }
 
-void	floodfill(char **map, char v, int x, int y)
+int	floodfill(char **map, char v, int x, int y)
 {
 	while (map[x][y] == '0')
 	{
@@ -66,10 +70,11 @@ void	floodfill(char **map, char v, int x, int y)
 	}
 	if (map[x][y] == ' ' || map[x][y] == '\t' || map[x][0] == '0'
 		|| (map[x][y + 1] == '\n' && map[x][y] == '0'))
-		printf("❌ Error\n%s\n", ERR_WALL);
+		return (1);
+	return (0);
 }
 
-void	rev_floodfill(char **map, char v, int x, int y)
+int	rev_floodfill(char **map, char v, int x, int y)
 {
 	while (map[x][y] == 'X')
 	{
@@ -79,7 +84,8 @@ void	rev_floodfill(char **map, char v, int x, int y)
 		rev_floodfill(map, v, x, y - 1);
 		rev_floodfill(map, v, x, y + 1);
 	}
-	if (map[x][y] == ' ' || map[x][y] == '\t' || map[x][0] == '0' 
+	if (map[x][y] == ' ' || map[x][y] == '\t' || map[x][0] == '0'
 		|| (map[x][y + 1] == '\n' && map[x][y] == '0'))
-		printf("❌ Error\n%s\n", ERR_WALL);
+		return (1);
+	return (0);
 }
