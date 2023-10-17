@@ -6,7 +6,7 @@
 /*   By: jpilotte <jpilotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:51:25 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/17 15:02:50 by jpilotte         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:16:50 by jpilotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,38 @@ void	check_map(t_ms *ms)
 	rev_floodfill(ms->main_map, '0', x, y);
 }
 
+int	is_valid_char(char c)
+{
+	return (c == '0' || c == '1' || c == 'N' || c == 'S'
+		|| c == 'E' || c == 'W' || c == '\t' || c == '\n' || c == ' ');
+}
+
+int	check_valid_char_in_row(char *row)
+{
+	int	i;
+
+	i = -1;
+	while (row[++i] != '\0')
+	{
+		if (!is_valid_char(row[i]))
+		{
+			printf("Error\nInvalid character in map\n");
+			return (1);
+		}
+	}
+	return (0);
+}
+
 int	check_valid_char(t_ms *ms)
 {
-	int		i;
-	int		j;
+	int	j;
 
 	j = 0;
-	while (*ms->main_map[j] != '\0')
+	while (ms->main_map[j] != NULL)
 	{
-		i = 0;
-		while (ms->main_map[j][i] != '\0')
+		if (check_valid_char_in_row(ms->main_map[j]) == 1)
 		{
-			if (ms->main_map[j][i] == '0' || ms->main_map[j][i] == '1'
-					|| ms->main_map[j][i] == 'N' 
-					|| ms->main_map[j][i] == 'S'
-					|| ms->main_map[j][i] == 'E'
-					|| ms->main_map[j][i] == 'W'
-					|| ms->main_map[j][i] == '\t'
-					|| ms->main_map[j][i] == '\n'
-					|| ms->main_map[j][i] == ' ')
-			{
-				i++;
-			}
-			else
-			{
-				printf("Error\nInvalid character in map\n");
-				return (1);
-			}
+			return (1);
 		}
 		j++;
 	}
