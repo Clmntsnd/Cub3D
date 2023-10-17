@@ -105,32 +105,6 @@ typedef struct s_ms {
 	void		*ceiling;	
 }	t_ms;
 
-typedef struct s_ray
-{
-	double	x;
-	double	y;
-	bool	hit_wall;
-}	t_ray;
-
-typedef struct s_minimap
-{
-	mlx_image_t *map_img;
-	mlx_image_t *player_img;
-	mlx_image_t *ray_img;
-	t_ray		ray;
-	double		pl_w;	// 'size' of the player (in pixel)
-	double		pl_h;	// 'size' of the player (in pixel)
-	double		pl_x;	// 'position' of the player in x
-	double		pl_y;	// 'position' of the player in y
-	double		pl_dx;	// delta 'position' of the player in x
-	double		pl_dy;	// delta 'position' of the player in y
-	double		pl_dir;	// view direction of the player
-	int			tile;
-	int			tile_s;
-	int			tile_b;
-	uint32_t	color;
-}	t_minimap;
-
 /* ------------------ Error ------------------- */
 int			clean_exit(t_ms *ms);
 void 		map_error_exit(t_ms *ms);
@@ -149,7 +123,6 @@ char		**sanatize_args(char **args);
 /* -------------------- Init ------------------- */
 t_ms		*get_ms(void);
 int			init_mlx(t_ms *ms);
-t_minimap	*get_minimap(void);
 void		init_content(t_ms *ms, char *argv);
 bool		get_texture(t_ms *ms);
 
@@ -158,12 +131,6 @@ void		check_map(t_ms *ms);
 void		check_arg_dup(t_ms *ms);
 void		floodfill(char **map, char v, int x, int y);
 void		rev_floodfill(char **map, char v, int x, int y);
-
-/* ------------------ Minimap ------------------ */
-void		draw_map2D(void *param);
-// int		draw_map2D(t_ms *ms);
-void		put_color_to_tile(t_ms *ms, t_minimap *minimap);
-void		put_pixel_to_map2D(t_minimap *minimap, int i, int j, uint32_t color);
 
 /* ------------------ Raycast ------------------ */
 void		loop(void *param);
@@ -186,9 +153,4 @@ void		rotate_vector(double *x, double *y, double angle);
 void		get_player_pos(t_ms *ms);
 void		set_dir(t_ms *ms, int i, int j);
 
-
-void		ft_player_and_ray(void* param);
-void 		ft_hook(void* param);
-void		cast_ray(t_minimap *minimap);
-void		print_player(void *param);
 #endif
