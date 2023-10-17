@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_check.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpilotte <jpilotte@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/17 13:51:25 by jpilotte          #+#    #+#             */
+/*   Updated: 2023/10/17 13:51:25 by jpilotte         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void check_map(t_ms *ms)
@@ -7,7 +19,6 @@ void check_map(t_ms *ms)
 
 	x = ms->game->pl_pos.x;
 	y = ms->game->pl_pos.y;
-	//add floodfill to checks
 	if(check_valid_char(ms))
 		map_error_exit(ms);
 	floodfill(ms->main_map, '0', '2', x, y);

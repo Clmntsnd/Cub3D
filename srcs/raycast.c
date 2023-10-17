@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpilotte <jpilotte@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/17 13:49:36 by jpilotte          #+#    #+#             */
+/*   Updated: 2023/10/17 13:49:51 by jpilotte         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "../includes/cub3d.h"
 
 void	set_data(t_ms *ms)
@@ -88,10 +101,8 @@ void	loop(void *param)
 {
 	t_ms		*ms;
 	int			x;
-	// t_minimap	*minimap;
 	(void)param;
 	ms = get_ms();
-	// minimap = get_minimap();
 	x = -1;
 	while (++x < WIDTH)
 	{
@@ -104,12 +115,4 @@ void	loop(void *param)
 		key_binding(ms);
 		move_cursor(ms);
 	}
-	// if (!ms->game->minimap_activ)
-	// 	return ;
-	// if(mlx_image_to_window(ms->mlx, minimap->map_img, 0, 0) == -1)
-	// {
-	// 	mlx_close_window(ms->mlx);
-	// 	puts(mlx_strerror(mlx_errno)); //To modify, can't use "puts"
-	// 	return ;
-	// }
 }

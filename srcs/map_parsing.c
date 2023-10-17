@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpilotte <jpilotte@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/17 13:51:08 by jpilotte          #+#    #+#             */
+/*   Updated: 2023/10/17 13:51:08 by jpilotte         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
@@ -63,9 +74,6 @@ void remove_map_args(t_ms *ms)
 		}
 		j++;
 	}
-	// if(check_arg_order(ms) == 0)
-	// 	map_error_exit(ms);
-	// ms->map_args[flag] = "\0";
 	if(flag == 6)
 	{
 		check_arg_dup(ms);
