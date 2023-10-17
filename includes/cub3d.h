@@ -37,11 +37,11 @@
 # define ERR_MEM		"❌ Memory allocation failed"
 # define ERR_COL		"❌ Invalid Color"
 # define ERR_TEX		"❌ Invalid Texture"
-# define ERR_S_TEX		"❌ Invalid South Texture"
-# define ERR_N_TEX		"❌ Invalid North Texture"
-# define ERR_W_TEX		"❌ Invalid West Texture"
-# define ERR_E_TEX		"❌ Invalid East Texture"
 # define ERR_XPM_TEX	"❌ Invalid XPM Texture"
+# define ERR_M_PL		"❌ More than one player position or no starting position.."
+# define ERR_C_MAP		"❌ Invalid character in map"
+# define ERR_D_ARG		"❌ Duplicate arguments.."
+# define ERR_WALL		"❌ Map is not surrounded by walls"
 
 //Window specs
 #define WIDTH 1024

@@ -51,6 +51,8 @@ int	check_valid_char(t_ms *ms)
 {
 	int	j;
 
+	j = -1;
+	while (*ms->main_map[++j] != '\0')
 	j = 0;
 	while (ms->main_map[j] != NULL)
 	{
@@ -58,7 +60,6 @@ int	check_valid_char(t_ms *ms)
 		{
 			return (1);
 		}
-		j++;
 	}
 	return (0);
 }
@@ -68,9 +69,9 @@ void	check_arg_dup(t_ms *ms)
 	int	i;
 	int	*flag;
 
-	i = 0;
+	i = -1;
 	flag = ft_calloc(6, sizeof(int));
-	while (i < 6)
+	while (++i < 5)
 	{
 		if (ms->map_args[i][0] == 'N')
 			flag[0] = 1;
@@ -84,17 +85,11 @@ void	check_arg_dup(t_ms *ms)
 			flag[4] = 1;
 		else if (ms->map_args[i][0] == 'C')
 			flag[5] = 1;
-		i++;
-	}
-	i = 0;
-	while (i < 6)
-	{
-		if (flag[i] != 1)
+		else if (flag[i] != 1)
 		{
-			printf("Error:\nDuplicate arguments..");
+			printf("❌ Error\n%s\n", ERR_D_ARG);
 			map_error_exit(ms);
 		}
-		i++;
 	}
 }
 
@@ -108,11 +103,9 @@ void	floodfill(char **map, char v, int x, int y)
 		floodfill(map, v, x, y - 1);
 		floodfill(map, v, x, y + 1);
 	}
-	if (map[x][y] == ' ' || map[x][y] == '\t' || map[x][0] == '0' || (map[x][y + 1] == '\n' && map[x][y] == '0'))
-	{
-		printf("Error\nMap is not surrounded by walls\n");
-		exit(0);
-	}
+	if (map[x][y] == ' ' || map[x][y] == '\t' || map[x][0] == '0'
+		|| (map[x][y + 1] == '\n' && map[x][y] == '0'))
+		printf("❌ Error\n%s\n", ERR_WALL);
 }
 
 void	rev_floodfill(char **map, char v, int x, int y)
@@ -125,9 +118,7 @@ void	rev_floodfill(char **map, char v, int x, int y)
 		rev_floodfill(map, v, x, y - 1);
 		rev_floodfill(map, v, x, y + 1);
 	}
-	if (map[x][y] == ' ' || map[x][y] == '\t' || map[x][0] == '0' || (map[x][y + 1] == '\n' && map[x][y] == '0'))
-	{
-		printf("Error\nMap is not surrounded by walls\n");
-		exit(0);
-	}
+	if (map[x][y] == ' ' || map[x][y] == '\t' || map[x][0] == '0' 
+		|| (map[x][y + 1] == '\n' && map[x][y] == '0'))
+		printf("❌ Error\n%s\n", ERR_WALL);
 }

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpilotte <jpilotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:49:26 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/17 16:50:21 by jpilotte         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:24:43 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+char	**sanatize_args(char **args)
 char	**sanatize_args(char **args)
 {
 	char	*src;
@@ -45,9 +46,8 @@ void	get_player_pos(t_ms *ms)
 		j = -1;
 		while (ms->main_map[i][++j])
 		{
-			if ((ms->main_map[i][j] == 'N') || (ms->main_map[i][j] == 'S')
-					|| (ms->main_map[i][j] == 'W'
-						|| (ms->main_map[i][j] == 'E')))
+			if (ms->main_map[i][j] == 'N' || ms->main_map[i][j] == 'S'
+				|| ms->main_map[i][j] == 'W' || ms->main_map[i][j] == 'E')
 			{
 				flag++;
 				set_dir(ms, i, j);
@@ -56,7 +56,7 @@ void	get_player_pos(t_ms *ms)
 	}
 	if (flag > 1 || flag == 0)
 	{
-		printf("Error\nMore than one player position or no starting position..\n");
+		printf("❌ Error\n%s\n", ERR_M_PL);
 		map_error_exit(ms);
 	}
 }
