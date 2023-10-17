@@ -52,14 +52,10 @@ int	check_valid_char(t_ms *ms)
 	int	j;
 
 	j = -1;
-	while (*ms->main_map[++j] != '\0')
-	j = 0;
-	while (ms->main_map[j] != NULL)
+	while (ms->main_map[++j] != NULL)
 	{
 		if (check_valid_char_in_row(ms->main_map[j]) == 1)
-		{
 			return (1);
-		}
 	}
 	return (0);
 }
