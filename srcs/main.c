@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpilotte <jpilotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:51:40 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/17 14:58:28 by jpilotte         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:15:44 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	init_mlx(t_ms *ms)
+{
+	ms->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
+	if (!(ms->mlx))
+	{
+		printf("%s\n", mlx_strerror(mlx_errno)); 
+		return (EXIT_FAILURE);
+	}
+	ms->m_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
+	if (!(ms->m_img))
+	{
+		mlx_close_window(ms->mlx);
+		printf("%s\n", mlx_strerror(mlx_errno));
+		return (EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(ms->mlx, ms->m_img, 0, 0) == -1)
+	{
+		mlx_close_window(ms->mlx);
+		printf("%s\n", mlx_strerror(mlx_errno));
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
 
 int	main(int ac, char **av)
 {

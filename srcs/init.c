@@ -24,90 +24,61 @@ t_ms	*get_ms(void)
 	return (ms);
 }
 
-int	init_mlx(t_ms *ms)
+bool	load_single_texture(t_ms *ms, int i, char c)
 {
-	ms->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
-	if (!(ms->mlx))
+	ms->paths = ft_strdup(ms->map_args[i] + 2);
+	if ((open(ms->paths, O_RDONLY)) == -1)
 	{
-		printf("%s\n", mlx_strerror(mlx_errno)); 
-		return (EXIT_FAILURE);
+		free(ms->paths);
+		return (printf("❌ Error\n%s\n", ERR_TEX), false);
 	}
-	ms->m_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
-	if (!(ms->m_img))
-	{
-		mlx_close_window(ms->mlx);
-		printf("%s\n", mlx_strerror(mlx_errno));
-		return (EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(ms->mlx, ms->m_img, 0, 0) == -1)
-	{
-		mlx_close_window(ms->mlx);
-		printf("%s\n", mlx_strerror(mlx_errno));
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
+	if (c == 'N')
+		ms->tex->no_tex = mlx_load_xpm42(ms->paths);
+	if (c == 'S')
+		ms->tex->so_tex = mlx_load_xpm42(ms->paths);
+	if (c == 'W')
+		ms->tex->we_tex = mlx_load_xpm42(ms->paths);
+	if (c == 'E')
+		ms->tex->ea_tex = mlx_load_xpm42(ms->paths);
+	free(ms->paths);
+	return (true);
+}
+
+bool	fill_texture(t_ms *ms)
+{
+	if (!ms->tex->no_tex || !ms->tex->so_tex 
+		|| !ms->tex->ea_tex || !ms->tex->we_tex)
+		return (printf("❌ Error\n%s\n", ERR_XPM_TEX), false);
+	ms->tex->so = convert_texture(ms->tex->so_tex);
+	ms->tex->no = convert_texture(ms->tex->no_tex);
+	ms->tex->we = convert_texture(ms->tex->we_tex);
+	ms->tex->ea = convert_texture(ms->tex->ea_tex);
+	return (true);
 }
 
 bool	get_texture(t_ms *ms)
 {
 	int	i;
 
+	ms->tex = ft_calloc(1, sizeof(t_tex));
 	i = -1;
-	if (ms->tex == NULL)
-		ms->tex = ft_calloc(1, sizeof(t_tex));
-	if (ms->paths == NULL) 
-		ms->paths = ft_calloc(4, sizeof(char *));
 	while (ms->map_args[++i])
 	{
 		if (ft_strncmp(ms->map_args[i], "NO", 2) == 0)
-		{
-			ms->paths[0] = ft_strdup(ms->map_args[i] + 2);
-			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
-				return (printf("❌ Error\n%s\n", ERR_N_TEX), false);
-			ms->tex->no_tex = mlx_load_xpm42(ms->paths[0]);
-			if (!ms->tex->no_tex)
-				return (printf("❌ Error\n%s\n", ERR_XPM_TEX), false);
-			free(ms->paths[0]);
-			free(ms->map_args[i]);
-		}
-		else if (ft_strncmp(ms->map_args[i], "SO", 2) == 0)
-		{
-			ms->paths[1] = ft_strdup(ms->map_args[i] + 2);
-			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
-				return (printf("❌ Error\n%s\n", ERR_S_TEX), false);
-			ms->tex->so_tex = mlx_load_xpm42(ms->paths[1]);
-			if (!ms->tex->so_tex)
-				return (printf("❌ Error\n%s\n", ERR_XPM_TEX), false);
-			free(ms->paths[1]);
-			free(ms->map_args[i]);
-		}
-		else if (ft_strncmp(ms->map_args[i], "WE", 2) == 0)
-		{
-			ms->paths[2] = ft_strdup(ms->map_args[i] + 2);
-			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
-				return (printf("❌ Error\n%s\n", ERR_W_TEX), false);
-			ms->tex->we_tex = mlx_load_xpm42(ms->paths[2]);
-			if (!ms->tex->we_tex)
-				return (printf("❌ Error\n%s\n", ERR_XPM_TEX), false);
-			free(ms->paths[2]);
-			free(ms->map_args[i]);
-		}
-		else if (ft_strncmp(ms->map_args[i], "EA", 2) == 0)
-		{
-			ms->paths[3] = ft_strdup(ms->map_args[i] + 2);
-			if ((open(ms->map_args[i] + 2, O_RDONLY)) == -1)
-				return (printf("❌ Error\n%s\n", ERR_E_TEX), false);
-			ms->tex->ea_tex = mlx_load_xpm42(ms->paths[3]);
-			if (!ms->tex->ea_tex)
-				return (printf("❌ Error\n%s\n", ERR_XPM_TEX), false);
-			free(ms->paths[3]);
-			free(ms->map_args[i]);
-		}
+			if (!load_single_texture(ms, i, 'N'))
+				return (false);
+		if (ft_strncmp(ms->map_args[i], "SO", 2) == 0)
+			if (!load_single_texture(ms, i, 'S'))
+				return (false);
+		if (ft_strncmp(ms->map_args[i], "WE", 2) == 0)
+			if (!load_single_texture(ms, i, 'W'))
+				return (false);
+		if (ft_strncmp(ms->map_args[i], "EA", 2) == 0)
+			if (!load_single_texture(ms, i, 'E'))
+				return (false);
 	}
-	ms->tex->so = fill_texture(ms->tex->so_tex);
-	ms->tex->no = fill_texture(ms->tex->no_tex);
-	ms->tex->we = fill_texture(ms->tex->we_tex);
-	ms->tex->ea = fill_texture(ms->tex->ea_tex);
+	if (!fill_texture(ms))
+		return (false);
 	return (true);
 }
 

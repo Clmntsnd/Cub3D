@@ -17,7 +17,7 @@ void	free_exit(t_ms *ms)
 	if (ms->main_map != NULL)
 		ft_free_tab_char(ms->main_map);
 	if (ms->paths != NULL)
-		ft_free_tab_char(ms->paths);
+		free(ms->paths);
 }
 
 void	map_error_exit(t_ms *ms)
