@@ -156,7 +156,8 @@ bool		get_texture(t_ms *ms);
 /* ------------------- Checks ------------------ */
 void		check_map(t_ms *ms);
 void		check_arg_dup(t_ms *ms);
-void		floodfill(char **map, char u, char v, int x, int y);
+void		floodfill(char **map, char v, int x, int y);
+void		rev_floodfill(char **map, char v, int x, int y);
 
 /* ------------------ Minimap ------------------ */
 void		draw_map2D(void *param);

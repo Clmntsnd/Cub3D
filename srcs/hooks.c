@@ -6,13 +6,13 @@
 /*   By: jpilotte <jpilotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:52:47 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/17 13:52:49 by jpilotte         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:56:44 by jpilotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void ft_player_and_ray(void* param)
+void	ft_player_and_ray(void *param)
 {
 	(void)param;
 	t_minimap	*minimap;
@@ -35,13 +35,14 @@ void	draw_pl(t_minimap *minimap)
 	u_int32_t	j;
 
 	i = -1;
-	while (++i < minimap->player_img->width) // width is 20
+	while (++i < minimap->player_img->width)
 	{
 		j = -1;
 		while (++j < 20)
 			mlx_put_pixel(minimap->player_img, i, j, get_rgba(250,0,0,255));
 	}
 }
+
 void	cast_ray(t_minimap *minimap)
 {
 	int	i;
