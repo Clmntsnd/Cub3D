@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpilotte <jpilotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:49:36 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/17 13:49:51 by jpilotte         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:29:46 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/cub3d.h"
 
@@ -101,6 +100,7 @@ void	loop(void *param)
 {
 	t_ms		*ms;
 	int			x;
+
 	(void)param;
 	ms = get_ms();
 	x = -1;

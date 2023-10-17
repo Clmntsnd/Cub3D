@@ -26,18 +26,18 @@ void	remove_map(t_ms *ms)
 	while (i < ms->height)
 	{
 		while ((ft_strncmp(&*ms->map[i], &*ms->map_args[0], ft_strlen(ms->map_args[0])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[1], ft_strlen(ms->map_args[1])) == 0)
-				|| (ft_strncmp(&*ms->map[i], &*ms->map_args[2], ft_strlen(ms->map_args[2])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[3], ft_strlen(ms->map_args[3])) == 0)
-				|| (ft_strncmp(&*ms->map[i], &*ms->map_args[4], ft_strlen(ms->map_args[4])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[5], ft_strlen(ms->map_args[5])) == 0))
+			|| (ft_strncmp(&*ms->map[i], &*ms->map_args[2], ft_strlen(ms->map_args[2])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[3], ft_strlen(ms->map_args[3])) == 0)
+			|| (ft_strncmp(&*ms->map[i], &*ms->map_args[4], ft_strlen(ms->map_args[4])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[5], ft_strlen(ms->map_args[5])) == 0))
 		{
 			i++;
 			flag++;
 		}
-		if (((ms->map[i][j] == '1' || ms->map[i][j] == '0'  || ms->map[i][j] == 'N' || ms->map[i][j] == 'S' || ms->map[i][j] == 'E' || ms->map[i][j] == 'W' || ms->map[i][j] == ' ' || ms->map[i][j] == '\t') && (ms->map[i][j])) && (flag != 6))
+		if (((ms->map[i][j] == '1' || ms->map[i][j] == '0' || ms->map[i][j] == 'N' || ms->map[i][j] == 'S' || ms->map[i][j] == 'E' || ms->map[i][j] == 'W' || ms->map[i][j] == ' ' || ms->map[i][j] == '\t') && (ms->map[i][j])) && (flag != 6))
 		{
 			printf("error\nToo few or too many textures..");
 			map_error_exit(ms);
 		}
-		else if (((ms->map[i][j] == '1' || ms->map[i][j] == '0'  || ms->map[i][j] == 'N' || ms->map[i][j] == 'S' || ms->map[i][j] == 'E' || ms->map[i][j] == 'W' || ms->map[i][j] == ' ' || ms->map[i][j] == '\t')) && (flag == 6))
+		else if (((ms->map[i][j] == '1' || ms->map[i][j] == '0' || ms->map[i][j] == 'N' || ms->map[i][j] == 'S' || ms->map[i][j] == 'E' || ms->map[i][j] == 'W' || ms->map[i][j] == ' ' || ms->map[i][j] == '\t')) && (flag == 6))
 		{
 			ms->main_map[j] = ft_strdup(ms->map[i]);
 			j++;
@@ -61,7 +61,8 @@ void	remove_map_args(t_ms *ms)
 	while (j < ms->width)
 	{
 		i = 0;
-		while (i < ms->height){
+		while (i < ms->height)
+		{
 			if ((ft_strncmp(&ms->map[i][j], "NO ", 3) == 0) || (ft_strncmp(&ms->map[i][j], "EA ", 3) == 0) 
 				|| (ft_strncmp(&ms->map[i][j], "SO ", 3) == 0) || (ft_strncmp(&ms->map[i][j], "WE ", 3) == 0)
 				|| (ft_strncmp(&ms->map[i][j], "C ", 2) == 0) || (ft_strncmp(&ms->map[i][j], "F ", 2) == 0))
@@ -77,20 +78,20 @@ void	remove_map_args(t_ms *ms)
 	{
 		check_arg_dup(ms);
 		remove_map(ms);
-		return;
+		return ;
 	}
 	else
 	{
-		printf("Error\nNot enough arguments\n");
+		printf("❌ Error\n%s\n", ERR_ARG);
 		map_error_exit(ms);
 	}
 }
 
 void	get_map(t_ms *ms, char *argv)
 {
-	int i;
-	int fd;
-	char *temp;
+	int		i;
+	int		fd;
+	char	*temp;
 
 	i = 0;
 	fd = open(argv, O_RDONLY);
@@ -106,18 +107,18 @@ void	get_map(t_ms *ms, char *argv)
 	close(fd);
 }
 
-void	get_map_size(t_ms *ms, char argv[1]) {
-	int i;
-	int fd;
-	char *rows;
+void	get_map_size(t_ms *ms, char argv[1])
+{
+	int		i;
+	int		fd;
+	char	*rows;
 
-	i = 0;
 	fd = open(argv, O_RDONLY);
 	rows = get_next_line(fd);
 	ms->height = 0;
 	ms->width = 0;
-
-	while (rows[i])
+	i = -1;
+	while (rows[++i])
 	{
 		i++;
 		ms->width++;
@@ -131,4 +132,3 @@ void	get_map_size(t_ms *ms, char argv[1]) {
 	free(rows);
 	close(fd);
 }
-

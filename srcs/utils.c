@@ -6,48 +6,49 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:49:26 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/17 15:52:40 by csenand          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:39:31 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-
-char **sanatize_args(char **args)
+char	**sanatize_args(char **args)
 {
-	if (args == NULL || *args == NULL) {
-        return(NULL);
-    }
-    char *src = *args;
-    char *dst = *args;
+	char	*src;
+	char	*dst;
 
-    while (*src)
+	src = *args;
+	dst = *args;
+	if (args == NULL || *args == NULL)
+		return (NULL);
+	while (*src)
 	{
-        if (*src != ' ' && *src != '\t' && *src != '\n') 
+		if (*src != ' ' && *src != '\t' && *src != '\n') 
 		{
-            *dst = *src;
-            dst++;
-        }
-        src++;
-    }
-    *dst = '\0';
-	return(args);
+			*dst = *src;
+			dst++;
+		}
+		src++;
+	}
+	*dst = '\0';
+	return (args);
 }
 
-void get_player_pos(t_ms *ms)
+void	get_player_pos(t_ms *ms)
 {
-	int i;
-	int j;
-	int flag;
+	int	i;
+	int	j;
+	int	flag;
 
 	i = -1;
 	flag = 0;
-	while(ms->main_map[++i])
+	while (ms->main_map[++i])
 	{
 		j = -1;
-		while(ms->main_map[i][++j])
+		while (ms->main_map[i][++j])
 		{
-			if((ms->main_map[i][j] == 'N') || (ms->main_map[i][j] == 'S') || (ms->main_map[i][j] == 'W' || (ms->main_map[i][j] == 'E')))
+			if (ms->main_map[i][j] == 'N' || ms->main_map[i][j] == 'S'
+				|| ms->main_map[i][j] == 'W' || ms->main_map[i][j] == 'E')
 			{
 				flag++;
 				set_dir(ms, i, j);
@@ -56,8 +57,8 @@ void get_player_pos(t_ms *ms)
 	}
 	if (flag > 1 || flag == 0)
 	{
-		printf("Error\nMore than one player position or no starting position..\n");
-		map_error_exit(ms);	
+		printf("❌ Error\n%s\n", ERR_M_PL);
+		map_error_exit(ms);
 	}
 }
 
