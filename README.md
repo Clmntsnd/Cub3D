@@ -19,7 +19,7 @@ BAD MAPS
                                        Display ERR    LEAKS (atExit)
 bad_arg_asset_missing.cub              managed        managed
 bad_arg_color_missing.cub              managed        managed
-bad_arg_dup.cub                        managed        managed
+bad_arg_dup.cub                        managed        to double check
 bad_arg_order_asset.cub                managed        managed
 bad_arg_order_colors.cub               managed        managed
 bad_arg_rgb_missing.cub                managed        managed

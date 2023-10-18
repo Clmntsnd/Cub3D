@@ -38,22 +38,14 @@ int		len_of_double_p_int(int **pp)
 
 void	free_texture(t_ms *ms)
 {
-	// if(ms->tex->no_tex != NULL)
-		free(ms->tex->no_tex);
-	// if(ms->tex->so_tex != NULL)
-		free(ms->tex->so_tex);
-	// if(ms->tex->we_tex != NULL)
-		free(ms->tex->we_tex);
-	// if(ms->tex->ea_tex != NULL)
-		free(ms->tex->ea_tex);
-	// if(ms->tex->no != NULL)
-		ft_free_tab_int(ms->tex->no, len_of_double_p_int(ms->tex->no));
-	// if(ms->tex->so != NULL)
-		ft_free_tab_int(ms->tex->so, len_of_double_p_int(ms->tex->so));
-	// if(ms->tex->we != NULL)
-		ft_free_tab_int(ms->tex->we, len_of_double_p_int(ms->tex->we));
-	// if(ms->tex->ea != NULL)
-		ft_free_tab_int(ms->tex->ea, len_of_double_p_int(ms->tex->ea));
+	free(ms->tex->no_tex);
+	free(ms->tex->so_tex);
+	free(ms->tex->we_tex);
+	free(ms->tex->ea_tex);
+	ft_free_tab_int(ms->tex->no, len_of_double_p_int(ms->tex->no));
+	ft_free_tab_int(ms->tex->so, len_of_double_p_int(ms->tex->so));
+	ft_free_tab_int(ms->tex->we, len_of_double_p_int(ms->tex->we));
+	ft_free_tab_int(ms->tex->ea, len_of_double_p_int(ms->tex->ea));
 }
 
 int clean_exit(t_ms *ms)
@@ -61,7 +53,6 @@ int clean_exit(t_ms *ms)
 	free_texture(ms);
 	if(ms->tex != NULL)
 		free(ms->tex);
-	// free_exit(ms);
 	printf("Exit\n");
 	return(0);
 }
