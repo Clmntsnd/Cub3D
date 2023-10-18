@@ -29,3 +29,45 @@ bool	ft_parse_arg(int ac, char **av)
 		return (printf("❌ Error\n%s\n%s\n", ERR_NAME, ERR_USG), false);
 	return (true);
 }
+
+bool	check_map_character(char ch, int flag, bool flag_state)
+{
+	bool	is_valid_char;
+
+	is_valid_char = (ch == '1' || ch == '0' || ch == 'N' || ch == 'S'
+			|| ch == 'E' || ch == 'W' || ch == ' ' || ch == '\t');
+	if (flag_state && flag == 6)
+		return (is_valid_char);
+	else if (!flag_state && flag != 6)
+		return (is_valid_char);
+	return (false);
+}
+
+bool	map_starts_with_any_arg(t_ms *ms, int i)
+{
+	int	arg_index;
+
+	arg_index = -1;
+	while (++arg_index < 6)
+	{
+		if (ft_strncmp(ms->map[i], ms->map_args[arg_index], \
+			ft_strlen(ms->map_args[arg_index])) == 0)
+			return (true);
+	}
+	return (false);
+}
+
+void	check_flag(t_ms *ms, int flag)
+{
+	if (flag == 6)
+	{
+		check_arg_dup(ms);
+		remove_map(ms);
+		return ;
+	}
+	else
+	{
+		printf("❌ Error\n%s\n", ERR_ARG);
+		map_error_exit(ms);
+	}
+}

@@ -18,31 +18,25 @@ void	remove_map(t_ms *ms)
 	int	j;
 	int	flag;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	flag = 0;
 	if (ms->main_map == NULL)
 		ms->main_map = (char **)ft_calloc(ms->height + 1, sizeof(char *));
-	while (i < ms->height)
+	while (++i < ms->height)
 	{
-		while ((ft_strncmp(&*ms->map[i], &*ms->map_args[0], ft_strlen(ms->map_args[0])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[1], ft_strlen(ms->map_args[1])) == 0)
-			|| (ft_strncmp(&*ms->map[i], &*ms->map_args[2], ft_strlen(ms->map_args[2])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[3], ft_strlen(ms->map_args[3])) == 0)
-			|| (ft_strncmp(&*ms->map[i], &*ms->map_args[4], ft_strlen(ms->map_args[4])) == 0) || (ft_strncmp(&*ms->map[i], &*ms->map_args[5], ft_strlen(ms->map_args[5])) == 0))
+		while (map_starts_with_any_arg(ms, i))
 		{
 			i++;
 			flag++;
 		}
-		if (((ms->map[i][j] == '1' || ms->map[i][j] == '0' || ms->map[i][j] == 'N' || ms->map[i][j] == 'S' || ms->map[i][j] == 'E' || ms->map[i][j] == 'W' || ms->map[i][j] == ' ' || ms->map[i][j] == '\t') && (ms->map[i][j])) && (flag != 6))
+		if (check_map_character(ms->map[i][j], flag, false))
 		{
 			printf("❌ Error\n❌ Too few or too many textures..\n");
 			map_error_exit(ms);
 		}
-		else if (((ms->map[i][j] == '1' || ms->map[i][j] == '0' || ms->map[i][j] == 'N' || ms->map[i][j] == 'S' || ms->map[i][j] == 'E' || ms->map[i][j] == 'W' || ms->map[i][j] == ' ' || ms->map[i][j] == '\t')) && (flag == 6))
-		{
-			ms->main_map[j] = ft_strdup(ms->map[i]);
-			j++;
-		}
-		i++;
+		else if (check_map_character(ms->map[i][j], flag, true))
+			ms->main_map[j++] = ft_strdup(ms->map[i]);
 	}
 	ft_free_tab_char(ms->map);
 }
@@ -53,37 +47,27 @@ void	remove_map_args(t_ms *ms)
 	int	j;
 	int	flag;
 
-	if (ms->map_args == NULL) 
-		ms->map_args = (char **)ft_calloc(7, sizeof(char *));
-	j = 0;
+	ms->map_args = (char **)ft_calloc(7, sizeof(char *));
+	j = -1;
 	flag = 0;
-	while (j < ms->width)
+	while (++j < ms->width)
 	{
-		i = 0;
-		while (i < ms->height)
+		i = -1;
+		while (++i < ms->height)
 		{
-			if ((ft_strncmp(&ms->map[i][j], "NO ", 3) == 0) || (ft_strncmp(&ms->map[i][j], "EA ", 3) == 0) 
-				|| (ft_strncmp(&ms->map[i][j], "SO ", 3) == 0) || (ft_strncmp(&ms->map[i][j], "WE ", 3) == 0)
-				|| (ft_strncmp(&ms->map[i][j], "C ", 2) == 0) || (ft_strncmp(&ms->map[i][j], "F ", 2) == 0))
+			if ((ft_strncmp(&ms->map[i][j], "NO ", 3) == 0) 
+				|| (ft_strncmp(&ms->map[i][j], "EA ", 3) == 0) 
+				|| (ft_strncmp(&ms->map[i][j], "SO ", 3) == 0)
+				|| (ft_strncmp(&ms->map[i][j], "WE ", 3) == 0)
+				|| (ft_strncmp(&ms->map[i][j], "C ", 2) == 0) 
+				|| (ft_strncmp(&ms->map[i][j], "F ", 2) == 0))
 			{
 				ms->map_args[flag] = ft_strdup(*sanatize_args(&ms->map[i]));
 				flag++;
 			}
-			i++;
 		}
-		j++;
 	}
-	if (flag == 6)
-	{
-		check_arg_dup(ms);
-		remove_map(ms);
-		return ;
-	}
-	else
-	{
-		printf("❌ Error\n%s\n", ERR_ARG);
-		map_error_exit(ms);
-	}
+	check_flag(ms, flag);
 }
 
 void	get_map(t_ms *ms, char *argv)

@@ -19,7 +19,7 @@ void	check_map(t_ms *ms)
 
 	x = ms->game->pl_pos.x;
 	y = ms->game->pl_pos.y;
-	if (check_valid_char(ms) )
+	if (check_valid_char(ms))
 		map_error_exit(ms);
 	if (floodfill(ms->main_map, 'X', x, y) 
 		|| rev_floodfill(ms->main_map, '0', x, y))
@@ -27,6 +27,13 @@ void	check_map(t_ms *ms)
 		printf("❌ Error\n%s\n", ERR_WALL),
 		map_error_exit(ms);
 	}
+}
+
+void	error_flag(t_ms *ms, int *flag)
+{
+	printf("❌ Error\n%s\n", ERR_D_ARG);
+	free(flag);
+	map_error_exit(ms);
 }
 
 void	check_arg_dup(t_ms *ms)
@@ -51,11 +58,7 @@ void	check_arg_dup(t_ms *ms)
 		else if (ms->map_args[i][0] == 'C')
 			flag[5] = 1;
 		else if (flag[i] != 1)
-		{
-			printf("❌ Error\n%s\n", ERR_D_ARG);
-			free(flag);
-			map_error_exit(ms);
-		}
+			error_flag(ms, flag);
 	}
 	free(flag);
 }
