@@ -40,7 +40,8 @@ void	free_exit(t_ms *ms)
 		ft_free_tab_char(ms->map_args);
 	if (ms->main_map)
 		ft_free_tab_char(ms->main_map);
-	free_texture(ms);
+	if (ms->tex)
+		free_texture(ms);
 	if(ms->tex)
 		ms->tex = ft_freenull(ms->tex);
 	if(ms->game)

@@ -33,6 +33,7 @@ void	remove_map(t_ms *ms)
 		if (check_map_character(ms->map[i][j], flag, false))
 		{
 			printf("❌ Error\n❌ Too few or too many textures..\n");
+			ft_free_tab_char(ms->map);
 			map_error_exit(ms);
 		}
 		else if (check_map_character(ms->map[i][j], flag, true))
