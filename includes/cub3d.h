@@ -151,5 +151,9 @@ void	rotate_vector(double *x, double *y, double angle);
 void	get_player_pos(t_ms *ms);
 void	set_dir(t_ms *ms, int i, int j);
 int		is_valid_char(char c);
+bool	check_map_character(char ch, int flag, bool flag_state);
+bool	map_starts_with_any_arg(t_ms *ms, int i);
+void	check_flag(t_ms *ms, int flag);
+void	remove_map(t_ms *ms);
 
 #endif

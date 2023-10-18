@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:51:40 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/18 12:02:32 by csenand          ###   ########.fr       */
+/*   Updated: 2023/10/18 15:31:40 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 	init_content(ms, av[1]);
 	if (!get_texture(ms) || !get_color(ms) || init_mlx(ms) == 1)
 	{
-		map_error_exit(ms);	
+		map_error_exit(ms);
 		return (1);
 	}
 	mlx_loop_hook(ms->mlx, loop, ms->mlx);
