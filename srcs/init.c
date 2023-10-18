@@ -78,7 +78,10 @@ bool	get_texture(t_ms *ms)
 				return (false);
 	}
 	if (!fill_texture(ms))
+	{
+		map_error_exit(ms);
 		return (false);
+	}
 	return (true);
 }
 

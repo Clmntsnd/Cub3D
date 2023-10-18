@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:51:40 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/17 17:15:44 by csenand          ###   ########.fr       */
+/*   Updated: 2023/10/18 12:02:32 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,11 @@ int	main(int ac, char **av)
 	if (!ft_parse_arg(ac, av))
 		return (EXIT_FAILURE);
 	init_content(ms, av[1]);
-	if (!get_texture(ms))
-		return (EXIT_FAILURE);
-	if (!get_color(ms))
-		return (EXIT_FAILURE);
-	if (init_mlx(ms) == 1)
-		return (EXIT_FAILURE);
+	if (!get_texture(ms) || !get_color(ms) || init_mlx(ms) == 1)
+	{
+		map_error_exit(ms);	
+		return (1);
+	}
 	mlx_loop_hook(ms->mlx, loop, ms->mlx);
 	mlx_loop(ms->mlx);
 	mlx_terminate(ms->mlx);

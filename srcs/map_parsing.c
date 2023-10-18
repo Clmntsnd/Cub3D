@@ -34,7 +34,7 @@ void	remove_map(t_ms *ms)
 		}
 		if (((ms->map[i][j] == '1' || ms->map[i][j] == '0' || ms->map[i][j] == 'N' || ms->map[i][j] == 'S' || ms->map[i][j] == 'E' || ms->map[i][j] == 'W' || ms->map[i][j] == ' ' || ms->map[i][j] == '\t') && (ms->map[i][j])) && (flag != 6))
 		{
-			printf("❌ Error\nToo few or too many textures..\n");
+			printf("❌ Error\n❌ Too few or too many textures..\n");
 			map_error_exit(ms);
 		}
 		else if (((ms->map[i][j] == '1' || ms->map[i][j] == '0' || ms->map[i][j] == 'N' || ms->map[i][j] == 'S' || ms->map[i][j] == 'E' || ms->map[i][j] == 'W' || ms->map[i][j] == ' ' || ms->map[i][j] == '\t')) && (flag == 6))
@@ -44,7 +44,6 @@ void	remove_map(t_ms *ms)
 		}
 		i++;
 	}
-	// ms->main_map[j] = "\0";
 	ft_free_tab_char(ms->map);
 }
 
