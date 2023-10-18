@@ -18,20 +18,20 @@ valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins
 BAD MAPS
                                        Display ERR    LEAKS (atExit)
 bad_arg_asset_missing.cub              managed        managed
-bad_arg_color_missing.cub              managed        manged
-bad_arg_dup.cub                        managed        3 leaks
+bad_arg_color_missing.cub              managed        managed
+bad_arg_dup.cub                        managed        managed
 bad_arg_order_asset.cub                managed        managed
 bad_arg_order_colors.cub               managed        managed
-bad_arg_rgb_missing.cub                managed        1 leak
+bad_arg_rgb_missing.cub                managed        managed
 bad_arg_wrong_asset_orientation.cub    managed        managed
-bad_assest_ext.cub                     managed        1 leak
-bad_color_rgb.cub                      managed        1 leak
+bad_assest_ext.cub                     managed        managed
+bad_color_rgb.cub                      managed        managed
 bad_ext.test                           managed        managed
-bad_map_char.cub                       managed        1 leak + double free
-bad_map_dup_starting_point.cub         managed        1 leak + double free
-bad_map_not_starting_point.cub         managed        1 leak + double free
-bad_map_open.cub                       managed        1 leak + double free         
+bad_map_char.cub                       managed        managed
+bad_map_dup_starting_point.cub         managed        managed
+bad_map_not_starting_point.cub         managed        managed
+bad_map_open.cub                       managed        managed   
 
 GOOD MAPS
-./cub3D assets/maps/good_map2.cub                     5 leaks
+./cub3D assets/maps/good_map2.cub                     managed
 ./cub3D assets/maps/good_map.cub      **ISSUES with tabs in texture path**

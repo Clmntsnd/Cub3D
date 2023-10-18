@@ -53,9 +53,11 @@ void	check_arg_dup(t_ms *ms)
 		else if (flag[i] != 1)
 		{
 			printf("❌ Error\n%s\n", ERR_D_ARG);
+			free(flag);
 			map_error_exit(ms);
 		}
 	}
+	free(flag);
 }
 
 int	floodfill(char **map, char v, int x, int y)

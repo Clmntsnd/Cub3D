@@ -44,7 +44,7 @@ void	remove_map(t_ms *ms)
 		}
 		i++;
 	}
-	ms->main_map[j] = "\0";
+	// ms->main_map[j] = "\0";
 	ft_free_tab_char(ms->map);
 }
 
