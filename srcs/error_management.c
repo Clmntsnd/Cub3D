@@ -36,21 +36,15 @@ void	free_texture(t_ms *ms)
 
 void	free_exit(t_ms *ms)
 {
-	// if(ms->map)
-	// 	ft_free_tab_char(ms->map);
 	if(ms->map_args)
 		ft_free_tab_char(ms->map_args);
 	if (ms->main_map)
 		ft_free_tab_char(ms->main_map);
-	if (ms->paths)
-		ms->paths = ft_freenull(ms->paths);
 	free_texture(ms);
 	if(ms->tex)
 		ms->tex = ft_freenull(ms->tex);
 	if(ms->game)
 		ms->game = ft_freenull(ms->game);
-	// if(ms->m_img)
-	// 	free(ms->m_img);	
 	if (ms != NULL)
 		ms = ft_freenull(ms);
 }

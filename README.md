@@ -37,6 +37,9 @@ bad_arg_dup.cub                        managed        to double check (SEE BELOW
 cub3D(84086,0x1126bedc0) malloc: *** error for object 0x7f9b3340e7d2: pointer being freed was not allocated
 cub3D(84086,0x1126bedc0) malloc: *** set a breakpoint in malloc_error_break to debug
 
+
+*Removing the free paths in free_exit solves this issue
+
 <!-- TODO -->
 bad_map_six_text_no_color.cub          **ISSUES**     **ISSUES** (map works but it should'nt)
 
