@@ -24,14 +24,14 @@ int		len_of_double_p_int(int **pp)
 
 void	free_texture(t_ms *ms)
 {
-	ms->tex->no_tex = ft_freenull(ms->tex->no_tex);
-	ms->tex->so_tex = ft_freenull(ms->tex->so_tex);
-	ms->tex->ea_tex = ft_freenull(ms->tex->ea_tex);
-	ms->tex->we_tex = ft_freenull(ms->tex->we_tex);
 	ft_free_tab_int(ms->tex->no, len_of_double_p_int(ms->tex->no));
 	ft_free_tab_int(ms->tex->so, len_of_double_p_int(ms->tex->so));
 	ft_free_tab_int(ms->tex->we, len_of_double_p_int(ms->tex->we));
 	ft_free_tab_int(ms->tex->ea, len_of_double_p_int(ms->tex->ea));
+	mlx_delete_xpm42(ms->tex->no_tex);
+	mlx_delete_xpm42(ms->tex->so_tex);
+	mlx_delete_xpm42(ms->tex->ea_tex);
+	mlx_delete_xpm42(ms->tex->we_tex);
 }
 
 void	free_exit(t_ms *ms)
@@ -41,9 +41,10 @@ void	free_exit(t_ms *ms)
 	if (ms->main_map)
 		ft_free_tab_char(ms->main_map);
 	if (ms->tex)
+	{
 		free_texture(ms);
-	if(ms->tex)
 		ms->tex = ft_freenull(ms->tex);
+	}
 	if(ms->game)
 		ms->game = ft_freenull(ms->game);
 	if (ms != NULL)
