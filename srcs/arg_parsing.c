@@ -68,6 +68,7 @@ void	check_flag(t_ms *ms, int flag)
 	else
 	{
 		printf("❌ Error\n%s\n", ERR_ARG);
+		ft_free_tab_char(ms->map_args);
 		map_error_exit(ms);
 	}
 }
