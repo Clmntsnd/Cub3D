@@ -16,10 +16,9 @@ leak check
 valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --suppressions=./cub3d.sup ./cub3D ./assets/maps/good_map.cub  
 
 BAD MAPS
-                                       Display ERR    LEAKS (atExit)
+                                       Display ERR    LEAKS (atExit)    
 
-bad_arg_dup.cub                        managed        managed
-bad_arg_order_asset.cub                managed        managed
+bad_arg_order_asset.cub                managed        managed   
 bad_arg_order_colors.cub               managed        managed
 bad_arg_rgb_missing.cub                managed        managed
 bad_assest_ext.cub                     managed        managed
@@ -33,11 +32,12 @@ bad_arg_asset_missing.cub              managed        managed
 bad_arg_color_missing.cub              managed        managed
 bad_arg_wrong_asset_orientation.cub    managed        managed
 
+bad_arg_dup.cub                        managed        managed
+
 <!-- TODO -->
 bad_map_six_text_no_color.cub          **ISSUES** (map works but it should'nt)
 
-GOOD MAPS
-./cub3D assets/maps/good_map2.cub                     managed
-
 <!-- TODO -->
-./cub3D assets/maps/good_map.cub      **ISSUES with tabs or space on empty lines (only whitespace on line)**
+GOOD MAPS
+./cub3D assets/maps/good_map2.cub                     managed        x7fff7889ec58: pointer being freed was not allocate
+./cub3D assets/maps/good_map.cub                                     0x7fb6b340e830 pointer being freed was not allocated

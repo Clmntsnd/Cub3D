@@ -45,28 +45,26 @@ void	remove_map(t_ms *ms)
 void	remove_map_args(t_ms *ms)
 {
 	int	i;
-	int	j;
 	int	flag;
+	char *temp;
 
 	ms->map_args = (char **)ft_calloc(7, sizeof(char *));
-	j = -1;
+	i = -1;
 	flag = 0;
-	while (++j < ms->width)
+	while (ms->map[++i])
 	{
-		i = -1;
-		while (++i < ms->height)
+		temp = ft_strdup(clean_string(ms->map[i]));
+		if ((ft_strncmp(ms->map[i], "NO", 2) == 0) 
+			|| (ft_strncmp(ms->map[i], "EA", 2) == 0) 
+			|| (ft_strncmp(ms->map[i], "SO", 2) == 0)
+			|| (ft_strncmp(ms->map[i], "WE", 2) == 0)
+			|| (ft_strncmp(ms->map[i], "C", 1) == 0) 
+			|| (ft_strncmp(ms->map[i], "F", 1) == 0))
 		{
-			if ((ft_strncmp(&ms->map[i][j], "NO ", 3) == 0) 
-				|| (ft_strncmp(&ms->map[i][j], "EA ", 3) == 0) 
-				|| (ft_strncmp(&ms->map[i][j], "SO ", 3) == 0)
-				|| (ft_strncmp(&ms->map[i][j], "WE ", 3) == 0)
-				|| (ft_strncmp(&ms->map[i][j], "C ", 2) == 0) 
-				|| (ft_strncmp(&ms->map[i][j], "F ", 2) == 0))
-			{
-				ms->map_args[flag] = ft_strdup(*sanatize_args(&ms->map[i]));
-				flag++;
-			}
+			ms->map_args[flag] = ft_strdup(temp);
+			flag++;
 		}
+		free(temp);
 	}
 	check_flag(ms, flag);
 }

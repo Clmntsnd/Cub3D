@@ -6,30 +6,29 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:49:26 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/18 11:18:22 by csenand          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:21:07 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char	**sanatize_args(char **args)
+char *clean_string(char *str)
 {
-	char	*src;
-	char	*dst;
+	int i = 0;
+	int j = 0;
 
-	src = *args;
-	dst = *args;
-	while (*src)
+	while (str[i] != '\0')
 	{
-		if (*src != ' ' && *src != '\t' && *src != '\n') 
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n') 
 		{
-			*dst = *src;
-			dst++;
+			str[j++] = str[i];
 		}
-		src++;
+		i++;
 	}
-	*dst = '\0';
-	return (args);
+	if (j > 0 && str[j - 1] == ' ')
+        j--;  // Remove trailing space
+	str[j] = '\0';
+	return str;
 }
 
 void	get_player_pos(t_ms *ms)

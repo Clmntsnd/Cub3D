@@ -117,7 +117,7 @@ void	get_map_size(t_ms *ms, char argv[1]);
 int		check_valid_char(t_ms *ms);
 int		check_walls(t_ms *ms);
 void	remove_map_args(t_ms *ms);
-char	**sanatize_args(char **args);
+char 	*clean_string(char *str);
 
 /* -------------------- Init ------------------- */
 t_ms	*get_ms(void);
@@ -155,5 +155,6 @@ bool	check_map_character(char ch, int flag, bool flag_state);
 bool	map_starts_with_any_arg(t_ms *ms, int i);
 void	check_flag(t_ms *ms, int flag);
 void	remove_map(t_ms *ms);
+
 
 #endif
