@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:49:26 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/20 12:21:07 by csenand          ###   ########.fr       */
+/*   Updated: 2023/10/20 15:45:14 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ char *clean_string(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n') 
-		{
 			str[j++] = str[i];
-		}
 		i++;
 	}
 	if (j > 0 && str[j - 1] == ' ')
