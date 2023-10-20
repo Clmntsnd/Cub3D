@@ -3,7 +3,7 @@ WE ./assets/textures/w_wall.xpm42
 EA ./assets/textures/e_wall.xpm42
 SO ./assets/textures/s_wall.xpm42
 
-C 255,185,255
+ 255,185,255
 F 60,35,10
 
 111111111

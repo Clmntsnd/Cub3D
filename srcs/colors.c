@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:46:33 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/20 11:48:28 by csenand          ###   ########.fr       */
+/*   Updated: 2023/10/20 14:49:43 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,29 @@ bool	convert_color(t_ms *ms, int i, char *str)
 
 bool	get_color(t_ms *ms)
 {
-	int			i;
-	char		*tmp;
+	int		i;
+	char	*tmp;
+	int 	flag_c;
+	int 	flag_f;
 
 	i = -1;
+	flag_c = 0;
+	flag_f = 0;
 	while (ms->map_args[++i])
 	{
 		if (ms->map_args[i][0] == 'C' || ms->map_args[i][0] == 'F')
 		{
+			if (ms->map_args[i][0] == 'C')	 
+				flag_c++; //needs to be 1 to be valid
+			if (ms->map_args[i][0] == 'F')	 
+				flag_f++; //needs to be 1 to be valid
 			tmp = ms->map_args[i] + 1;
 			if (!is_valid_arg(tmp) || !convert_color(ms, i, tmp))
 				return (printf("❌ Error\n%s\n", ERR_COL), false);
 		}
 	}
+	if (flag_c != 1 || flag_f != 1)
+		return (printf("❌ Error\n%s\n", ERR_COL), false);		
 	return (true);
 }
 

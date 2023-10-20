@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:51:40 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/18 16:37:12 by csenand          ###   ########.fr       */
+/*   Updated: 2023/10/20 14:55:09 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,12 @@ int	main(int ac, char **av)
 
 	ms = get_ms();
 	if (!ft_parse_arg(ac, av))
-	{	
-		mlx_terminate(ms->mlx);
 		return (EXIT_FAILURE);
-	}
 	init_content(ms, av[1]);
 	if (!get_texture(ms) || !get_color(ms) || init_mlx(ms) == 1)
 	{
-		mlx_terminate(ms->mlx);
 		if (ms->mlx != NULL)
-			ms->mlx = ft_freenull(ms->mlx);
+			mlx_terminate(ms->mlx);
 		clean_exit(ms);
 		return (1);
 	}
