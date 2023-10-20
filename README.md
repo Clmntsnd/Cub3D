@@ -33,8 +33,8 @@ bad_map_open.cub                       managed        managed
 bad_arg_asset_missing.cub              **ISSUES**     managed     pointer being freed was not allocated
 bad_arg_color_missing.cub              **ISSUES**     managed     pointer being freed was not allocated
 bad_arg_dup.cub                        **ISSUES**     managed     pointer being freed was not allocated
-bad_arg_wrong_asset_orientation.cub    managed        managed     pointer being freed was not allocated
-bad_map_six_text_no_color.cub          managed        managed     pointer being freed was not allocated
+bad_arg_wrong_asset_orientation.cub    **ISSUES**     managed     pointer being freed was not allocated
+bad_map_six_text_no_color.cub          **ISSUES**     managed     pointer being freed was not allocated
 
 GOOD MAPS 
 ./cub3D assets/maps/good_map2.cub                     managed
