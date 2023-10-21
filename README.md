@@ -28,13 +28,16 @@ bad_map_char.cub                       managed        managed
 bad_map_dup_starting_point.cub         managed        managed
 bad_map_not_starting_point.cub         managed        managed
 bad_map_open.cub                       managed        managed   
+bad_arg_asset_missing.cub              Managed     managed     
+bad_arg_color_missing.cub              managed     managed    
+bad_arg_dup.cub                        managed     managed     
+bad_arg_wrong_asset_orientation.cub    managed     managed     
+bad_map_six_text_no_color.cub          managed     managed     
 
-<!-- TODO -->
-bad_arg_asset_missing.cub              **ISSUES**     managed     pointer being freed was not allocated
-bad_arg_color_missing.cub              **ISSUES**     managed     pointer being freed was not allocated
-bad_arg_dup.cub                        **ISSUES**     managed     pointer being freed was not allocated
-bad_arg_wrong_asset_orientation.cub    **ISSUES**     managed     pointer being freed was not allocated
-bad_map_six_text_no_color.cub          **ISSUES**     managed     pointer being freed was not allocated
+
+-- ToDo --
+
+bad_map_open.cub       map opens but shouldnt
 
 GOOD MAPS 
 ./cub3D assets/maps/good_map2.cub                     managed

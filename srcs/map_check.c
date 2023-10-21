@@ -74,7 +74,8 @@ int	floodfill(char **map, char v, int x, int y)
 		floodfill(map, v, x, y + 1);
 	}
 	if (map[x][y] == ' ' || map[x][y] == '\t' || map[x][0] == '0'
-		|| (map[x][y + 1] == '\n' && map[x][y] == '0'))
+		|| (map[x][y + 1] == '\n' && map[x][y] == '0') ||
+		(map[x][y] == ' ' && map[x][y + 1] == '\0'))
 		return (1);
 	return (0);
 }

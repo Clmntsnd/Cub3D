@@ -70,6 +70,7 @@ void	check_flag(t_ms *ms, int flag)
 		printf("HERE ❌ Error\n%s\n", ERR_ARG);
 		if (ms->map_args)
 			ft_free_tab_char(ms->map_args);
-		map_error_exit(ms);
+		exit(1);
+		// map_error_exit(ms);
 	}
 }
