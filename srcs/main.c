@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:51:40 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/20 14:55:09 by csenand          ###   ########.fr       */
+/*   Updated: 2023/10/22 17:29:32 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	main(int ac, char **av)
 	{
 		if (ms->mlx != NULL)
 			mlx_terminate(ms->mlx);
-		clean_exit(ms);
+		// clean_exit(ms);
+		map_error_exit(ms);
 		return (1);
 	}
 	mlx_loop_hook(ms->mlx, loop, ms->mlx);

@@ -24,25 +24,68 @@ t_ms	*get_ms(void)
 	return (ms);
 }
 
-bool	load_single_texture(t_ms *ms, int i, char c)
+// bool	load_single_texture(t_ms *ms, int i, char c)
+// {
+// 	ms->paths = ft_strdup(ms->map_args[i] + 2);
+// 	printf("ms->paths: %s\n", ms->paths);
+// 	if ((open(ms->paths, O_RDONLY)) == -1)
+// 	{
+// 		free(ms->paths);
+// 		return (printf("❌ Error\n%s\n", ERR_TEX), false);
+// 	}
+// 	if (c == 'N')
+// 		ms->tex->no_tex = mlx_load_xpm42(ms->paths);
+// 	if (c == 'S')
+// 		ms->tex->so_tex = mlx_load_xpm42(ms->paths);
+// 	if (c == 'W')
+// 		ms->tex->we_tex = mlx_load_xpm42(ms->paths);
+// 	if (c == 'E')
+// 		ms->tex->ea_tex = mlx_load_xpm42(ms->paths);
+// 	free(ms->paths);
+// 	return (true);
+// }
+
+bool load_single_texture(t_ms *ms, int i, char c)
 {
-	ms->paths = ft_strdup(ms->map_args[i] + 2);
-	if ((open(ms->paths, O_RDONLY)) == -1)
-	{
-		free(ms->paths);
-		return (printf("❌ Error\n%s\n", ERR_TEX), false);
-	}
-	if (c == 'N')
+    int tex_index;
+
+	tex_index = -1;
+    if (c == 'N')
+		tex_index = 0;
+    if (c == 'S')
+		tex_index = 1;
+    if (c == 'W')
+		tex_index = 2;
+    if (c == 'E')
+		tex_index = 3;
+
+    // Check if the texture is already loaded
+    if (tex_index != -1 && ms->texture_loaded[tex_index])
+        return (printf("❌ Error\n❌ Duplicate texture found.\n"), false);
+
+    ms->paths = ft_strdup(ms->map_args[i] + 2);
+
+    if ((open(ms->paths, O_RDONLY)) == -1) {
+        free(ms->paths);
+        return (printf("❌ Error\n%s\n", ERR_TEX), false);
+    }
+
+    if (c == 'N')
 		ms->tex->no_tex = mlx_load_xpm42(ms->paths);
-	if (c == 'S')
+    if (c == 'S')
 		ms->tex->so_tex = mlx_load_xpm42(ms->paths);
-	if (c == 'W')
+    if (c == 'W')
 		ms->tex->we_tex = mlx_load_xpm42(ms->paths);
-	if (c == 'E')
+    if (c == 'E')
 		ms->tex->ea_tex = mlx_load_xpm42(ms->paths);
-	free(ms->paths);
-	return (true);
+
+    // Mark the texture as loaded
+    if (tex_index != -1)
+        ms->texture_loaded[tex_index] = true;
+    free(ms->paths);
+    return true;
 }
+
 
 bool	fill_texture(t_ms *ms)
 {

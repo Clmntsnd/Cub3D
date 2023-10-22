@@ -101,7 +101,7 @@ typedef struct s_ms {
 	t_game		*game;		//game informations
 	mlx_image_t *m_img;
 	t_tex		*tex;
-
+	bool texture_loaded[4];
 }	t_ms;
 
 /* ------------------ Error ------------------- */

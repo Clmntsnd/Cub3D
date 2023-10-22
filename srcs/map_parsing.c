@@ -42,6 +42,18 @@ void	remove_map(t_ms *ms)
 	ft_free_tab_char(ms->map);
 }
 
+bool should_clean_string(char *str) 
+{
+    while (*str == ' ' || *str == '\t') 
+        str++;
+    return (ft_strncmp(str, "NO", 2) == 0) || 
+           (ft_strncmp(str, "EA", 2) == 0) || 
+           (ft_strncmp(str, "SO", 2) == 0) || 
+           (ft_strncmp(str, "WE", 2) == 0) || 
+           (ft_strncmp(str, "C", 1) == 0) || 
+           (ft_strncmp(str, "F", 1) == 0);
+}
+
 void	remove_map_args(t_ms *ms)
 {
 	int	i;
@@ -53,7 +65,10 @@ void	remove_map_args(t_ms *ms)
 	flag = 0;
 	while (ms->map[++i])
 	{
-		temp = ft_strdup(clean_string(ms->map[i]));
+		if (should_clean_string(ms->map[i]))
+            temp = ft_strdup(clean_string(ms->map[i]));
+        else
+            temp = ft_strdup(ms->map[i]);
 		if ((ft_strncmp(ms->map[i], "NO", 2) == 0) 
 			|| (ft_strncmp(ms->map[i], "EA", 2) == 0) 
 			|| (ft_strncmp(ms->map[i], "SO", 2) == 0)
