@@ -21,8 +21,7 @@ void	remove_map(t_ms *ms)
 	i = -1;
 	j = 0;
 	flag = 0;
-	if (ms->main_map == NULL)
-		ms->main_map = (char **)ft_calloc(ms->height + 1, sizeof(char *));
+	ms->main_map = (char **)ft_calloc(ms->height + 1, sizeof(char *));
 	while (++i < ms->height)
 	{
 		while (map_starts_with_any_arg(ms, i))
@@ -42,23 +41,23 @@ void	remove_map(t_ms *ms)
 	ft_free_tab_char(ms->map);
 }
 
-bool should_clean_string(char *str) 
+bool	should_clean_string(char *str)
 {
-    while (*str == ' ' || *str == '\t') 
-        str++;
-    return (ft_strncmp(str, "NO", 2) == 0) || 
-           (ft_strncmp(str, "EA", 2) == 0) || 
-           (ft_strncmp(str, "SO", 2) == 0) || 
-           (ft_strncmp(str, "WE", 2) == 0) || 
-           (ft_strncmp(str, "C", 1) == 0) || 
-           (ft_strncmp(str, "F", 1) == 0);
+	while (*str == ' ' || *str == '\t')
+		str++;
+	return ((ft_strncmp(str, "NO", 2) == 0)
+		|| (ft_strncmp(str, "EA", 2) == 0)
+		|| (ft_strncmp(str, "SO", 2) == 0)
+		|| (ft_strncmp(str, "WE", 2) == 0)
+		|| (ft_strncmp(str, "C", 1) == 0)
+		|| (ft_strncmp(str, "F", 1) == 0));
 }
 
 void	remove_map_args(t_ms *ms)
 {
-	int	i;
-	int	flag;
-	char *temp;
+	int		i;
+	int		flag;
+	char	*temp;
 
 	ms->map_args = (char **)ft_calloc(7, sizeof(char *));
 	i = -1;
@@ -66,19 +65,16 @@ void	remove_map_args(t_ms *ms)
 	while (ms->map[++i])
 	{
 		if (should_clean_string(ms->map[i]))
-            temp = ft_strdup(clean_string(ms->map[i]));
-        else
-            temp = ft_strdup(ms->map[i]);
-		if ((ft_strncmp(ms->map[i], "NO", 2) == 0) 
-			|| (ft_strncmp(ms->map[i], "EA", 2) == 0) 
+			temp = ft_strdup(clean_string(ms->map[i]));
+		else
+			temp = ft_strdup(ms->map[i]);
+		if ((ft_strncmp(ms->map[i], "NO", 2) == 0)
+			|| (ft_strncmp(ms->map[i], "EA", 2) == 0)
 			|| (ft_strncmp(ms->map[i], "SO", 2) == 0)
 			|| (ft_strncmp(ms->map[i], "WE", 2) == 0)
-			|| (ft_strncmp(ms->map[i], "C", 1) == 0) 
+			|| (ft_strncmp(ms->map[i], "C", 1) == 0)
 			|| (ft_strncmp(ms->map[i], "F", 1) == 0))
-		{
-			ms->map_args[flag] = ft_strdup(temp);
-			flag++;
-		}
+			ms->map_args[flag++] = ft_strdup(temp);
 		free(temp);
 	}
 	check_flag(ms, flag);

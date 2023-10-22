@@ -6,7 +6,7 @@
 /*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:51:40 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/22 17:29:32 by loulou           ###   ########.fr       */
+/*   Updated: 2023/10/22 18:42:09 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	init_mlx(t_ms *ms)
 	ms->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
 	if (!(ms->mlx))
 	{
-		printf("%s\n", mlx_strerror(mlx_errno)); 
+		printf("%s\n", mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
 	ms->m_img = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
@@ -48,7 +48,6 @@ int	main(int ac, char **av)
 	{
 		if (ms->mlx != NULL)
 			mlx_terminate(ms->mlx);
-		// clean_exit(ms);
 		map_error_exit(ms);
 		return (1);
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/22 18:59:55 by loulou            #+#    #+#             */
+/*   Updated: 2023/10/22 18:59:55 by loulou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -38,23 +50,24 @@
 # define ERR_COL		"❌ Invalid Color"
 # define ERR_TEX		"❌ Invalid Texture"
 # define ERR_XPM_TEX	"❌ Invalid XPM Texture"
-# define ERR_M_PL		"❌ More than one player position or no starting position.."
+# define ERR_M_PL		"❌ More than one player position or no starting \
+position.."
 # define ERR_C_MAP		"❌ Invalid character in map"
 # define ERR_D_ARG		"❌ Duplicate arguments.."
 # define ERR_WALL		"❌ Map is not surrounded by walls"
 
 //Window specs
-#define WIDTH 1024
-#define HEIGHT 768
+# define WIDTH 1024
+# define HEIGHT 768
 # define MOVE_SPEED 0.00004
 # define ROTATE_SPEED 0.00003
 # define MOUSE_SPEED 750
 
 /* ------------------ STRUCTS ------------------ */
-typedef	struct s_vect
+typedef struct s_vect
 {
-	double x;
-	double y;
+	double	x;
+	double	y;
 }	t_vect;
 
 typedef struct s_game {
@@ -94,30 +107,28 @@ typedef struct s_ms {
 	void		*mlx;
 	char		**map;
 	char		**map_args;
-	char 		**main_map;
-	char    	*paths;
-	int			height; 	//map height
-	int			width;		//map width
-	t_game		*game;		//game informations
-	mlx_image_t *m_img;
+	char		**main_map;
+	char		*paths;
+	int			height;
+	int			width;
+	t_game		*game;
+	mlx_image_t	*m_img;
 	t_tex		*tex;
-	bool texture_loaded[4];
+	bool		texture_loaded[4];
 }	t_ms;
 
 /* ------------------ Error ------------------- */
 int		clean_exit(t_ms *ms);
-void 	map_error_exit(t_ms *ms);
-void 	free_exit(t_ms *ms);
-void	free_double_p(char **map, int numRows);
+void	map_error_exit(t_ms *ms);
+void	free_exit(t_ms *ms);
 
 /* ------------------ Parsing ------------------ */
 bool	ft_parse_arg(int ac, char **av);
 void	get_map(t_ms *ms, char *argv);
 void	get_map_size(t_ms *ms, char argv[1]);
 int		check_valid_char(t_ms *ms);
-int		check_walls(t_ms *ms);
 void	remove_map_args(t_ms *ms);
-char 	*clean_string(char *str);
+char	*clean_string(char *str);
 
 /* -------------------- Init ------------------- */
 t_ms	*get_ms(void);
@@ -139,8 +150,8 @@ int		**convert_texture(xpm_t *texture);
 void	find_texture_hit(t_ms *ms, xpm_t *texture);
 
 /* ------------------ Colors ------------------ */
-int32_t get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
-bool 	get_color(t_ms *ms);
+int32_t	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
+bool	get_color(t_ms *ms);
 bool	convert_color(t_ms *ms, int i, char *str);
 bool	is_valid_arg(char *str);
 
@@ -155,6 +166,7 @@ bool	check_map_character(char ch, int flag, bool flag_state);
 bool	map_starts_with_any_arg(t_ms *ms, int i);
 void	check_flag(t_ms *ms, int flag);
 void	remove_map(t_ms *ms);
-
+int		floodfill(char **map, char v, int x, int y);
+int		rev_floodfill(char **map, char v, int x, int y);
 
 #endif

@@ -3,30 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:49:26 by jpilotte          #+#    #+#             */
-/*   Updated: 2023/10/20 15:45:14 by csenand          ###   ########.fr       */
+/*   Updated: 2023/10/22 18:41:29 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char *clean_string(char *str)
+char	*clean_string(char *str)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
 
+	i = 0;
+	j = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n') 
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
 			str[j++] = str[i];
 		i++;
 	}
 	if (j > 0 && str[j - 1] == ' ')
-        j--;  // Remove trailing space
+		j--;
 	str[j] = '\0';
-	return str;
+	return (str);
 }
 
 void	get_player_pos(t_ms *ms)
@@ -71,12 +73,12 @@ void	set_dir(t_ms *ms, int i, int j)
 	}
 	if (ms->main_map[i][j] == 'E')
 	{
-		ms->game->pl_dir.y = 1; 
+		ms->game->pl_dir.y = 1;
 		ms->game->plane.x = 0.66;
 	}
 	if (ms->main_map[i][j] == 'W')
 	{
-		ms->game->pl_dir.y = -1; 
+		ms->game->pl_dir.y = -1;
 		ms->game->plane.x = -0.66;
 	}
 	ms->game->pl_pos.x = i + 0.5;
