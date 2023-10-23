@@ -125,7 +125,7 @@ void	free_exit(t_ms *ms);
 /* ------------------ Parsing ------------------ */
 bool	ft_parse_arg(int ac, char **av);
 void	get_map(t_ms *ms, char *argv);
-void	get_map_size(t_ms *ms, char argv[1]);
+int		get_map_size(t_ms *ms, char argv[1]);
 int		check_valid_char(t_ms *ms);
 void	remove_map_args(t_ms *ms);
 char	*clean_string(char *str);

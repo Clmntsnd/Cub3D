@@ -100,7 +100,7 @@ void	get_map(t_ms *ms, char *argv)
 	close(fd);
 }
 
-void	get_map_size(t_ms *ms, char argv[1])
+int	get_map_size(t_ms *ms, char argv[1])
 {
 	int		i;
 	int		fd;
@@ -109,10 +109,7 @@ void	get_map_size(t_ms *ms, char argv[1])
 	fd = open(argv, O_RDONLY);
 	rows = get_next_line(fd);
 	if (!rows)
-	{
-		printf("❌ Error\n❌ File is empty\n");
-		exit(1);
-	}
+		return (1);
 	ms->height = 0;
 	ms->width = 0;
 	i = -1;
@@ -129,4 +126,5 @@ void	get_map_size(t_ms *ms, char argv[1])
 	}
 	free(rows);
 	close(fd);
+	return (0);
 }

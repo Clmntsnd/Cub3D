@@ -26,7 +26,11 @@ t_ms	*get_ms(void)
 
 void	init_content(t_ms *ms, char *argv)
 {
-	get_map_size(ms, argv);
+	if (get_map_size(ms, argv) == 1)
+	{
+		printf("❌ Error\n❌ File is empty\n");
+		exit(1);
+	}
 	get_map(ms, argv);
 	remove_map_args(ms);
 	get_player_pos(ms);
