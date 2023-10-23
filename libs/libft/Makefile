@@ -20,7 +20,6 @@ AR			= 	ar rcs
 
 SRCS_DIR	=	./srcs/
 SRCS_LST	= 	ft_atof.c \
-				ft_atoi_base.c \
 				ft_atoi.c \
 				ft_atol.c \
 				ft_bzero.c \

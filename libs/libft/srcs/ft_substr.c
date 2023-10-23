@@ -45,7 +45,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!subs)
 		return (0);
 	if (start >= ft_strlen(s))
-	{	
+	{
 		*subs = '\0';
 		return (subs);
 	}
