@@ -1,0 +1,38 @@
+NO ./assets/textures/n_wall.xpm42
+
+
+                        EA                      ./assets/textures/e_wall.xpm42
+
+
+
+        SO ./assets/textures/s_wall.xpm42
+
+
+
+
+
+
+
+
+
+                WE                                                              ./assets/textures/w_wall.xpm42
+
+
+
+
+
+C                55     ,185,                   255
+
+
+
+
+
+F 0           ,                  65,10
+
+1111111111111
+ 10000N00001
+  100000001
+   1000001
+    10001
+     101
+      1
